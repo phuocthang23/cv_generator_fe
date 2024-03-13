@@ -1,4 +1,4 @@
-const Admin = () => {
+const AdminLayout = () => {
   return (
     <div>
       <h1 className="text-red-500">ADMIN</h1>
@@ -6,4 +6,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default AdminLayout;

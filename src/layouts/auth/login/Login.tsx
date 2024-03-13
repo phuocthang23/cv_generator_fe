@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { users } from "../../data/mockData";
+import { users } from "../../../data/mockData";
 import { useNavigate } from "react-router-dom";
 import {
   Button,

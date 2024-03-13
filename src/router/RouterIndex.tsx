@@ -1,31 +1,35 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "../layouts/auth/Login";
+import Login from "../layouts/auth/login/Login";
 import Auth from "../layouts/auth/Auth";
-import Register from "../layouts/auth/Register";
-import UserLayout from "../layouts/User/UserLayout";
-import HomePage from "../layouts/User/Home/HomePage";
-import Admin from "../page/Admin/Admin";
-import Business from "../page/Business/Business";
-import Login2 from "../layouts/auth/Login2";
+import Register from "../layouts/auth/register/Register";
+import HomePage from "../page/User/home/homePage";
+import Login2 from "../layouts/auth/login/Login2";
+import UserLayout from "../page/User/UserLayout";
+import AdminLayout from "../page/Admin/AdminLayout";
+import BusinessLayout from "../page/Business/BusinessLayout";
 
 const RouterIndex = () => {
   return (
     <div>
       <Routes>
+        {/* auth */}
         <Route path="/auth" element={<Auth />}>
           <Route index element={<Login />} />
           <Route path="login" element={<Login />} />
           <Route path="login2" element={<Login2 />} />
           <Route path="register" element={<Register />} />
         </Route>
+
         {/* homepage */}
         <Route path="/" element={<UserLayout />}>
           <Route index element={<HomePage />} />
         </Route>
+
         {/* adminpage */}
-        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="/admin" element={<AdminLayout />}></Route>
+
         {/* businesspage */}
-        <Route path="/business" element={<Business />}></Route>
+        <Route path="/business" element={<BusinessLayout />}></Route>
       </Routes>
     </div>
   );
