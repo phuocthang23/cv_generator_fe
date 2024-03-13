@@ -7,6 +7,7 @@ import HomePage from "../layouts/User/Home/HomePage";
 import Admin from "../page/Admin/Admin";
 import Business from "../page/Business/Business";
 import Login2 from "../layouts/auth/Login2";
+import JobDetail from "../page/MainPage/JobDetail";
 
 const RouterIndex = () => {
   return (
@@ -21,6 +22,7 @@ const RouterIndex = () => {
         {/* homepage */}
         <Route path="/" element={<UserLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="/job-detail" element={<JobDetail />} />
         </Route>
         {/* adminpage */}
         <Route path="/admin" element={<Admin />}></Route>
