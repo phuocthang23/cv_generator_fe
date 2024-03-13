@@ -1,38 +1,35 @@
+import { FloatingLabel } from "flowbite-react";
+import { useAuthLogic } from "../../utils/authLogic";
 import { useNavigate } from "react-router-dom";
 import { users } from "../../data/mockData";
-import { useAuthLogic } from "../../utils/authLogic";
-import { FloatingLabel } from "flowbite-react";
+import { loginApi } from "../../apis/auth/auth";
 
-const Register = () => {
-  const {
-    email,
-    setEmail,
-    password,
-    confirmPassword,
-    setConfirmPassword,
-    setPassword,
-    emailError,
-    passwordError,
-    confirmPasswordError,
-  } = useAuthLogic(true);
+const Login2 = () => {
+  const { email, setEmail, password, setPassword, emailError, passwordError } =
+    useAuthLogic(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (!emailError && !passwordError) {
-      const newUser = { email, password, role: "user" };
-      users.push(newUser);
-      navigate("/login");
+    const validUser = await loginApi({ email, password });
+    console.log(validUser);
+    if (validUser.success) {
+      if (validUser.data.role === "admin") {
+        navigate("/admin");
+      } else if (validUser.data.role === "staff") {
+        navigate("/");
+      } else {
+        navigate("/business");
+      }
     }
   };
-
   return (
     <div>
       <section className="relative flex flex-wrap lg:h-screen lg:items-center">
         <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-lg text-center">
             <h1 className="text-2xl font-bold sm:text-3xl">
-              Get started today for sign up with us!
+              Get started today for sign in with us!
             </h1>
 
             <p className="mt-4 text-gray-500">
@@ -75,32 +72,13 @@ const Register = () => {
                   <p className="text-red-500">{passwordError}</p>
                 )}
               </div>
-
-              <div>
-                <FloatingLabel
-                  variant="outlined"
-                  label="repassword"
-                  sizing="md"
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  color={
-                    confirmPasswordError && confirmPassword !== ""
-                      ? "error"
-                      : "default"
-                  }
-                />
-                {confirmPasswordError && confirmPassword !== "" && (
-                  <p className="text-red-500">{confirmPasswordError}</p>
-                )}
-              </div>
             </div>
 
             <div className="flex items-center justify-between">
               <p className="text-sm text-gray-500">
-                Already have account ?{" "}
+                No account?{" "}
                 <a className="underline" href="#">
-                  Sign in
+                  Sign up
                 </a>
               </p>
 
@@ -108,7 +86,7 @@ const Register = () => {
                 type="submit"
                 className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
               >
-                Sign up
+                Sign in
               </button>
             </div>
           </form>
@@ -126,4 +104,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login2;

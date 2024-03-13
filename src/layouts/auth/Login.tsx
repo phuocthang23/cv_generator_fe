@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { users } from "../../data/mockData";
 import { useNavigate } from "react-router-dom";
-
+import {
+  Button,
+  Card,
+  Checkbox,
+  Typography,
+  Input,
+} from "@material-tailwind/react";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,28 +54,53 @@ const Login = () => {
       }
     }
   };
-
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {emailError && <p className="text-red-500">{emailError}</p>}
-        <input
-          type="password"
-          placeholder="Mật khẩu"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {passwordError && <p className="text-red-500">{passwordError}</p>}
-        <button type="submit" className="bg-blue-500">
-          Đăng nhập
-        </button>
-      </form>
+    <div className="flex gap-5">
+      <div className="w-1/2">
+        <Card color="transparent" shadow={false}>
+          <Typography variant="h4" color="blue-gray">
+            Sign Up
+          </Typography>
+          <Typography color="gray" className="mt-1 font-normal">
+            Nice to meet you! Enter your details to register.
+          </Typography>
+          <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 m-auto">
+            <div className="mb-1 flex flex-col gap-3">
+              <div>
+                <Input type="email" label="Email" />
+                <Typography
+                  variant="small"
+                  color="gray"
+                  className="mt-1 ml-2 flex items-center font-normal text-red-500"
+                >
+                  Email does not exist or email is incorrect
+                </Typography>
+              </div>
+
+              <div>
+                <Input type="password" label="password" />
+                <Typography
+                  variant="small"
+                  color="gray"
+                  className="mt-1 ml-2 flex items-center font-normal text-red-500"
+                >
+                  Use at least 8 characters
+                </Typography>
+              </div>
+            </div>
+
+            <Button className="mt-6" fullWidth>
+              sign in
+            </Button>
+            <Typography color="gray" className="mt-4 text-center font-normal">
+              Already have an account?{" "}
+              <a href="#" className="font-medium text-gray-900">
+                Sign In
+              </a>
+            </Typography>
+          </form>
+        </Card>
+      </div>
     </div>
   );
 };

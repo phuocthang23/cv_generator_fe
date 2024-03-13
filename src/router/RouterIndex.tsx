@@ -6,6 +6,7 @@ import UserLayout from "../layouts/User/UserLayout";
 import HomePage from "../layouts/User/Home/HomePage";
 import Admin from "../page/Admin/Admin";
 import Business from "../page/Business/Business";
+import Login2 from "../layouts/auth/Login2";
 
 const RouterIndex = () => {
   return (
@@ -14,6 +15,7 @@ const RouterIndex = () => {
         <Route path="/auth" element={<Auth />}>
           <Route index element={<Login />} />
           <Route path="login" element={<Login />} />
+          <Route path="login2" element={<Login2 />} />
           <Route path="register" element={<Register />} />
         </Route>
         {/* homepage */}
