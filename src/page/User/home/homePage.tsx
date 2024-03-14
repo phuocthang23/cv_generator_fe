@@ -1,10 +1,12 @@
 import Caurousel from "../../../components/carousel/Caurousel";
 import Company from "../../../components/company/Company";
 import Outstanding from "../../../components/outstanding/Outstanding";
+import Banner from "../../../layouts/banner";
 
 const homePage = () => {
   return (
     <div>
+      <Banner />
       <Outstanding />
       <Company />
       <Caurousel />
