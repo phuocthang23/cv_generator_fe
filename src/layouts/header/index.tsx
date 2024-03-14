@@ -20,7 +20,6 @@ const Header = () => {
         </div>
       </div>
       <SubHeader />
-      <Banner />
     </div>
   );
 };
