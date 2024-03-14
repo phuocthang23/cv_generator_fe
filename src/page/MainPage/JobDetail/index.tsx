@@ -262,7 +262,7 @@ const JobDetail = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className=" border-t-2 mt-14 ">
+      <div className=" border-t-2 mt-14 mb-52">
         <div className="border-collapse main max-w-[1320px] mx-auto pt-[100px]">
           <h1 className="font-bold text-[40px] mb-[50px]">Related Jobs</h1>
           <div className="grid gap-x-8 gap-y-4 grid-cols-3">
