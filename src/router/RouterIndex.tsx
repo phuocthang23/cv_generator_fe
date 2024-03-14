@@ -8,6 +8,7 @@ import Login2 from "../layouts/auth/Login2";
 import JobDetail from "../page/MainPage/JobDetail";
 import HomePage from "../page/User/home/homePage";
 import UserLayout from "../page/User/UserLayout";
+import CreateJob from "../page/MainPage/createjob";
 
 const RouterIndex = () => {
   return (
@@ -23,6 +24,7 @@ const RouterIndex = () => {
         <Route path="/" element={<UserLayout />}>
           <Route index element={<HomePage />} />
           <Route path="/job-detail" element={<JobDetail />} />
+          <Route path="/create-job" element={<CreateJob />} />
         </Route>
         {/* adminpage */}
         <Route path="/admin" element={<Admin />}></Route>
