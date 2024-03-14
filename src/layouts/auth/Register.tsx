@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { users } from "../../../data/mockData";
-import { useAuthLogic } from "../../../utils/authLogic";
+import { users } from "../../data/mockData";
+import { useAuthLogic } from "../../utils/authLogic";
 import { FloatingLabel } from "flowbite-react";
 
 const Register = () => {

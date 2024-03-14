@@ -1,8 +1,8 @@
 import { FloatingLabel } from "flowbite-react";
-import { useAuthLogic } from "../../../utils/authLogic";
+import { useAuthLogic } from "../../utils/authLogic";
 import { useNavigate } from "react-router-dom";
-import { users } from "../../../data/mockData";
-import { loginApi } from "../../../apis/auth/auth";
+import { users } from "../../data/mockData";
+import { loginApi } from "../../apis/auth/auth";
 
 const Login2 = () => {
   const { email, setEmail, password, setPassword, emailError, passwordError } =
