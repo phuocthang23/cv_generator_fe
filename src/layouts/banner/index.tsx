@@ -39,7 +39,7 @@ const Banner = () => {
                   className="border-none bg-white"
                 />
               </div>
-              <button className="px-10 py-2 h-12 rounded-md bg-[#BC2228] text-white">
+              <button className="px-8 py-3 h-12 rounded-md bg-[#BC2228] text-white">
                 Find Job
               </button>
             </div>

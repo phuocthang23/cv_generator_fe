@@ -262,170 +262,172 @@ const JobDetail = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className=" border-t-2 border-collapse mt-14 main max-w-[1320px] mx-auto pt-[100px]">
-        <h1 className="font-bold text-[40px] mb-[50px]">Related Jobs</h1>
-        <div className="grid gap-x-8 gap-y-4 grid-cols-3">
-          <div className="border border-collapse rounded p-6">
-            <p className="text-lg">
-              Techical Support Specialist
-              <p className="text-sm mt-2">
-                <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                  FULL-TIME
-                </span>{" "}
-                <span>Salary: $20,000 - $25,000</span>
+      <div className=" border-t-2 mt-14 ">
+        <div className="border-collapse main max-w-[1320px] mx-auto pt-[100px]">
+          <h1 className="font-bold text-[40px] mb-[50px]">Related Jobs</h1>
+          <div className="grid gap-x-8 gap-y-4 grid-cols-3">
+            <div className="border border-collapse rounded p-6">
+              <p className="text-lg">
+                Techical Support Specialist
+                <p className="text-sm mt-2">
+                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
+                    FULL-TIME
+                  </span>{" "}
+                  <span>Salary: $20,000 - $25,000</span>
+                </p>
               </p>
-            </p>
-            <p className="mt-5 flex flex-row">
-              <span className=" basis-1/6">
-                <img src={EmployersLogo} />
-              </span>
-              <span className="mx-3 w-full">
-                Google Inc.{" "}
-                <span className="flex">
-                  {" "}
-                  <img className="h-[18px]" src={MapPin} />
-                  Dhaka, Bangladesh
+              <p className="mt-5 flex flex-row">
+                <span className=" basis-1/6">
+                  <img src={EmployersLogo} />
                 </span>
-              </span>
-              <span className="basis-1/6">
-                <img src={BookmarkSimple} alt="" />
-              </span>
-            </p>
-          </div>
-          <div className="border border-collapse rounded p-6">
-            <p className="text-lg">
-              Techical Support Specialist
-              <p className="text-sm mt-2">
-                <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                  FULL-TIME
-                </span>{" "}
-                <span>Salary: $20,000 - $25,000</span>
+                <span className="mx-3 w-full">
+                  Google Inc.{" "}
+                  <span className="flex">
+                    {" "}
+                    <img className="h-[18px]" src={MapPin} />
+                    Dhaka, Bangladesh
+                  </span>
+                </span>
+                <span className="basis-1/6">
+                  <img src={BookmarkSimple} alt="" />
+                </span>
               </p>
-            </p>
-            <p className="mt-5 flex flex-row">
-              <span className=" basis-1/6">
-                <img src={EmployersLogo} />
-              </span>
-              <span className="mx-3 w-full">
-                Google Inc.{" "}
-                <span className="flex">
-                  {" "}
-                  <img className="h-[18px]" src={MapPin} />
-                  Dhaka, Bangladesh
-                </span>
-              </span>
-              <span className="basis-1/6">
-                <img src={BookmarkSimple} alt="" />
-              </span>
-            </p>
-          </div>
-          <div className="border border-collapse rounded p-6">
-            <p className="text-lg">
-              Techical Support Specialist
-              <p className="text-sm mt-2">
-                <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                  FULL-TIME
-                </span>{" "}
-                <span>Salary: $20,000 - $25,000</span>
+            </div>
+            <div className="border border-collapse rounded p-6">
+              <p className="text-lg">
+                Techical Support Specialist
+                <p className="text-sm mt-2">
+                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
+                    FULL-TIME
+                  </span>{" "}
+                  <span>Salary: $20,000 - $25,000</span>
+                </p>
               </p>
-            </p>
-            <p className="mt-5 flex flex-row">
-              <span className=" basis-1/6">
-                <img src={EmployersLogo} />
-              </span>
-              <span className="mx-3 w-full">
-                Google Inc.{" "}
-                <span className="flex">
-                  {" "}
-                  <img className="h-[18px]" src={MapPin} />
-                  Dhaka, Bangladesh
+              <p className="mt-5 flex flex-row">
+                <span className=" basis-1/6">
+                  <img src={EmployersLogo} />
                 </span>
-              </span>
-              <span className="basis-1/6">
-                <img src={BookmarkSimple} alt="" />
-              </span>
-            </p>
-          </div>
-          <div className="border border-collapse rounded p-6">
-            <p className="text-lg">
-              Techical Support Specialist
-              <p className="text-sm mt-2">
-                <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                  FULL-TIME
-                </span>{" "}
-                <span>Salary: $20,000 - $25,000</span>
+                <span className="mx-3 w-full">
+                  Google Inc.{" "}
+                  <span className="flex">
+                    {" "}
+                    <img className="h-[18px]" src={MapPin} />
+                    Dhaka, Bangladesh
+                  </span>
+                </span>
+                <span className="basis-1/6">
+                  <img src={BookmarkSimple} alt="" />
+                </span>
               </p>
-            </p>
-            <p className="mt-5 flex flex-row">
-              <span className=" basis-1/6">
-                <img src={EmployersLogo} />
-              </span>
-              <span className="mx-3 w-full">
-                Google Inc.{" "}
-                <span className="flex">
-                  {" "}
-                  <img className="h-[18px]" src={MapPin} />
-                  Dhaka, Bangladesh
-                </span>
-              </span>
-              <span className="basis-1/6">
-                <img src={BookmarkSimple} alt="" />
-              </span>
-            </p>
-          </div>
-          <div className="border border-collapse rounded p-6">
-            <p className="text-lg">
-              Techical Support Specialist
-              <p className="text-sm mt-2">
-                <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                  FULL-TIME
-                </span>{" "}
-                <span>Salary: $20,000 - $25,000</span>
+            </div>
+            <div className="border border-collapse rounded p-6">
+              <p className="text-lg">
+                Techical Support Specialist
+                <p className="text-sm mt-2">
+                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
+                    FULL-TIME
+                  </span>{" "}
+                  <span>Salary: $20,000 - $25,000</span>
+                </p>
               </p>
-            </p>
-            <p className="mt-5 flex flex-row">
-              <span className=" basis-1/6">
-                <img src={EmployersLogo} />
-              </span>
-              <span className="mx-3 w-full">
-                Google Inc.{" "}
-                <span className="flex">
-                  {" "}
-                  <img className="h-[18px]" src={MapPin} />
-                  Dhaka, Bangladesh
+              <p className="mt-5 flex flex-row">
+                <span className=" basis-1/6">
+                  <img src={EmployersLogo} />
                 </span>
-              </span>
-              <span className="basis-1/6">
-                <img src={BookmarkSimple} alt="" />
-              </span>
-            </p>
-          </div>
-          <div className="border border-collapse rounded p-6">
-            <p className="text-lg">
-              Techical Support Specialist
-              <p className="text-sm mt-2">
-                <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                  FULL-TIME
-                </span>{" "}
-                <span>Salary: $20,000 - $25,000</span>
+                <span className="mx-3 w-full">
+                  Google Inc.{" "}
+                  <span className="flex">
+                    {" "}
+                    <img className="h-[18px]" src={MapPin} />
+                    Dhaka, Bangladesh
+                  </span>
+                </span>
+                <span className="basis-1/6">
+                  <img src={BookmarkSimple} alt="" />
+                </span>
               </p>
-            </p>
-            <p className="mt-5 flex flex-row">
-              <span className=" basis-1/6">
-                <img src={EmployersLogo} />
-              </span>
-              <span className="mx-3 w-full">
-                Google Inc.{" "}
-                <span className="flex">
-                  {" "}
-                  <img className="h-[18px]" src={MapPin} />
-                  Dhaka, Bangladesh
+            </div>
+            <div className="border border-collapse rounded p-6">
+              <p className="text-lg">
+                Techical Support Specialist
+                <p className="text-sm mt-2">
+                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
+                    FULL-TIME
+                  </span>{" "}
+                  <span>Salary: $20,000 - $25,000</span>
+                </p>
+              </p>
+              <p className="mt-5 flex flex-row">
+                <span className=" basis-1/6">
+                  <img src={EmployersLogo} />
                 </span>
-              </span>
-              <span className="basis-1/6">
-                <img src={BookmarkSimple} alt="" />
-              </span>
-            </p>
+                <span className="mx-3 w-full">
+                  Google Inc.{" "}
+                  <span className="flex">
+                    {" "}
+                    <img className="h-[18px]" src={MapPin} />
+                    Dhaka, Bangladesh
+                  </span>
+                </span>
+                <span className="basis-1/6">
+                  <img src={BookmarkSimple} alt="" />
+                </span>
+              </p>
+            </div>
+            <div className="border border-collapse rounded p-6">
+              <p className="text-lg">
+                Techical Support Specialist
+                <p className="text-sm mt-2">
+                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
+                    FULL-TIME
+                  </span>{" "}
+                  <span>Salary: $20,000 - $25,000</span>
+                </p>
+              </p>
+              <p className="mt-5 flex flex-row">
+                <span className=" basis-1/6">
+                  <img src={EmployersLogo} />
+                </span>
+                <span className="mx-3 w-full">
+                  Google Inc.{" "}
+                  <span className="flex">
+                    {" "}
+                    <img className="h-[18px]" src={MapPin} />
+                    Dhaka, Bangladesh
+                  </span>
+                </span>
+                <span className="basis-1/6">
+                  <img src={BookmarkSimple} alt="" />
+                </span>
+              </p>
+            </div>
+            <div className="border border-collapse rounded p-6">
+              <p className="text-lg">
+                Techical Support Specialist
+                <p className="text-sm mt-2">
+                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
+                    FULL-TIME
+                  </span>{" "}
+                  <span>Salary: $20,000 - $25,000</span>
+                </p>
+              </p>
+              <p className="mt-5 flex flex-row">
+                <span className=" basis-1/6">
+                  <img src={EmployersLogo} />
+                </span>
+                <span className="mx-3 w-full">
+                  Google Inc.{" "}
+                  <span className="flex">
+                    {" "}
+                    <img className="h-[18px]" src={MapPin} />
+                    Dhaka, Bangladesh
+                  </span>
+                </span>
+                <span className="basis-1/6">
+                  <img src={BookmarkSimple} alt="" />
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
