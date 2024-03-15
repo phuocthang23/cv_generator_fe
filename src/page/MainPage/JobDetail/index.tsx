@@ -1,4 +1,3 @@
-type Props = {};
 import logo from "../../../assets/logo.png";
 import vector from "../../../assets/BookmarkSimple.png";
 import MapTrifold from "../../../assets/MapTrifold.png";
@@ -18,7 +17,7 @@ import BookmarkSimple from "../../../assets/BookmarkSimple (1).png";
 import { FaArrowRight } from "react-icons/fa";
 import "./index.scss";
 import { Link } from "react-router-dom";
-const JobDetail = (props: Props) => {
+const JobDetail = () => {
   return (
     <div>
       <div className="main max-w-[1320px] mx-auto ">

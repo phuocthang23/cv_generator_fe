@@ -8,7 +8,9 @@ import Login2 from "../layouts/auth/Login2";
 import JobDetail from "../page/MainPage/JobDetail";
 import HomePage from "../page/User/home/homePage";
 import UserLayout from "../page/User/UserLayout";
-import CreateJob from "../page/MainPage/createjob";
+import CreateJob from "../page/MainPage/Create-job";
+import JobApplicationLayout from "../page/MainPage/Job-application";
+import ProfileCV from "../page/MainPage/Job-application/Profile";
 
 const RouterIndex = () => {
   return (
@@ -25,7 +27,11 @@ const RouterIndex = () => {
           <Route index element={<HomePage />} />
           <Route path="/job-detail" element={<JobDetail />} />
           <Route path="/create-job" element={<CreateJob />} />
+          <Route path="/job-application" element={<JobApplicationLayout />}>
+            <Route index element={<ProfileCV />} />
+          </Route>
         </Route>
+
         {/* adminpage */}
         <Route path="/admin" element={<Admin />}></Route>
         {/* businesspage */}
