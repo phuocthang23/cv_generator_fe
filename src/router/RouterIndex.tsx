@@ -11,6 +11,7 @@ import UserLayout from "../page/User/UserLayout";
 import CreateJob from "../page/MainPage/Create-job";
 import JobApplicationLayout from "../page/MainPage/Job-application";
 import ProfileCV from "../page/MainPage/Job-application/Profile";
+import BusinessInformationUser from "../page/User/business-information-user";
 
 const RouterIndex = () => {
   return (
@@ -30,6 +31,10 @@ const RouterIndex = () => {
           <Route path="/job-application" element={<JobApplicationLayout />}>
             <Route index element={<ProfileCV />} />
           </Route>
+          <Route
+            path="/business-information-user"
+            element={<BusinessInformationUser />}
+          />
         </Route>
 
         {/* adminpage */}
