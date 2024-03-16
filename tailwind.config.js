@@ -8,7 +8,14 @@ module.exports = withMT({
     "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: ["Inter", "sans-serif"],
+      },
+      colors: {
+        main: ["#BC2228"],
+      },
+    },
   },
   plugins: [require("flowbite/plugin")],
 });
