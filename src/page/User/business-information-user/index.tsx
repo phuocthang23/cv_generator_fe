@@ -16,9 +16,12 @@ import { Link, NavLink } from "react-router-dom";
 import { FiFilter, FiMapPin, FiSearch, FiSettings } from "react-icons/fi";
 import { ImTarget } from "react-icons/im";
 import { IoOptionsOutline } from "react-icons/io5";
+import BreadCrumb from "../../../components/breadCrumb/BreadCrumb";
 const BusinessInformationUser = () => {
   return (
     <div>
+      <BreadCrumb />
+      {/* main */}
       <div className="main max-w-[1320px] mx-auto font-inter">
         <div className=" heading mx-auto mt-[35.5px] flex justify-between">
           <div className="flex items-center">
