@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import HeaderJobApplication from "../../../layouts/JobApplication";
+import HeaderJobApplication from "../../JobApplication";
 
 const JobApplicationLayout = () => {
   return (

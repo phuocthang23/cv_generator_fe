@@ -1,17 +1,17 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "../layouts/auth/Login";
-import Auth from "../layouts/auth/Auth";
-import Register from "../layouts/auth/Register";
+import Auth from "../layouts/Auth";
+import Register from "../page/auth/Register";
 import Admin from "../page/Admin/Admin";
 import Business from "../page/Business/Business";
-import Login2 from "../layouts/auth/Login2";
+import Login2 from "../page/auth/Login2";
 import JobDetail from "../page/MainPage/JobDetail";
 import HomePage from "../page/User/home/homePage";
-import UserLayout from "../page/User/UserLayout";
+import UserLayout from "../layouts/UserLayout";
 import CreateJob from "../page/MainPage/Create-job";
 import JobApplicationLayout from "../page/MainPage/Job-application";
 import ProfileCV from "../page/MainPage/Job-application/Profile";
 import BusinessInformationUser from "../page/User/business-information-user";
+import Login from "../page/auth/Login";
 
 const RouterIndex = () => {
   return (
@@ -19,7 +19,6 @@ const RouterIndex = () => {
       <Routes>
         <Route path="/auth" element={<Auth />}>
           <Route index element={<Login />} />
-          <Route path="login" element={<Login />} />
           <Route path="login2" element={<Login2 />} />
           <Route path="register" element={<Register />} />
         </Route>

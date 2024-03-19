@@ -4,7 +4,7 @@ import { FaFacebookSquare, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#BC2228] pt-10 pb-4 px-20 h-[346px] gap-10">
+    <footer className="bg-[#BC2228] pt-10 pb-4 px-20 h-[346px] min-w-[1440px] gap-10">
       <div className="h-[290px] gap-10">
         <div className="flex justify-evenly items-center gap-6">
           <div className="w-[566px] h-[232px] gap-10 flex flex-col gap-3 justify-between">

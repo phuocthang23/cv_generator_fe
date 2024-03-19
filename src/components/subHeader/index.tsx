@@ -2,8 +2,8 @@ import logo from "../../assets/header/Logo.png";
 import { IoSearchOutline } from "react-icons/io5";
 const SubHeader = () => {
   return (
-    <div className="min-w-[1440px] max-h-[139px] py-[30px] px-[10px]">
-      <div className=" min-w-[1136px] min-h-[72px] py-2 px-[90px] gap-30 flex items-center mx-auto">
+    <div className="min-w-[1440px] max-h-[139px] py-[30px]">
+      <div className=" w-[1250px] min-h-[72px] py-2 px-[30px] flex items-center justify-between mx-auto">
         <div className="min-w-[127px] min-h-[56px] mr-[30px]">
           <img src={logo} alt="" />
         </div>
@@ -35,14 +35,14 @@ const SubHeader = () => {
           </div>
         </div>
 
-        <div className="flex gap-3 items-center min-h-[48px] w-[407px]">
-          <button className="min-w-[109px] h-12 rounded-[3px] bg-[#BC2228] border-[1px] border-[#BC2228] px-6 py-3 text-white">
+        <div className="flex grid grid-cols-3 gap-3 items-center min-h-[48px]">
+          <button className=" rounded-[3px] bg-[#BC2228] border-[1px] border-[#BC2228] px-6 py-3 text-white whitespace-nowrap">
             Đăng Nhập
           </button>
-          <button className="w-[109px] h-12 rounded-[3px] bg-white border-[1px] border-[#BC2228] px-6 py-3 text-[#BC2228]">
+          <button className=" rounded-[3px] bg-white border-[1px] border-[#BC2228] px-6 py-3 text-[#BC2228] whitespace-nowrap">
             Đăng ký
           </button>
-          <button className="min-w-[109px] h-12 rounded-[3px] bg-[#231651] border-[1px] border-[#231651] px-6 py-3 text-white">
+          <button className=" rounded-[3px] bg-[#231651] border-[1px] border-[#231651] px-6 py-3 text-white whitespace-nowrap">
             Đăng Tuyển
           </button>
         </div>
