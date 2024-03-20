@@ -11,9 +11,13 @@ module.exports = withMT({
     extend: {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        cabin: ["Cabin", "sans-serif"],
       },
       colors: {
         main: ["#BC2228"],
+      },
+      fontSize: {
+        "3xxl": ["30px", "40px"],
       },
     },
   },
