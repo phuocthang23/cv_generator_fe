@@ -1,8 +1,15 @@
-import { decodeToken } from "react-jwt";
+import { jwtDecode } from "jwt-decode";
+
+interface MyToken {
+  name: string;
+  exp: number;
+}
 export const generateToken = () => {
   const token = localStorage.getItem("Auth");
 
-  const myDecodedToken = decodeToken(token as string);
+  const myDecodedToken = jwtDecode(token as string);
 
-  return myDecodedToken;
+  if ("dataGenerateToken" in myDecodedToken) {
+    return myDecodedToken.dataGenerateToken;
+  }
 };

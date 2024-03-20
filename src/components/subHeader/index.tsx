@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/header/Logo.png";
 import { IoSearchOutline } from "react-icons/io5";
+import { IoMdNotifications } from "react-icons/io";
+import { CgProfile } from "react-icons/cg";
 import { generateToken } from "../../utils/generateToken.utils";
+import { tokenType } from "../../types/token";
 
 const SubHeader = () => {
-  const navigate = useNavigate();
+  const token = generateToken() as tokenType;
 
-  const token = generateToken();
+  const hasToken = token !== null;
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     navigate("/auth");
@@ -50,21 +54,37 @@ const SubHeader = () => {
         </div>
 
         <div className="flex grid grid-cols-3 gap-3 items-center min-h-[48px]">
-          <button
-            onClick={handleLogin}
-            className=" rounded-[3px] bg-[#BC2228] border-[1px] border-[#BC2228] px-6 py-3 text-white whitespace-nowrap"
-          >
-            Đăng Nhập
-          </button>
-          <button
-            onClick={handleRegister}
-            className=" rounded-[3px] bg-white border-[1px] border-[#BC2228] px-6 py-3 text-[#BC2228] whitespace-nowrap"
-          >
-            Đăng ký
-          </button>
-          <button className=" rounded-[3px] bg-[#231651] border-[1px] border-[#231651] px-6 py-3 text-white whitespace-nowrap">
-            Đăng Tuyển
-          </button>
+          {hasToken ? (
+            <>
+              {/* Hide login, register, and apply buttons */}
+              <div className="text-[#BC2228] text-[25px] px-2">
+                <IoMdNotifications />
+              </div>
+
+              <div className="text-[#BC2228] text-[25px] px-2">
+                <CgProfile />
+              </div>
+              <p className="px-6 py-3">{token?.userName}</p>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={handleLogin}
+                className="rounded-[3px] bg-[#BC2228] border-[1px] border-[#BC2228] px-6 py-3 text-white whitespace-nowrap"
+              >
+                Đăng Nhập
+              </button>
+              <button
+                onClick={handleRegister}
+                className="rounded-[3px] bg-white border-[1px] border-[#BC2228] px-6 py-3 text-[#BC2228] whitespace-nowrap"
+              >
+                Đăng ký
+              </button>
+              <button className="rounded-[3px] bg-white border-[1px] border-[#BC2228] px-6 py-3 text-[#BC2228] whitespace-nowrap">
+                Đăng tuyển
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
