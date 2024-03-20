@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { User } from "../types/auth";
 
 export const useAuthLogic = (isRegister: boolean) => {
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -23,7 +24,15 @@ export const useAuthLogic = (isRegister: boolean) => {
     } else {
       setPasswordError("");
     }
-  }, [email, password, confirmPassword, isRegister]);
+
+    if (isRegister) {
+      if (confirmPassword !== password) {
+        setConfirmPasswordError("Mật khẩu không khớp");
+      } else {
+        setConfirmPasswordError("");
+      }
+    }
+  }, [email, password, confirmPassword, name, isRegister]);
 
   return {
     email,
@@ -32,7 +41,10 @@ export const useAuthLogic = (isRegister: boolean) => {
     setPassword,
     confirmPassword,
     setConfirmPassword,
+    userName,
+    setUserName,
     emailError,
+    setEmailError,
     passwordError,
     confirmPasswordError,
   };

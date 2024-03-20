@@ -1,6 +1,28 @@
 import Logo from "../../assets/logo-rikkei2 2.png";
 import Investment from "../../assets/Investment data-rafiki 1.png";
+import { useAuthLogic } from "../../utils/authLogic";
+import { useNavigate } from "react-router-dom";
+import { loginApi } from "../../apis/auth/auth";
 const Login = () => {
+  const { email, setEmail, password, setPassword, emailError, passwordError } =
+    useAuthLogic(false);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const response: any = await loginApi({ email, password });
+    if (response) {
+      localStorage.setItem("Auth", response.access_token);
+      if (response.data.role === "admin") {
+        navigate("/admin");
+      } else if (response.data.role === "staff") {
+        navigate("/");
+      } else {
+        navigate("/business");
+      }
+    }
+  };
   return (
     <div className="px-8 mb-8 min-w-[1440px] mx-auto">
       <div>
@@ -14,7 +36,7 @@ const Login = () => {
             Cùng Rikkei Education xây dựng hồ sơ nổi bật và nhận được các cơ hội
             sự nghiệp lý tưởng
           </p>
-          <form action="" method="post" className="mt-[50px]">
+          <form onSubmit={handleSubmit} className="mt-[50px]">
             <div id="email" className="flex flex-col">
               <label htmlFor="" className="mb-4">
                 Email
@@ -22,8 +44,17 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="abc@gmail.com"
-                className="h-16 round-[5px] border border-[#DEDDE4]"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={`h-16 rounded-[5px] border ${
+                  emailError && email !== ""
+                    ? "border-red-500"
+                    : "border-[#DEDDE4]"
+                }`}
               />
+              {emailError && email !== "" && (
+                <p className="text-red-500">{emailError}</p>
+              )}
             </div>
             <div id="password" className="flex flex-col mt-9">
               <label htmlFor="" className="mb-4">
@@ -32,8 +63,17 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="********"
-                className="h-16 round-[5px] border border-[#DEDDE4]"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={`h-16 rounded-[5px] border ${
+                  passwordError && password !== ""
+                    ? "border-red-500"
+                    : "border-[#DEDDE4]"
+                }`}
               />
+              {passwordError && password !== "" && (
+                <p className="text-red-500">{passwordError}</p>
+              )}
             </div>
 
             <button

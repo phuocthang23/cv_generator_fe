@@ -10,3 +10,8 @@ export interface dataLoginResponse {
   role: string;
   username: string;
 }
+
+export interface registerResponse {
+  success: boolean;
+  message: string;
+}

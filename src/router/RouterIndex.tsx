@@ -3,7 +3,6 @@ import Auth from "../layouts/Auth";
 import Register from "../page/auth/Register";
 import Admin from "../page/Admin/Admin";
 import Business from "../page/Business/Business";
-import Login2 from "../page/auth/Login2";
 import JobDetail from "../page/MainPage/JobDetail";
 import HomePage from "../page/User/home/homePage";
 import UserLayout from "../layouts/UserLayout";
@@ -19,7 +18,6 @@ const RouterIndex = () => {
       <Routes>
         <Route path="/auth" element={<Auth />}>
           <Route index element={<Login />} />
-          <Route path="login2" element={<Login2 />} />
           <Route path="register" element={<Register />} />
         </Route>
         {/* homepage */}

@@ -1,6 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/header/Logo.png";
 import { IoSearchOutline } from "react-icons/io5";
+import { generateToken } from "../../utils/generateToken.utils";
+
 const SubHeader = () => {
+  const navigate = useNavigate();
+
+  const token = generateToken();
+
+  const handleLogin = () => {
+    navigate("/auth");
+  };
+
+  const handleRegister = () => {
+    navigate("/auth/register");
+  };
   return (
     <div className="min-w-[1440px] max-h-[139px] py-[30px]">
       <div className=" w-[1250px] min-h-[72px] py-2 px-[30px] flex items-center justify-between mx-auto">
@@ -36,10 +50,16 @@ const SubHeader = () => {
         </div>
 
         <div className="flex grid grid-cols-3 gap-3 items-center min-h-[48px]">
-          <button className=" rounded-[3px] bg-[#BC2228] border-[1px] border-[#BC2228] px-6 py-3 text-white whitespace-nowrap">
+          <button
+            onClick={handleLogin}
+            className=" rounded-[3px] bg-[#BC2228] border-[1px] border-[#BC2228] px-6 py-3 text-white whitespace-nowrap"
+          >
             Đăng Nhập
           </button>
-          <button className=" rounded-[3px] bg-white border-[1px] border-[#BC2228] px-6 py-3 text-[#BC2228] whitespace-nowrap">
+          <button
+            onClick={handleRegister}
+            className=" rounded-[3px] bg-white border-[1px] border-[#BC2228] px-6 py-3 text-[#BC2228] whitespace-nowrap"
+          >
             Đăng ký
           </button>
           <button className=" rounded-[3px] bg-[#231651] border-[1px] border-[#231651] px-6 py-3 text-white whitespace-nowrap">

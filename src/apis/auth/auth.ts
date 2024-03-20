@@ -1,8 +1,8 @@
 import { AxiosResponse } from "axios";
 
 import axiosInstance from "../base.api";
-import { LoginRequest } from "./request/login.request";
-import { LoginResponse } from "./reponse/login.reponse";
+import { LoginRequest, RegisterRequest } from "./request/login.request";
+import { LoginResponse, registerResponse } from "./reponse/login.reponse";
 
 const loginApi = async (requestBody: LoginRequest): Promise<LoginResponse> => {
   return axiosInstance
@@ -15,4 +15,15 @@ const loginApi = async (requestBody: LoginRequest): Promise<LoginResponse> => {
     });
 };
 
-export { loginApi };
+const RegisterApi = async (requestBody: any): Promise<any> => {
+  return axiosInstance
+    .post("/auth/register", requestBody)
+    .then((response: AxiosResponse<any>) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+};
+
+export { loginApi, RegisterApi };
