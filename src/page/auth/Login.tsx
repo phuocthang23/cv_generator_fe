@@ -4,6 +4,8 @@ import { useAuthLogic } from "../../utils/authLogic";
 import { useNavigate } from "react-router-dom";
 import { loginApi } from "../../apis/auth/auth";
 import { useState } from "react";
+import { Alert } from "flowbite-react";
+import { HiInformationCircle } from "react-icons/hi";
 const Login = () => {
   const {
     email,
@@ -16,11 +18,18 @@ const Login = () => {
     setPasswordError,
   } = useAuthLogic(false);
 
-  // const [x, setX] = useState<Boolean>(true);
+  const [messageError, setMessageError] = useState<String>("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    setMessageError(""); // Xóa thông báo lỗi trước khi kiểm tra
+
+    if (email === "" || password === "") {
+      setMessageError("Email hoặc password không được trống");
+      return;
+    }
 
     try {
       const response: any = await loginApi({ email, password });
@@ -38,11 +47,8 @@ const Login = () => {
         }
       }
     } catch (error: any) {
-      if (error.response.status === 401)
-        setPasswordError("Email hoặc password không đúng");
-      else {
-        setEmailError("Email hoặc password bị trống");
-      }
+      setEmailError("Email hoặc password không đúng");
+      setPasswordError("Email hoặc password không đúng");
     }
   };
   return (
@@ -74,6 +80,7 @@ const Login = () => {
                     : "border-[#DEDDE4]"
                 }`}
               />
+
               {emailError && email !== "" && (
                 <p className="text-red-500">{emailError}</p>
               )}
@@ -97,6 +104,16 @@ const Login = () => {
                 <p className="text-red-500">{passwordError}</p>
               )}
             </div>
+
+            {messageError && (
+              <Alert
+                color="failure"
+                icon={HiInformationCircle}
+                className="mt-4"
+              >
+                <span className="font-medium">{messageError}</span>.
+              </Alert>
+            )}
 
             <button
               type="submit"
