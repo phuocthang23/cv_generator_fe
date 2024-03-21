@@ -25,15 +25,15 @@ const Register = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const response: any = await RegisterApi({
-      email,
-      password,
-      roleId,
-      userName,
-    });
-    if (response.success) {
+    try {
+      await RegisterApi({
+        email,
+        password,
+        roleId,
+        userName,
+      });
       navigate("/auth");
-    } else if (response.statusCode === 409) {
+    } catch (error) {
       setEmailError("Email đã được tồn tại");
     }
   };

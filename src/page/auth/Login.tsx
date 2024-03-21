@@ -3,23 +3,45 @@ import Investment from "../../assets/Investment data-rafiki 1.png";
 import { useAuthLogic } from "../../utils/authLogic";
 import { useNavigate } from "react-router-dom";
 import { loginApi } from "../../apis/auth/auth";
+import { useState } from "react";
 const Login = () => {
-  const { email, setEmail, password, setPassword, emailError, passwordError } =
-    useAuthLogic(false);
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    emailError,
+    passwordError,
+    setEmailError,
+    setPasswordError,
+  } = useAuthLogic(false);
 
+  // const [x, setX] = useState<Boolean>(true);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const response: any = await loginApi({ email, password });
-    if (response) {
-      localStorage.setItem("Auth", response.access_token);
-      if (response.data.role === "admin") {
-        navigate("/admin");
-      } else if (response.data.role === "staff") {
-        navigate("/");
-      } else {
-        navigate("/business");
+
+    try {
+      const response: any = await loginApi({ email, password });
+      console.log(response);
+
+      if (response) {
+        localStorage.setItem("Auth", response.access_token);
+
+        if (response.data.role === "admin") {
+          navigate("/admin");
+        } else if (response.data.role === "staff") {
+          navigate("/");
+        } else {
+          navigate("/business");
+        }
+      }
+    } catch (error: any) {
+      if (error.response.status === 401)
+        setPasswordError("Email hoặc password không đúng");
+      else {
+        setEmailError("Email hoặc password bị trống");
       }
     }
   };

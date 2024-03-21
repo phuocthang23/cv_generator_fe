@@ -46,6 +46,7 @@ export const useAuthLogic = (isRegister: boolean) => {
     emailError,
     setEmailError,
     passwordError,
+    setPasswordError,
     confirmPasswordError,
   };
 };
