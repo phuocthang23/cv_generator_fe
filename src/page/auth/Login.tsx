@@ -88,7 +88,10 @@ const Login = () => {
             <p className="text-sm font-cabin font-medium">Quên mật khẩu?</p>
             <p className="text-sm font-cabin font-medium mt-5">
               Bạn không có tài khoản?{" "}
-              <span className="text-main-0 hover:text-red-500">
+              <span
+                className="text-main-0 hover:text-red-500 cursor-pointer"
+                onClick={() => navigate("/auth/register")}
+              >
                 Tạo 1 tài khoản
               </span>
             </p>

@@ -2,12 +2,13 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../assets/header/Logo.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoMdNotifications } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
 import { generateToken } from "../../utils/generateToken.utils";
 import { tokenType } from "../../types/token";
+import { Avatar, Dropdown } from "flowbite-react";
+import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from "react-icons/hi";
 
 const SubHeader = () => {
-  const token = generateToken() as tokenType;
+  const token = generateToken() as tokenType | null;
 
   const hasToken = token !== null;
   const navigate = useNavigate();
@@ -18,6 +19,12 @@ const SubHeader = () => {
 
   const handleRegister = () => {
     navigate("/auth/register");
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("Auth");
+
+    navigate("/auth");
   };
   return (
     <div className="min-w-[1440px] max-h-[139px] py-[30px]">
@@ -61,9 +68,27 @@ const SubHeader = () => {
                 <IoMdNotifications />
               </div>
 
-              <div className="text-[#BC2228] text-[25px] px-2">
-                <CgProfile />
-              </div>
+              <Dropdown
+                label={
+                  <Avatar
+                    img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                    status="online"
+                    rounded
+                  />
+                }
+                arrowIcon={false}
+                inline
+              >
+                <Dropdown.Header></Dropdown.Header>
+                <Dropdown.Item icon={HiViewGrid}>Dashboard</Dropdown.Item>
+                <Dropdown.Item icon={HiCog}>Settings</Dropdown.Item>
+                <Dropdown.Item icon={HiCurrencyDollar}>Earnings</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item icon={HiLogout} onClick={handleSignOut}>
+                  Sign out
+                </Dropdown.Item>
+              </Dropdown>
+
               <p className="px-6 py-3">{token?.userName}</p>
             </>
           ) : (

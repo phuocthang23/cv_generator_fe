@@ -20,7 +20,7 @@ const Register = () => {
     confirmPasswordError,
   } = useAuthLogic(true);
 
-  const roleId = 1;
+  const roleId = 3;
   const navigate = useNavigate();
 
   const handleSubmit = async (e: any) => {
@@ -134,9 +134,12 @@ const Register = () => {
 
           <div className="text-center mt-[20px]">
             <p className="text-sm font-cabin font-medium mt-5">
-              Tạo 1 tài khoản{" "}
-              <span className="text-main-0 hover:text-red-500">
-                Tạo 1 tài khoản
+              bạn đã có tài khoản?{" "}
+              <span
+                className="text-main-0 hover:text-red-500 cursor-pointer"
+                onClick={() => navigate("/auth")}
+              >
+                Đăng nhập tài khoản
               </span>
             </p>
           </div>
