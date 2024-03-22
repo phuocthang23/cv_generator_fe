@@ -11,6 +11,8 @@ import JobApplicationLayout from "../page/MainPage/Job-application";
 import ProfileCV from "../page/MainPage/Job-application/Profile";
 import BusinessInformationUser from "../page/User/business-information-user";
 import Login from "../page/auth/Login";
+import ForgetPassword from "../page/auth/ForgetPassword/ForgetPassword";
+import ComfirmPassword from "../page/auth/ForgetPassword/ComfirmPassword";
 
 const RouterIndex = () => {
   return (
@@ -19,7 +21,11 @@ const RouterIndex = () => {
         <Route path="/auth" element={<Auth />}>
           <Route index element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="check-email" element={<ForgetPassword />} />
+          <Route path="reset-password/:id" element={<ComfirmPassword />} />
         </Route>
+        {/* forgot password */}
+
         {/* homepage */}
         <Route path="/" element={<UserLayout />}>
           <Route index element={<HomePage />} />

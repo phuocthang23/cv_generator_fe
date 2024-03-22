@@ -32,7 +32,7 @@ export const useAuthLogic = (isRegister: boolean) => {
         setConfirmPasswordError("");
       }
     }
-  }, [email, password, confirmPassword, name, isRegister]);
+  }, [email, password, confirmPassword, userName, isRegister]);
 
   return {
     email,
