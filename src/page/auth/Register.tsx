@@ -1,30 +1,29 @@
 import { useNavigate } from "react-router-dom";
-import { useAuthLogic } from "../../utils/authLogic";
 import Investment from "../../assets/Investment data-rafiki 1.png";
 import Logo from "../../assets/logo-rikkei2 2.png";
+import { registerService } from "../../service/auth/Register.service";
+import { Alert } from "flowbite-react";
+import { HiInformationCircle } from "react-icons/hi";
 
 const Register = () => {
-  // const {
-  //   email,
-  //   setEmail,
-  //   password,
-  //   confirmPassword,
-  //   setConfirmPassword,
-  //   setPassword,
-  //   emailError,
-  //   passwordError,
-  //   confirmPasswordError,
-  // } = useAuthLogic(true);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const handleSubmit = (e: any) => {
-  //   e.preventDefault();
-  //   if (!emailError && !passwordError) {
-  //     const newUser = { email, password, role: "user" };
-  //     users.push(newUser);
-  //     navigate("/login");
-  //   }
-  // };
+  const {
+    email,
+    setEmail,
+    password,
+    confirmPassword,
+    setConfirmPassword,
+    setPassword,
+    emailError,
+    setEmailError,
+    userName,
+    setUserName,
+    passwordError,
+    confirmPasswordError,
+    messageError,
+    handleSubmit,
+  } = registerService();
 
   return (
     <div className="px-8 mb-8 min-w-[1440px] mx-auto">
@@ -37,15 +36,21 @@ const Register = () => {
             Cùng Rikkei Education xây dựng hồ sơ nổi bật và nhận được các cơ hội
             sự nghiệp lý tưởng
           </p>
-          <form action="" method="post" className="mt-[50px]">
+          <form onSubmit={handleSubmit} className="mt-[50px]">
             <div id="name" className="flex flex-col">
               <label htmlFor="" className="mb-4">
                 Họ tên
               </label>
               <input
-                type="email"
-                placeholder="abc@gmail.com"
-                className="h-16 round-[5px] border border-[#DEDDE4]"
+                type="text"
+                placeholder="abcd"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                className={`h-16 rounded-[5px] border ${
+                  emailError && email !== ""
+                    ? "border-red-500"
+                    : "border-[#DEDDE4]"
+                }`}
               />
             </div>
             <div id="email" className="flex flex-col mt-9">
@@ -55,8 +60,17 @@ const Register = () => {
               <input
                 type="email"
                 placeholder="abc@gmail.com"
-                className="h-16 round-[5px] border border-[#DEDDE4]"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={`h-16 rounded-[5px] border ${
+                  emailError && email !== ""
+                    ? "border-red-500"
+                    : "border-[#DEDDE4]"
+                }`}
               />
+              {emailError && email !== "" && (
+                <p className="text-red-500">{emailError}</p>
+              )}
             </div>
             <div id="password" className="flex flex-col mt-9">
               <label htmlFor="" className="mb-4">
@@ -65,8 +79,17 @@ const Register = () => {
               <input
                 type="password"
                 placeholder="********"
-                className="h-16 round-[5px] border border-[#DEDDE4]"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={`h-16 rounded-[5px] border ${
+                  passwordError && password !== ""
+                    ? "border-red-500"
+                    : "border-[#DEDDE4]"
+                }`}
               />
+              {passwordError && password !== "" && (
+                <p className="text-red-500">{passwordError}</p>
+              )}
             </div>
             <div id="repassword" className="flex flex-col mt-9">
               <label htmlFor="" className="mb-4">
@@ -75,9 +98,28 @@ const Register = () => {
               <input
                 type="password"
                 placeholder="********"
-                className="h-16 round-[5px] border border-[#DEDDE4]"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className={`h-16 rounded-[5px] border ${
+                  confirmPasswordError && confirmPassword !== ""
+                    ? "border-red-500"
+                    : "border-[#DEDDE4]"
+                }`}
               />
+              {confirmPasswordError && confirmPassword !== "" && (
+                <p className="text-red-500">{confirmPasswordError}</p>
+              )}
             </div>
+
+            {messageError && (
+              <Alert
+                color="failure"
+                icon={HiInformationCircle}
+                className="mt-4"
+              >
+                <span className="font-medium">{messageError}</span>.
+              </Alert>
+            )}
 
             <button
               type="submit"
@@ -89,9 +131,12 @@ const Register = () => {
 
           <div className="text-center mt-[20px]">
             <p className="text-sm font-cabin font-medium mt-5">
-              Tạo 1 tài khoản{" "}
-              <span className="text-main-0 hover:text-red-500">
-                Tạo 1 tài khoản
+              bạn đã có tài khoản?{" "}
+              <span
+                className="text-main-0 hover:text-red-500 cursor-pointer"
+                onClick={() => navigate("/auth")}
+              >
+                Đăng nhập tài khoản
               </span>
             </p>
           </div>

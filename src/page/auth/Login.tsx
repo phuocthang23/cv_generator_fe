@@ -1,6 +1,22 @@
 import Logo from "../../assets/logo-rikkei2 2.png";
 import Investment from "../../assets/Investment data-rafiki 1.png";
+import { useNavigate } from "react-router-dom";
+import { Alert } from "flowbite-react";
+import { HiInformationCircle } from "react-icons/hi";
+import { loginService } from "../../service/auth/Login.service";
 const Login = () => {
+  const navigate = useNavigate();
+
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    emailError,
+    passwordError,
+    messageError,
+    handleSubmit,
+  } = loginService();
   return (
     <div className="px-8 mb-8 min-w-[1440px] mx-auto">
       <div>
@@ -14,7 +30,7 @@ const Login = () => {
             Cùng Rikkei Education xây dựng hồ sơ nổi bật và nhận được các cơ hội
             sự nghiệp lý tưởng
           </p>
-          <form action="" method="post" className="mt-[50px]">
+          <form onSubmit={handleSubmit} className="mt-[50px]">
             <div id="email" className="flex flex-col">
               <label htmlFor="" className="mb-4">
                 Email
@@ -22,8 +38,18 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="abc@gmail.com"
-                className="h-16 round-[5px] border border-[#DEDDE4]"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={`h-16 rounded-[5px] border ${
+                  emailError && email !== ""
+                    ? "border-red-500"
+                    : "border-[#DEDDE4]"
+                }`}
               />
+
+              {emailError && email !== "" && (
+                <p className="text-red-500">{emailError}</p>
+              )}
             </div>
             <div id="password" className="flex flex-col mt-9">
               <label htmlFor="" className="mb-4">
@@ -32,9 +58,28 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="********"
-                className="h-16 round-[5px] border border-[#DEDDE4]"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={`h-16 rounded-[5px] border ${
+                  passwordError && password !== ""
+                    ? "border-red-500"
+                    : "border-[#DEDDE4]"
+                }`}
               />
+              {passwordError && password !== "" && (
+                <p className="text-red-500">{passwordError}</p>
+              )}
             </div>
+
+            {messageError && (
+              <Alert
+                color="failure"
+                icon={HiInformationCircle}
+                className="mt-4"
+              >
+                <span className="font-medium">{messageError}</span>.
+              </Alert>
+            )}
 
             <button
               type="submit"
@@ -48,7 +93,10 @@ const Login = () => {
             <p className="text-sm font-cabin font-medium">Quên mật khẩu?</p>
             <p className="text-sm font-cabin font-medium mt-5">
               Bạn không có tài khoản?{" "}
-              <span className="text-main-0 hover:text-red-500">
+              <span
+                className="text-main-0 hover:text-red-500 cursor-pointer"
+                onClick={() => navigate("/auth/register")}
+              >
                 Tạo 1 tài khoản
               </span>
             </p>
