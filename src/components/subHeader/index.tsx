@@ -60,11 +60,10 @@ const SubHeader = () => {
           </div>
         </div>
 
-        <div className="flex grid grid-cols-3 gap-3 items-center min-h-[48px]">
+        <div className=" grid grid-cols-3 gap-3 items-center min-h-[48px]">
           {hasToken ? (
             <>
-              {/* Hide login, register, and apply buttons */}
-              <div className="text-[#BC2228] text-[25px] px-2">
+              <div className="text-[#BC2228] text-[25px] ml-[-10px]">
                 <IoMdNotifications />
               </div>
 
@@ -74,6 +73,7 @@ const SubHeader = () => {
                     img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                     status="online"
                     rounded
+                    className="mr-2 ml-[-15px]"
                   />
                 }
                 arrowIcon={false}
@@ -89,7 +89,7 @@ const SubHeader = () => {
                 </Dropdown.Item>
               </Dropdown>
 
-              <p className="px-6 py-3">{token?.userName}</p>
+              <p className="">{token?.userName}</p>
             </>
           ) : (
             <>

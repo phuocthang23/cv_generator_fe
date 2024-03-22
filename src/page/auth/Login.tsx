@@ -1,12 +1,12 @@
 import Logo from "../../assets/logo-rikkei2 2.png";
 import Investment from "../../assets/Investment data-rafiki 1.png";
-import { useAuthLogic } from "../../utils/authLogic";
 import { useNavigate } from "react-router-dom";
-import { loginApi } from "../../apis/auth/auth";
-import { useState } from "react";
 import { Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
+import { loginService } from "../../service/auth/Login.service";
 const Login = () => {
+  const navigate = useNavigate();
+
   const {
     email,
     setEmail,
@@ -14,43 +14,9 @@ const Login = () => {
     setPassword,
     emailError,
     passwordError,
-    setEmailError,
-    setPasswordError,
-  } = useAuthLogic(false);
-
-  const [messageError, setMessageError] = useState<String>("");
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-
-    setMessageError(""); // Xóa thông báo lỗi trước khi kiểm tra
-
-    if (email === "" || password === "") {
-      setMessageError("Email hoặc password không được trống");
-      return;
-    }
-
-    try {
-      const response: any = await loginApi({ email, password });
-      console.log(response);
-
-      if (response) {
-        localStorage.setItem("Auth", response.access_token);
-
-        if (response.data.role === "admin") {
-          navigate("/admin");
-        } else if (response.data.role === "staff") {
-          navigate("/");
-        } else {
-          navigate("/business");
-        }
-      }
-    } catch (error: any) {
-      setEmailError("Email hoặc password không đúng");
-      setPasswordError("Email hoặc password không đúng");
-    }
-  };
+    messageError,
+    handleSubmit,
+  } = loginService();
   return (
     <div className="px-8 mb-8 min-w-[1440px] mx-auto">
       <div>

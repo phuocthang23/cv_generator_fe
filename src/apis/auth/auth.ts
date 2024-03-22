@@ -15,14 +15,6 @@ const loginApi = async (
     console.log(err);
     throw err;
   }
-  // return axiosInstance
-  //   .post(API_LOGIN, requestBody)
-  //   .then((response: AxiosResponse<LoginResponse>) => {
-  //     return response.data;
-  //   })
-  //   .catch((error) => {
-  //     throw error;
-  //   });
 };
 
 const RegisterApi = async (

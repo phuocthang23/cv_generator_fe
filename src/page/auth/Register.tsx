@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { useAuthLogic } from "../../utils/authLogic";
 import Investment from "../../assets/Investment data-rafiki 1.png";
 import Logo from "../../assets/logo-rikkei2 2.png";
-import { RegisterApi } from "../../apis/auth/auth";
+import { registerService } from "../../service/auth/Register.service";
+import { Alert } from "flowbite-react";
+import { HiInformationCircle } from "react-icons/hi";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const {
     email,
     setEmail,
@@ -18,25 +21,9 @@ const Register = () => {
     setUserName,
     passwordError,
     confirmPasswordError,
-  } = useAuthLogic(true);
-
-  const roleId = 3;
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    try {
-      await RegisterApi({
-        email,
-        password,
-        roleId,
-        userName,
-      });
-      navigate("/auth");
-    } catch (error) {
-      setEmailError("Email đã được tồn tại");
-    }
-  };
+    messageError,
+    handleSubmit,
+  } = registerService();
 
   return (
     <div className="px-8 mb-8 min-w-[1440px] mx-auto">
@@ -123,6 +110,16 @@ const Register = () => {
                 <p className="text-red-500">{confirmPasswordError}</p>
               )}
             </div>
+
+            {messageError && (
+              <Alert
+                color="failure"
+                icon={HiInformationCircle}
+                className="mt-4"
+              >
+                <span className="font-medium">{messageError}</span>.
+              </Alert>
+            )}
 
             <button
               type="submit"
