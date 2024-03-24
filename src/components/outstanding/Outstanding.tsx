@@ -2,19 +2,30 @@ import { CiBookmark, CiLocationOn } from "react-icons/ci";
 import { FaArrowRight } from "react-icons/fa";
 import EmployersLogo2 from "../../assets/Employers Logo 2.png";
 import "./index.scss";
+import { useNavigate } from "react-router-dom";
 const Outstanding = () => {
+  const navigate = useNavigate();
   return (
     <div className=" mx-auto px-[60px] font-inter w-[1440px] py-[100px]">
-      <div className="flex justify-between items-center h-12 max-h-[1320px]">
+      <div className="flex justify-between items-center h-12 max-w-[1320px]">
         <h1 className=" font-bold text-3xl">Công việc nổi bật</h1>
         <div className="flex items-center">
-          <p className="text-sm text-red-700"> xem thêm</p>
+          <p
+            className="text-sm text-red-700 cursor-pointer"
+            onClick={() => navigate("/job")}
+          >
+            {" "}
+            xem thêm
+          </p>
           <div className="ml-3">
-            <FaArrowRight className="text-main-0" />
+            <FaArrowRight
+              className="text-main-0 cursor-pointer"
+              onClick={() => navigate("/job")}
+            />
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-6 mt-[50px] max-h-[1320px]">
+      <div className="grid grid-cols-3 gap-6 mt-[50px] max-w-[1320px]">
         <div className=" bg-white rounded-md shadow-md company border-2 border-[#E4E5E8]">
           <div className=" mb-5">
             <h2 className="text-lg font-semibold">

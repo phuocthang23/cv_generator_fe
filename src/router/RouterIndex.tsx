@@ -11,6 +11,8 @@ import JobApplicationLayout from "../page/MainPage/Job-application";
 import ProfileCV from "../page/MainPage/Job-application/Profile";
 import BusinessInformationUser from "../page/User/business-information-user";
 import Login from "../page/auth/Login";
+import Job from "../page/User/job/Job";
+import CompanyList from "../page/User/company-list/CompanyList";
 
 const RouterIndex = () => {
   return (
@@ -32,6 +34,8 @@ const RouterIndex = () => {
             path="/business-information-user"
             element={<BusinessInformationUser />}
           />
+          <Route path="/job" element={<Job />} />
+          <Route path="/list-company" element={<CompanyList />} />
         </Route>
 
         {/* adminpage */}
