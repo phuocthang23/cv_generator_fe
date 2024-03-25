@@ -2,16 +2,27 @@ import { CiLocationOn } from "react-icons/ci";
 import "../outstanding/index.scss";
 import basketball from "../../assets/basket.png";
 import { FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Company = () => {
+  const navigate = useNavigate();
   return (
     <div className=" mx-auto px-[60px] font-inter w-[1440px]">
-      <div className="flex justify-between items-center h-12 max-h-[1320px]">
+      <div className="flex justify-between items-center h-12 max-w-[1320px]">
         <h1 className=" font-bold text-3xl">Công ty nổi bật</h1>
         <div className="flex items-center">
-          <p className="text-sm text-red-700"> xem thêm</p>
+          <p
+            className="text-sm text-red-700 cursor-pointer"
+            onClick={() => navigate("/list-company")}
+          >
+            {" "}
+            xem thêm
+          </p>
           <div className="ml-3">
-            <FaArrowRight className="text-main-0" />
+            <FaArrowRight
+              className="text-main-0 cursor-pointer"
+              onClick={() => navigate("/list-company")}
+            />
           </div>
         </div>
       </div>
