@@ -15,3 +15,11 @@ export interface registerResponse {
   success: boolean;
   message: string;
 }
+
+export interface resetPasswordResponse {
+  message: string;
+}
+
+export interface comfirmPasswordResponse {
+  message: string;
+}

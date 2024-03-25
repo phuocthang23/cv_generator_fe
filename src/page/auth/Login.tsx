@@ -90,7 +90,12 @@ const Login = () => {
           </form>
 
           <div className="text-center mt-[20px]">
-            <p className="text-sm font-cabin font-medium">Quên mật khẩu?</p>
+            <p
+              className="text-sm font-cabin font-medium cursor-pointer hover:text-red-500"
+              onClick={() => navigate("/auth/check-email")}
+            >
+              Quên mật khẩu?
+            </p>
             <p className="text-sm font-cabin font-medium mt-5">
               Bạn không có tài khoản?{" "}
               <span
