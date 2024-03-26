@@ -6,9 +6,13 @@ import Filter from "../../../components/filter/Filter";
 import { getJob } from "../../../service/jobService/job.service";
 import PaginationComponent from "../../../components/pagination/PaginationComponent";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Job = () => {
   const [page, setPage] = useState(1);
+
+  const navigate = useNavigate();
+
   const limit = 12;
 
   const data = getJob({ page, limit });
@@ -23,7 +27,8 @@ const Job = () => {
             {data?.data.map((item: any, index: number) => (
               <div
                 key={index}
-                className=" bg-white rounded-md shadow-md company border-2 border-[#E4E5E8]"
+                className=" bg-white rounded-md shadow-md company border-2 border-[#E4E5E8] cursor-pointer"
+                onClick={() => navigate(`/job-detail/${item.id}`)}
               >
                 <div className=" mb-5">
                   <h2 className="text-lg font-semibold">{item.title}</h2>
