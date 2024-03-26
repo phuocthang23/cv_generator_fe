@@ -16,8 +16,16 @@ import EmployersLogo from "../../../assets/Employers Logo.png";
 import BookmarkSimple from "../../../assets/BookmarkSimple (1).png";
 import { FaArrowRight } from "react-icons/fa";
 import "./index.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { jobDetail } from "../../../service/jobService/jobDetail.service";
+import { TabItem } from "flowbite-react";
 const JobDetail = () => {
+  const param = useParams();
+
+  const data = jobDetail(param);
+
+  console.log(data);
+
   return (
     <div>
       <div className="main max-w-[1320px] mx-auto ">
@@ -25,7 +33,7 @@ const JobDetail = () => {
           <div className="flex items-center">
             <img className="w-[96px] mr-6" src={logo} alt="" />
             <div className="heading ">
-              <p className="text-2xl">Senior UX Designer</p>
+              <p className="text-2xl">{data.title}</p>
               <p className="text-[18px] mt-3 address">
                 at FPT Software{" "}
                 <span className="mx-2 text-white itag">FULL-TIME</span>{" "}
@@ -48,28 +56,7 @@ const JobDetail = () => {
               <b> Job Description</b>
             </p>
             <p className="mt-4 text-base">
-              <span className="block mb-4">
-                Velstar is a Shopify Plus agency, and we partner with brands to
-                help them grow, we also do the same with our people!
-              </span>
-              <span className="block mb-4">
-                Here at Velstar, we don't just make websites, we create
-                exceptional digital experiences that consumers love. Our team of
-                designers, developers, strategists, and creators work together
-                to push brands to the next level. From Platform Migration, User
-                Experience & User Interface Design, to Digital Marketing, we
-                have a proven track record in delivering outstanding eCommerce
-                solutions and driving sales for our clients.
-              </span>
-              <span className="block mb-4">
-                The role will involve translating project specifications into
-                clean, test-driven, easily maintainable code. You will work with
-                the Project and Development teams as well as with the Technical
-                Director, adhering closely to project plans and delivering work
-                that meets functional & non-functional requirements. You will
-                have the opportunity to create new, innovative, secure and
-                scalable features for our clients on the Shopify platform
-              </span>
+              <span className="block mb-4">{data.description}</span>
               <span>Want to work with us? You're in good company!</span>
             </p>
             <div className="requirements">
@@ -161,8 +148,8 @@ const JobDetail = () => {
             <div className=" flex p-8 border border-collapse ml-6 rounded-lg">
               <div className="money w-[50%] pr-8 border-r-2">
                 <p className="font-medium text-center">Salary (USD)</p>
-                <p className="text-xl text-light-green-700 my-3">
-                  $100,000 - $120,000
+                <p className="text-xl text-light-green-700 my-3 text-center">
+                  ${data.salary}
                 </p>
                 <span className="text-ellipsis block text-center text-[#767F8C]">
                   Yearly salary
@@ -190,12 +177,12 @@ const JobDetail = () => {
                   <li>
                     <img src={Timer} alt="" />
                     <p className="text-xs text-[#767F8C]">Job expire in:</p>
-                    <p className="text-ellipsis">14 Aug, 2021</p>
+                    <p className="text-ellipsis">{data.expire_at}</p>
                   </li>
                   <li>
                     <img src={Stack} alt="" />
                     <p className="text-xs text-[#767F8C]">Job Level:</p>
-                    <p className="text-ellipsis">Entry Level</p>
+                    <p className="text-ellipsis">{data.level}</p>
                   </li>
                   <li>
                     <img src={Wallet} alt="" />

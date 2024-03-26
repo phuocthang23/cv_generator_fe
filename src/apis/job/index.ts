@@ -17,3 +17,15 @@ export const getJobApi = async (
     throw err;
   }
 };
+
+export const getOneJobApi = async (
+  id: any
+): Promise<AxiosResponse<any, any>> => {
+  try {
+    const response = await axiosInstance.get(`${API_JOB}/${id.id}`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
