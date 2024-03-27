@@ -18,24 +18,23 @@ import { FaArrowRight } from "react-icons/fa";
 import "./index.scss";
 import { Link, useParams } from "react-router-dom";
 import { jobDetail } from "../../../service/jobService/jobDetail.service";
-import { TabItem } from "flowbite-react";
+import BreadCrumb from "../../../components/breadCrumb/BreadCrumb";
+import { formatDay } from "../../../utils/convertDay";
 const JobDetail = () => {
   const param = useParams();
 
-  const data = jobDetail(param);
-
-  console.log(data);
-
+  const { dataJob, relatedJobs } = jobDetail(param);
   return (
     <div>
+      <BreadCrumb />
       <div className="main max-w-[1320px] mx-auto ">
         <div className=" heading mx-auto mt-[35.5px] flex justify-between">
           <div className="flex items-center">
             <img className="w-[96px] mr-6" src={logo} alt="" />
             <div className="heading ">
-              <p className="text-2xl">{data.title}</p>
+              <p className="text-2xl">{dataJob.title}</p>
               <p className="text-[18px] mt-3 address">
-                at FPT Software{" "}
+                at {dataJob.company?.name}
                 <span className="mx-2 text-white itag">FULL-TIME</span>{" "}
                 <span className="featured text-red-700">Featured</span>
               </p>
@@ -56,7 +55,7 @@ const JobDetail = () => {
               <b> Job Description</b>
             </p>
             <p className="mt-4 text-base">
-              <span className="block mb-4">{data.description}</span>
+              <span className="block mb-4">{dataJob.description}</span>
               <span>Want to work with us? You're in good company!</span>
             </p>
             <div className="requirements">
@@ -149,7 +148,7 @@ const JobDetail = () => {
               <div className="money w-[50%] pr-8 border-r-2">
                 <p className="font-medium text-center">Salary (USD)</p>
                 <p className="text-xl text-light-green-700 my-3 text-center">
-                  ${data.salary}
+                  ${dataJob.salary}
                 </p>
                 <span className="text-ellipsis block text-center text-[#767F8C]">
                   Yearly salary
@@ -172,17 +171,19 @@ const JobDetail = () => {
                   <li>
                     <img src={CalendarBlank} alt="" />
                     <p className="text-xs text-[#767F8C]">Job Posted:</p>
-                    <p className="text-ellipsis">14 Jun, 2021</p>
+                    <p className="text-ellipsis">
+                      {formatDay(dataJob.createdAt)}
+                    </p>
                   </li>
                   <li>
                     <img src={Timer} alt="" />
                     <p className="text-xs text-[#767F8C]">Job expire in:</p>
-                    <p className="text-ellipsis">{data.expire_at}</p>
+                    <p className="text-ellipsis">{dataJob.expire_at}</p>
                   </li>
                   <li>
                     <img src={Stack} alt="" />
                     <p className="text-xs text-[#767F8C]">Job Level:</p>
-                    <p className="text-ellipsis">{data.level}</p>
+                    <p className="text-ellipsis">{dataJob.level}</p>
                   </li>
                   <li>
                     <img src={Wallet} alt="" />
@@ -252,168 +253,48 @@ const JobDetail = () => {
         <div className="border-collapse main max-w-[1320px] mx-auto pt-[100px]">
           <h1 className="font-bold text-[40px] mb-[50px]">Related Jobs</h1>
           <div className="grid gap-x-8 gap-y-4 grid-cols-3">
-            <div className="border border-collapse rounded p-6">
-              <p className="text-lg">
-                Techical Support Specialist
-                <p className="text-sm mt-2">
-                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                    FULL-TIME
-                  </span>{" "}
-                  <span>Salary: $20,000 - $25,000</span>
-                </p>
-              </p>
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <span className="mx-3 w-full">
-                  Google Inc.{" "}
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </span>
-                <span className="basis-1/6">
-                  <img src={BookmarkSimple} alt="" />
-                </span>
-              </p>
-            </div>
-            <div className="border border-collapse rounded p-6">
-              <p className="text-lg">
-                Techical Support Specialist
-                <p className="text-sm mt-2">
-                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                    FULL-TIME
-                  </span>{" "}
-                  <span>Salary: $20,000 - $25,000</span>
-                </p>
-              </p>
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <span className="mx-3 w-full">
-                  Google Inc.{" "}
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </span>
-                <span className="basis-1/6">
-                  <img src={BookmarkSimple} alt="" />
-                </span>
-              </p>
-            </div>
-            <div className="border border-collapse rounded p-6">
-              <p className="text-lg">
-                Techical Support Specialist
-                <p className="text-sm mt-2">
-                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                    FULL-TIME
-                  </span>{" "}
-                  <span>Salary: $20,000 - $25,000</span>
-                </p>
-              </p>
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <span className="mx-3 w-full">
-                  Google Inc.{" "}
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </span>
-                <span className="basis-1/6">
-                  <img src={BookmarkSimple} alt="" />
-                </span>
-              </p>
-            </div>
-            <div className="border border-collapse rounded p-6">
-              <p className="text-lg">
-                Techical Support Specialist
-                <p className="text-sm mt-2">
-                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                    FULL-TIME
-                  </span>{" "}
-                  <span>Salary: $20,000 - $25,000</span>
-                </p>
-              </p>
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <span className="mx-3 w-full">
-                  Google Inc.{" "}
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </span>
-                <span className="basis-1/6">
-                  <img src={BookmarkSimple} alt="" />
-                </span>
-              </p>
-            </div>
-            <div className="border border-collapse rounded p-6">
-              <p className="text-lg">
-                Techical Support Specialist
-                <p className="text-sm mt-2">
-                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                    FULL-TIME
-                  </span>{" "}
-                  <span>Salary: $20,000 - $25,000</span>
-                </p>
-              </p>
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <span className="mx-3 w-full">
-                  Google Inc.{" "}
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </span>
-                <span className="basis-1/6">
-                  <img src={BookmarkSimple} alt="" />
-                </span>
-              </p>
-            </div>
-            <div className="border border-collapse rounded p-6">
-              <p className="text-lg">
-                Techical Support Specialist
-                <p className="text-sm mt-2">
-                  <span className="text-light-green-700 rounded bg-[#E7F6EA] px-1 py-2">
-                    FULL-TIME
-                  </span>{" "}
-                  <span>Salary: $20,000 - $25,000</span>
-                </p>
-              </p>
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <span className="mx-3 w-full">
-                  Google Inc.{" "}
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </span>
-                <span className="basis-1/6">
-                  <img src={BookmarkSimple} alt="" />
-                </span>
-              </p>
-            </div>
+            {relatedJobs
+              .filter(
+                (item: any) =>
+                  item.title
+                    .toLowerCase()
+                    .includes(dataJob.title.toLowerCase().split(" ")[0]) ||
+                  item.title
+                    .toLowerCase()
+                    .includes(dataJob.title.toLowerCase().split(" ")[1])
+              )
+              .slice(0, 6)
+              .map((item: any, index: number) => (
+                <div className="border border-collapse rounded p-6" key={index}>
+                  <p className="text-lg">
+                    {item.title}
+                    <p className="text-sm mt-2">
+                      <span className="text-[#0BA02C] rounded bg-[#E7F6EA] px-2 py-1">
+                        FULL-TIME
+                      </span>{" "}
+                      <span className="ml-4">
+                        Salary: $ {item.salary.toLocaleString()}
+                      </span>
+                    </p>
+                  </p>
+                  <p className="mt-5 flex flex-row">
+                    <span className=" basis-1/6">
+                      <img src={EmployersLogo} />
+                    </span>
+                    <span className="mx-3 w-full">
+                      {item.company?.name}.{" "}
+                      <span className="flex">
+                        {" "}
+                        <img className="h-[18px]" src={MapPin} />
+                        Dhaka, Bangladesh
+                      </span>
+                    </span>
+                    <span className="basis-1/6">
+                      <img src={BookmarkSimple} alt="" />
+                    </span>
+                  </p>
+                </div>
+              ))}
           </div>
         </div>
       </div>

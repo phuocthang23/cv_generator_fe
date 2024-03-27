@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
 import "./index.scss";
+import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
 const HeaderJobApplication = () => {
   const activeStyle = "text-red-700 border-b-2 border-b-red-700 py-[14px]";
   return (
     <div className="bg-white">
+      <BreadCrumb />
       <div className="max-w-[1320px] mx-auto py-[14px]">
         <ul className="flex text-white">
           <li>

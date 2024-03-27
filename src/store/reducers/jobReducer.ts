@@ -3,9 +3,14 @@ import {
   createReducer,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { jobAction, jobDetailAction } from "../action/job.action";
+import {
+  getAllJobApiAction,
+  jobAction,
+  jobDetailAction,
+} from "../action/job.action";
 
 const initState = {
+  getAllJob: [],
   listJob: [],
   jobDetail: {},
 };
@@ -26,6 +31,15 @@ const jobReducer: any = createReducer(
           jobDetail: action.payload,
         };
       })
+      .addCase(
+        getAllJobApiAction,
+        (state: any, action: PayloadAction<string>) => {
+          return {
+            ...state,
+            getAllJob: action.payload,
+          };
+        }
+      )
 );
 
 export default jobReducer;

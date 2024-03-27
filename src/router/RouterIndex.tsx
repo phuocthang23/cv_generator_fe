@@ -31,7 +31,7 @@ const RouterIndex = () => {
         {/* homepage */}
         <Route path="/" element={<UserLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="/job-detail/:id" element={<JobDetail />} />
+          <Route path="/job/:id" element={<JobDetail />} />
           <Route path="/create-job" element={<CreateJob />} />
           <Route path="/job-application" element={<JobApplicationLayout />}>
             <Route index element={<ProfileCV />} />

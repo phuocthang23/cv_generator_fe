@@ -1,8 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import jobReducer from "./reducers/jobReducer";
+import companyReducer from "./reducers/companyReducer";
 
 const rootReducer = combineReducers({
   jobReducer,
+  companyReducer,
 });
 
 const store = configureStore({

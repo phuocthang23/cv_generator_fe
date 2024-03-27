@@ -28,7 +28,7 @@ const Job = () => {
               <div
                 key={index}
                 className=" bg-white rounded-md shadow-md company border-2 border-[#E4E5E8] cursor-pointer"
-                onClick={() => navigate(`/job-detail/${item.id}`)}
+                onClick={() => navigate(`/job/${item.id}`)}
               >
                 <div className=" mb-5">
                   <h2 className="text-lg font-semibold">{item.title}</h2>
@@ -43,11 +43,17 @@ const Job = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <button className="bg-gray-200 p-3 rounded-md">
-                      <img src={EmployersLogo2} alt="" />
+                    <button className="bg-gray-200 border-2 border-gray-300 rounded-md">
+                      <img
+                        src={item.company.logo}
+                        alt=""
+                        className="w-9 h-9 rounded-md"
+                      />
                     </button>
                     <div className="flex flex-col ml-3">
-                      <p className="text-sm font-semibold">Google Inc.</p>
+                      <p className="text-sm font-semibold">
+                        {item.company.name}
+                      </p>
                       <div className="flex items-center ">
                         <CiLocationOn />
                         <span className="text-gray-700">Dhaka, Bangladesh</span>

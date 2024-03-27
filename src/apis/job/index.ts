@@ -18,6 +18,16 @@ export const getJobApi = async (
   }
 };
 
+export const getAllJobApi = async (): Promise<AxiosResponse<any, any>> => {
+  try {
+    const response = await axiosInstance.get(API_JOB);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
 export const getOneJobApi = async (
   id: any
 ): Promise<AxiosResponse<any, any>> => {
