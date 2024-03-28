@@ -18,6 +18,7 @@ import RegisterCandidate from "../page/auth/candidate/RegisterCanidate";
 import LoginCandidate from "../page/auth/candidate/LoginCandidate";
 import CandidateList from "../page/Business/candidate-list/CandidateList";
 import CandidateLayout from "../layouts/CandidateLayout";
+import CandidateDetail from "../page/Business/CandidateDetail";
 
 const RouterIndex = () => {
   return (
@@ -52,9 +53,12 @@ const RouterIndex = () => {
         {/* adminpage */}
         <Route path="/admin" element={<Admin />}></Route>
         {/* businesspage */}
+       
         <Route path="/business" element={<CandidateLayout />}>
           <Route index element={<CandidateList />} />
+          <Route path=":id" element={<CandidateDetail />} />
         </Route>
+     
       </Routes>
     </div>
   );

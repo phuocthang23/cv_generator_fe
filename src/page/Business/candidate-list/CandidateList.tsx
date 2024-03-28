@@ -7,9 +7,12 @@ import { useState } from "react";
 import { getCandidate } from "../../../service/candidateService/candidate.service";
 import PaginationComponent from "../../../components/pagination/PaginationComponent";
 import { FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 const CandidateList = () => {
   const [page, setPage] = useState(1);
   const limit = 12;
+
+  const navigate = useNavigate();
 
   const { data, total } = getCandidate({ page, limit });
   return (
@@ -21,8 +24,9 @@ const CandidateList = () => {
           {data?.map((item: any) => {
             return (
               <div
-                className=" rounded-lg shadow-md border-2 company "
+                className=" rounded-lg shadow-md border-2 company cursor-pointer"
                 key={item.id}
+                onClick={() => navigate(`/business/${item.id}`)}
               >
                 <div className="flex items-center">
                   <div className="bg-[#EDEFF5]  mr-4">

@@ -2,9 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../../assets/logo-rikkei2 2.png";
 import { Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
-import { registerCandidateService } from "../../../service/authCandidate/RegisterCadindate.service";
-import { formatDay } from "../../../utils/convertDay";
-
+import { registerCandidateService } from "../../../service/candidateService/RegisterCadindate.service";
 const RegisterCandidate = () => {
   const navigate = useNavigate();
 
@@ -16,7 +14,6 @@ const RegisterCandidate = () => {
     setConfirmPassword,
     setPassword,
     emailError,
-    setEmailError,
     userName,
     setUserName,
     passwordError,

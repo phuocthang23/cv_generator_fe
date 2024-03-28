@@ -1,11 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 
 const candidateAction: any = createAction("GET_CANDIDATES");
-// const jobDetailAction: any = createAction("GET_JOB_DETAIL");
-// const getAllJobApiAction: any = createAction("GET_ALL_JOB");
+const candidateDetailAction: any = createAction("GET_CANDIDATES_DETAIL");
 
-export {
-  candidateAction,
-  //  jobDetailAction,
-  // getAllJobApiAction
-};
+export { candidateAction, candidateDetailAction };
