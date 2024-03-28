@@ -1,5 +1,5 @@
 import { CiLocationOn } from "react-icons/ci";
-import "../../../components/outstanding/index.scss";
+import "../../../components/candidateOutstanding/index.scss";
 import basketball from "../../../assets/basket.png";
 import BreadCrumb from "../../../components/breadCrumb/BreadCrumb";
 import Filter from "../../../components/filter/Filter";
@@ -12,7 +12,6 @@ const CandidateList = () => {
   const limit = 12;
 
   const { data, total } = getCandidate({ page, limit });
-  console.log(data);
   return (
     <div>
       <BreadCrumb />

@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 import EmployersLogo2 from "../../assets/Employers Logo 2.png";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
-const Outstanding = () => {
+const CompanyOutstanding = () => {
   const navigate = useNavigate();
   return (
     <div className=" mx-auto px-[60px] font-inter w-[1440px] py-[100px]">
@@ -327,4 +327,4 @@ const Outstanding = () => {
   );
 };
 
-export default Outstanding;
+export default CompanyOutstanding;
