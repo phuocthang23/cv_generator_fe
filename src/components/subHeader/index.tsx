@@ -89,7 +89,7 @@ const SubHeader = () => {
               </Dropdown>
 
               <p className="">
-                {token.role === "candidate" ? token?.name : token?.userName}
+                {token?.role === "candidates" ? token?.name : token?.userName}
               </p>
             </>
           ) : (

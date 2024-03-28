@@ -11,7 +11,7 @@ const homePage = () => {
   return (
     <div>
       <Banner />
-      {token.role === "candidates" ? (
+      {token?.role === "candidates" ? (
         <CompanyOutstanding />
       ) : (
         <CandidateOutstanding />
