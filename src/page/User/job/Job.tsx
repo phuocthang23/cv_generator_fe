@@ -1,5 +1,4 @@
 import { CiBookmark, CiLocationOn } from "react-icons/ci";
-import EmployersLogo2 from "../../../assets/Employers Logo 2.png";
 import "./index.scss";
 import BreadCrumb from "../../../components/breadCrumb/BreadCrumb";
 import Filter from "../../../components/filter/Filter";

@@ -3,7 +3,7 @@ import office from "../../../assets/At the office-amico 1.png";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
-import { LoginCandidateService } from "../../../service/authCandidate/LoginCandidate.service";
+import { LoginCandidateService } from "../../../service/candidateService/LoginCandidate.service";
 const LoginCandidate = () => {
   const navigate = useNavigate();
 

@@ -1,38 +1,26 @@
-// import { useEffect } from "react";
-// import { getAllJobApi, getOneJobApi } from "../../apis/job";
-// import { AppState } from "../../store";
-// import { useDispatch, useSelector } from "react-redux";
-// import {
-//   getAllJobApiAction,
-//   jobDetailAction,
-// } from "../../store/action/job.action";
+import { useEffect } from "react";
+import { getOneCandidateApi } from "../../apis/candidates";
+import { AppState } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { candidateDetailAction } from "../../store/action/candidate.action";
 
-// export const jobDetail = (id: any) => {
-//   const dispatch = useDispatch();
-//   const dataJob = useSelector(
-//     (state: AppState) => (state.jobReducer as any).jobDetail
-//   );
+export const candidatesDetail = (id: any) => {
+  const dispatch = useDispatch();
+  const dataJob = useSelector(
+    (state: AppState) => (state.candidateReducer as any).candidatesDetail
+  );
 
-//   const relatedJobs = useSelector(
-//     (state: AppState) => (state.jobReducer as any).getAllJob
-//   );
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res: any = await getOneCandidateApi(id);
+        dispatch(candidateDetailAction(res));
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const res: any = await getOneJobApi(id);
-//         dispatch(jobDetailAction(res));
-
-//         const relatedJobsData: any = await getAllJobApi();
-//         const filteredRelatedJobs = relatedJobsData.data;
-//         dispatch(getAllJobApiAction(filteredRelatedJobs));
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   return { dataJob, relatedJobs };
-// };
+    fetchData();
+  }, []);
+  return dataJob;
+};

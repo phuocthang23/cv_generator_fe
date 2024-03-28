@@ -16,7 +16,6 @@ const Register = () => {
     setConfirmPassword,
     setPassword,
     emailError,
-    setEmailError,
     userName,
     setUserName,
     passwordError,

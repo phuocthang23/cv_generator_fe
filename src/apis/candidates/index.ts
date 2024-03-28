@@ -2,12 +2,12 @@ import { AxiosResponse } from "axios";
 import axiosInstance from "../base.api";
 import { API_CANDIDATES } from "../patchApi";
 
-interface JobParams {
+interface CandidateParams {
   page?: number;
   limit?: number;
 }
 export const getCandidatesApi = async (
-  params: JobParams
+  params: CandidateParams
 ): Promise<AxiosResponse<any, any>> => {
   try {
     const response = await axiosInstance.get(API_CANDIDATES, { params });
@@ -16,14 +16,15 @@ export const getCandidatesApi = async (
     throw err;
   }
 };
-// export const getOneJobApi = async (
-//   id: any
-// ): Promise<AxiosResponse<any, any>> => {
-//   try {
-//     const response = await axiosInstance.get(`${API_JOB}/${id.id}`);
-//     return response.data;
-//   } catch (err) {
-//     console.log(err);
-//     throw err;
-//   }
-// };
+
+export const getOneCandidateApi = async (
+  id: any
+): Promise<AxiosResponse<any, any>> => {
+  try {
+    const response = await axiosInstance.get(`${API_CANDIDATES}/${id.id}`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
