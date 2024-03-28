@@ -16,6 +16,10 @@ export interface registerResponse {
   message: string;
 }
 
+export interface registerCandidateResponse {
+  success: boolean;
+  message: string;
+}
 export interface resetPasswordResponse {
   message: string;
 }

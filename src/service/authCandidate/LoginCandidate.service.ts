@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthLogic } from "../../utils/authLogic";
-import { loginApi } from "../../apis/auth/auth";
 import { useState } from "react";
+import { loginCandidateApi } from "../../apis/auth/auth";
 
-export const loginService = () => {
+export const LoginCandidateService = () => {
   const {
     email,
     setEmail,
@@ -25,7 +25,7 @@ export const loginService = () => {
     setMessageError("");
 
     try {
-      const response: any = await loginApi({ email, password });
+      const response: any = await loginCandidateApi({ email, password });
 
       if (response) {
         localStorage.setItem("Auth", response.access_token);

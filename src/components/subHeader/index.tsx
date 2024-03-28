@@ -3,12 +3,11 @@ import logo from "../../assets/header/Logo.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoMdNotifications } from "react-icons/io";
 import { generateToken } from "../../utils/generateToken.utils";
-import { tokenType } from "../../types/token";
 import { Avatar, Dropdown } from "flowbite-react";
 import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from "react-icons/hi";
 
 const SubHeader = () => {
-  const token = generateToken() as tokenType | null;
+  const token = generateToken() as any | null;
 
   const hasToken = token !== null;
   const navigate = useNavigate();
@@ -89,7 +88,9 @@ const SubHeader = () => {
                 </Dropdown.Item>
               </Dropdown>
 
-              <p className="">{token?.userName}</p>
+              <p className="">
+                {token.role === "candidate" ? token?.name : token?.userName}
+              </p>
             </>
           ) : (
             <>

@@ -3,5 +3,5 @@ export const formatDay = (isDay: string) => {
   const day = date.getDate();
   const month = `0${date.getMonth() + 1}`.slice(-2);
   const year = date.getFullYear();
-  return `${year}/${month}/${day}`;
+  return `${day}/${month}/${year}`;
 };

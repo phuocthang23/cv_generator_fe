@@ -14,6 +14,8 @@ import ForgetPassword from "../page/auth/ForgetPassword/ForgetPassword";
 import ComfirmPassword from "../page/auth/ForgetPassword/ComfirmPassword";
 import Job from "../page/User/job/Job";
 import CompanyList from "../page/User/company-list/CompanyList";
+import RegisterCandidate from "../page/auth/candidate/RegisterCanidate";
+import LoginCandidate from "../page/auth/candidate/LoginCandidate";
 import CandidateList from "../page/Business/candidate-list/CandidateList";
 import CandidateLayout from "../layouts/CandidateLayout";
 
@@ -23,7 +25,9 @@ const RouterIndex = () => {
       <Routes>
         <Route path="/auth" element={<Auth />}>
           <Route index element={<Login />} />
+          <Route path="login-candidate" element={<LoginCandidate />} />
           <Route path="register" element={<Register />} />
+          <Route path="register-candidate" element={<RegisterCandidate />} />
           <Route path="check-email" element={<ForgetPassword />} />
           <Route path="reset-password/:id" element={<ComfirmPassword />} />
         </Route>
@@ -49,8 +53,8 @@ const RouterIndex = () => {
         <Route path="/admin" element={<Admin />}></Route>
         {/* businesspage */}
         <Route path="/business" element={<CandidateLayout />}>
-            <Route index element={<CandidateList />} />
-          </Route>     
+          <Route index element={<CandidateList />} />
+        </Route>
       </Routes>
     </div>
   );
