@@ -1,5 +1,5 @@
 import { CiLocationOn } from "react-icons/ci";
-import "../../../components/outstanding/index.scss";
+import "../../../components/companyOutstanding/index.scss";
 import basketball from "../../../assets/basket.png";
 import BreadCrumb from "../../../components/breadCrumb/BreadCrumb";
 import Filter from "../../../components/filter/Filter";

@@ -1,5 +1,5 @@
 import { CiLocationOn } from "react-icons/ci";
-import "../outstanding/index.scss";
+import "../companyOutstanding/index.scss";
 import basketball from "../../assets/basket.png";
 import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";

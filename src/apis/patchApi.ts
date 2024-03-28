@@ -6,3 +6,4 @@ export const API_JOB = `/job`;
 export const API_COMPANY = "/company";
 export const API_REGISTER_CANDIDATE = "/candidates/register";
 export const API_LOGIN_CANDIDATE = "/candidates/login";
+export const API_CANDIDATES = "/candidates";

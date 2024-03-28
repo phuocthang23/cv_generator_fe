@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import Auth from "../layouts/Auth";
 import Register from "../page/auth/Register";
 import Admin from "../page/Admin/Admin";
-import Business from "../page/Business/Business";
 import JobDetail from "../page/MainPage/JobDetail";
 import HomePage from "../page/User/home/homePage";
 import UserLayout from "../layouts/UserLayout";
@@ -17,6 +16,8 @@ import Job from "../page/User/job/Job";
 import CompanyList from "../page/User/company-list/CompanyList";
 import RegisterCandidate from "../page/auth/candidate/RegisterCanidate";
 import LoginCandidate from "../page/auth/candidate/LoginCandidate";
+import CandidateList from "../page/Business/candidate-list/CandidateList";
+import CandidateLayout from "../layouts/CandidateLayout";
 
 const RouterIndex = () => {
   return (
@@ -51,7 +52,9 @@ const RouterIndex = () => {
         {/* adminpage */}
         <Route path="/admin" element={<Admin />}></Route>
         {/* businesspage */}
-        <Route path="/business" element={<Business />}></Route>
+        <Route path="/business" element={<CandidateLayout />}>
+          <Route index element={<CandidateList />} />
+        </Route>
       </Routes>
     </div>
   );
