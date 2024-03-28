@@ -9,3 +9,13 @@ export interface RegisterRequest {
   password: string;
   roleId: number;
 }
+
+export interface RegisterCandidateRequest {
+  name: string;
+  email: string;
+  password: string;
+  gender: string;
+  phone: number;
+  address: string;
+  dob: string;
+}
