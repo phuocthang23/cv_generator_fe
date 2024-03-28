@@ -58,10 +58,7 @@ const CandidateOutstanding = () => {
                       Fresher
                     </span>
                     <div className="ml-10">
-                      <FaArrowRight
-                        className="text-[#BC2228] cursor-pointer text-xl"
-                        // onClick={() => navigate("/list-company")}
-                      />
+                      <FaArrowRight className="text-[#BC2228] cursor-pointer text-xl" />
                     </div>
                   </div>
                 </div>
