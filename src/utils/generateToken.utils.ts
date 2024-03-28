@@ -9,8 +9,8 @@ export const generateToken = () => {
 
   const myDecodedToken = jwtDecode(token as any);
 
-  if ("dataGenerateToken" in myDecodedToken) {
-    return myDecodedToken.dataGenerateToken;
+  if ("data" in myDecodedToken) {
+    return myDecodedToken.data;
   }
 
   return null;
