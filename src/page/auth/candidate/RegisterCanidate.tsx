@@ -211,7 +211,7 @@ const RegisterCandidate = () => {
                 Giới tính
               </label>
               <select
-                value={gender || 0}
+                value={gender}
                 onChange={handleChange}
                 className=" border text-gray-900 text-base min-w-[73px] py-[6px]"
               >

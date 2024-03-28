@@ -23,7 +23,7 @@ export const registerCandidateService = () => {
   const [messageError, setMessageError] = useState("");
   const [phone, setPhone] = useState(0);
   const [address, setAddress] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState<any>(0);
   const [dateTime, setDateTime] = useState("");
 
   const handleChange = (event: any) => {
