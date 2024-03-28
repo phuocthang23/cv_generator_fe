@@ -34,8 +34,9 @@ const CandidateOutstanding = () => {
         {data.data?.map((item: any) => {
           return (
             <div
-              className=" rounded-lg shadow-md border-2 company "
+              className=" rounded-lg shadow-md border-2 company cursor-pointer"
               key={item.id}
+              onClick={() => navigate(`/business/${item.id}`)}
             >
               <div className="flex items-center">
                 <div className="bg-[#EDEFF5]  mr-4">
