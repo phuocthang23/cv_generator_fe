@@ -12,8 +12,22 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import cv from "../../../../assets/cv.png";
 
 import "./index.scss";
+import { useState } from "react";
+import IntroduceModal from "../../../../components/modal/IntroduceModal";
+import EducationModal from "../../../../components/modal/EducationModal";
+import ExpModal from "../../../../components/modal/ExpModal";
+import PresonalProjectModal from "../../../../components/modal/PresonalProjectModal";
+import Certificate from "../../../../components/modal/Certificate";
+import PersonalInfo from "../../../../components/modal/personalInfo";
 
 const ProfileCV = () => {
+  const [showIntro, setShowIntro] = useState(false);
+  const [showEdu, setShowEdu] = useState(false);
+  const [showExp, setShowExp] = useState(false);
+  const [showProject, setShowProject] = useState(false);
+  const [showCertificate, setShowCertificate] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+
   return (
     <div className="mt-5 max-w-[1320px] mx-auto">
       <div className="main flex">
@@ -64,9 +78,16 @@ const ProfileCV = () => {
         </div>
         <div className="right-block w-[826px]">
           <div className=" w-full ml-[30px] py-5 bg-white border rounded-lg flex relative mb-[50px]">
-            <button className="text-red-700 absolute top-5 right-[68px]">
+            <button
+              className="text-red-700 absolute top-5 right-[68px] "
+              onClick={() => setShowProfile(true)}
+            >
               <IoCreateOutline className="text-xl" />
             </button>
+            <PersonalInfo
+              show={showProfile}
+              onClose={() => setShowProfile(false)}
+            />
             <div className="mr-5">
               <img src={logo} alt="" />
             </div>
@@ -97,28 +118,49 @@ const ProfileCV = () => {
               </div>
             </div>
           </div>
+
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
-            <button className="text-red-700 absolute top-5 right-[68px]">
+            <button
+              className="text-red-700 absolute top-5 right-[68px]"
+              onClick={() => setShowIntro(true)}
+            >
               <CiCirclePlus className="text-xl" />
             </button>
+            <IntroduceModal
+              show={showIntro}
+              onClose={() => setShowIntro(false)}
+            />
             <p className="text-2xl font-bold mb-[22px]">Giới thiệu bản thân</p>
             <p className="text-[#767F8C]">
               Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
             </p>
           </div>
+
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
-            <button className="text-red-700 absolute top-5 right-[68px]">
+            <button
+              className="text-red-700 absolute top-5 right-[68px]"
+              onClick={() => setShowEdu(true)}
+            >
               <CiCirclePlus className="text-xl" />
             </button>
+
+            <EducationModal show={showEdu} onClose={() => setShowEdu(false)} />
+
             <p className="text-2xl font-bold mb-[22px]">Học vấn</p>
             <p className="text-[#767F8C]">
               Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
             </p>
           </div>
+
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
-            <button className="text-red-700 absolute top-5 right-[68px]">
+            <button
+              className="text-red-700 absolute top-5 right-[68px]"
+              onClick={() => setShowExp(true)}
+            >
               <CiCirclePlus className="text-xl" />
             </button>
+            <ExpModal show={showExp} onClose={() => setShowExp(false)} />
+
             <p className="text-2xl font-bold mb-[22px]">Kinh nghiệm làm việc</p>
             <p className="text-[#767F8C]">
               Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
@@ -134,9 +176,16 @@ const ProfileCV = () => {
             </p>
           </div>
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
-            <button className="text-red-700 absolute top-5 right-[68px]">
+            <button
+              className="text-red-700 absolute top-5 right-[68px]"
+              onClick={() => setShowProject(true)}
+            >
               <CiCirclePlus className="text-xl" />
             </button>
+            <PresonalProjectModal
+              show={showProject}
+              onClose={() => setShowProject(false)}
+            />
             <p className="text-2xl font-bold mb-[22px] border-b">
               Dự án Cá Nhân
             </p>
@@ -153,9 +202,16 @@ const ProfileCV = () => {
             </p>
           </div>
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
-            <button className="text-red-700 absolute top-5 right-[68px]">
+            <button
+              className="text-red-700 absolute top-5 right-[68px]"
+              onClick={() => setShowCertificate(true)}
+            >
               <CiCirclePlus className="text-xl" />
             </button>
+            <Certificate
+              show={showCertificate}
+              onClose={() => setShowCertificate(false)}
+            />
             <p className="text-2xl font-bold mb-[22px]">Chứng chỉ</p>
             <p className="text-[#767F8C]">
               Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn

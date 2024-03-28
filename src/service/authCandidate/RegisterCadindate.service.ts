@@ -58,7 +58,7 @@ export const registerCandidateService = () => {
         address,
         dob,
       });
-      navigate("/auth");
+      navigate("/auth/login-candidate");
     } catch (error) {
       setEmailError("Email đã được tồn tại");
     }
