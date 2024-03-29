@@ -35,7 +35,6 @@ const ProfileCV = () => {
   const dataToken: any = generateToken();
   const candidateId = (dataToken as any).id;
   const dataCandidate = candidatesDetail({ id: candidateId });
-  console.log(dataCandidate);
   const introduceCandidates = dataCandidate.introduceCandidates;
   const educationCandidates = dataCandidate.educationCandidates;
   const experienceCandidates = dataCandidate.experienceCandidates;
