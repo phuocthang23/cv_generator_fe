@@ -1,4 +1,5 @@
 import { Button, Modal } from "flowbite-react";
+import { useState } from "react";
 
 const IntroduceModal = ({
   show,
@@ -7,6 +8,7 @@ const IntroduceModal = ({
   show: boolean;
   onClose: () => void;
 }) => {
+  const [first, setfirst] = useState();
   return (
     <Modal show={show} onClose={onClose}>
       <Modal.Header className="text-center">

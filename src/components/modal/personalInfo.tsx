@@ -1,9 +1,10 @@
 import { Button, Modal } from "flowbite-react";
-import { FaImage, FaRegTrashAlt } from "react-icons/fa";
-import fpt from "../../assets/Social icon.png";
-import { useState } from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { generateToken } from "../../utils/generateToken.utils";
 import { candidatesDetail } from "../../service/candidateService/candidateDetail.service";
+import { updateCandidateService } from "../../service/candidateService/updateCandidate.service";
+import { formatDay } from "../../utils/convertDay";
 
 const PersonalInfo = ({
   show,
@@ -12,31 +13,79 @@ const PersonalInfo = ({
   show: boolean;
   onClose: () => void;
 }) => {
+  const { handleSave } = updateCandidateService();
   const dataToken: any = generateToken();
   const candidateId = (dataToken as any).id;
   const dataCandidate = candidatesDetail({ id: candidateId });
 
-  const [name, setName] = useState(dataCandidate.name);
-  const [email, setEmail] = useState(dataCandidate.email);
-  const [phone, setPhone] = useState(dataCandidate.phone);
-  const [dob, setDob] = useState(dataCandidate.dob);
-  const [gender, setGender] = useState(dataCandidate.gender);
-  const [address, setAddress] = useState(dataCandidate.address);
+  const [name, setName] = useState(dataCandidate?.name);
+  const [email, setEmail] = useState(dataCandidate?.email);
+  const [phone, setPhone] = useState(dataCandidate?.phone);
+  const [dob, setDob] = useState(dataCandidate?.dob);
+  const [gender, setGender] = useState(dataCandidate?.gender);
+  const [address, setAddress] = useState(dataCandidate?.address);
+  const [avatar, setAvatar] = useState<File | null>(null);
+
+  useEffect(() => {
+    setName(dataCandidate?.name);
+    setEmail(dataCandidate?.email);
+    setPhone(dataCandidate?.phone);
+    setDob(formatDay(dataCandidate?.dob));
+    setAddress(dataCandidate?.address);
+    setGender(dataCandidate?.gender);
+  }, [dataCandidate]);
+
+  const body = {
+    name,
+    email,
+    phone,
+    dob,
+    address,
+    gender,
+    avatar,
+  };
 
   const handleChange = (event: any) => {
     setGender(event.target.value);
   };
+
+  const handleClose = () => {
+    setName(dataCandidate.name);
+    setEmail(dataCandidate.email);
+    setPhone(dataCandidate.phone);
+    setDob(dataCandidate.dob);
+    setGender(dataCandidate.gender);
+    setAddress(dataCandidate.address);
+    onClose();
+  };
+
+  const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setAvatar(event.target.files[0]);
+    }
+  };
+
+  const handleClickSave = async () => {
+    await handleSave(candidateId, body);
+    onClose();
+  };
+
   return (
     <div>
-      <Modal show={show} onClose={onClose}>
+      <Modal show={show} onClose={handleClose}>
         <p className="text-center text-2xl p-4"> Cập nhập thông tin cá nhân </p>
         <Modal.Body>
           <div>
             <img src={dataToken.avatar} alt="" className="mx-auto w-[100px]" />
             <div className="flex justify-center items-center">
-              <button className="cursor-pointer px-3 py-4">
+              {/* <button className="cursor-pointer px-3 py-4">
                 <FaImage className="mx-auto" /> chỉnh sửa
-              </button>
+              </button> */}
+              <input
+                type="file"
+                onChange={handleAvatarChange}
+                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+              />
               <button className="cursor-pointer px-3 py-4">
                 <FaRegTrashAlt className="mx-auto" /> xóa
               </button>
@@ -118,7 +167,7 @@ const PersonalInfo = ({
               Giới tính
             </label>
             <select
-              defaultValue={gender}
+              value={gender}
               onChange={handleChange}
               className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
             >
@@ -137,8 +186,8 @@ const PersonalInfo = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={onClose}>Cập Nhật</Button>
-          <Button color="gray" onClick={onClose}>
+          <Button onClick={handleClickSave}>Cập Nhật</Button>
+          <Button color="gray" onClick={handleClose}>
             Hủy Bỏ
           </Button>
         </Modal.Footer>
