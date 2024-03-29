@@ -16,7 +16,7 @@ const PersonalInfo = ({
   const { handleSave } = updateCandidateService();
   const dataToken: any = generateToken();
   const candidateId = (dataToken as any).id;
-  const dataCandidate = candidatesDetail({ id: candidateId });
+  const dataCandidate: any = candidatesDetail({ id: candidateId });
 
   const [name, setName] = useState(dataCandidate?.name);
   const [email, setEmail] = useState(dataCandidate?.email);
@@ -25,24 +25,27 @@ const PersonalInfo = ({
   const [gender, setGender] = useState(dataCandidate?.gender);
   const [address, setAddress] = useState(dataCandidate?.address);
   const [avatar, setAvatar] = useState<File | null>(null);
+  const [link_fb, setLink_fb] = useState(dataCandidate?.link_fb);
 
   useEffect(() => {
     setName(dataCandidate?.name);
     setEmail(dataCandidate?.email);
     setPhone(dataCandidate?.phone);
-    setDob(formatDay(dataCandidate?.dob));
+    setDob(dataCandidate?.dob);
     setAddress(dataCandidate?.address);
     setGender(dataCandidate?.gender);
+    setLink_fb(dataCandidate?.link_fb);
   }, [dataCandidate]);
 
   const body = {
     name,
     email,
     phone,
-    dob,
+    dob: formatDay(dob),
     address,
     gender,
     avatar,
+    link_fb,
   };
 
   const handleChange = (event: any) => {
@@ -56,6 +59,7 @@ const PersonalInfo = ({
     setDob(dataCandidate.dob);
     setGender(dataCandidate.gender);
     setAddress(dataCandidate.address);
+    setLink_fb(dataCandidate.link_fb);
     onClose();
   };
 
@@ -78,9 +82,6 @@ const PersonalInfo = ({
           <div>
             <img src={dataToken.avatar} alt="" className="mx-auto w-[100px]" />
             <div className="flex justify-center items-center">
-              {/* <button className="cursor-pointer px-3 py-4">
-                <FaImage className="mx-auto" /> chỉnh sửa
-              </button> */}
               <input
                 type="file"
                 onChange={handleAvatarChange}
@@ -167,7 +168,7 @@ const PersonalInfo = ({
               Giới tính
             </label>
             <select
-              value={gender}
+              defaultValue={gender}
               onChange={handleChange}
               className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
             >
@@ -181,6 +182,8 @@ const PersonalInfo = ({
             </label>
             <input
               type="text"
+              value={link_fb}
+              onChange={(e) => setLink_fb(e.target.value)}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
             />
           </div>

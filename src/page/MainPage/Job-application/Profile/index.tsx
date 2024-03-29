@@ -34,7 +34,7 @@ const ProfileCV = () => {
 
   const dataToken: any = generateToken();
   const candidateId = (dataToken as any).id;
-  const dataCandidate = candidatesDetail({ id: candidateId });
+  const dataCandidate: any = candidatesDetail({ id: candidateId });
   const introduceCandidates = dataCandidate.introduceCandidates;
   const educationCandidates = dataCandidate.educationCandidates;
   const experienceCandidates = dataCandidate.experienceCandidates;
@@ -123,13 +123,16 @@ const ProfileCV = () => {
                   </p>
                   <p className="flex items-center w-[216px]">
                     <FaRegUserCircle className="mr-2" />{" "}
-                    {dataCandidate.gender !== 1 ? "Nữ" : "Nam"}
+                    {dataCandidate.gender !== 1 ? "Nam" : "Nữ"}
                   </p>
                   <p className="flex items-center w-[216px]">
                     <FiMapPin className="mr-2" /> {dataCandidate.address}
                   </p>
-                  <p className="flex items-center w-[216px]">
-                    <TbWorld className="mr-2" /> Trang cá nhân
+                  <p className="flex items-center w-[216px] text-xs text-wrap">
+                    <TbWorld className="mr-2 w-4 h-4" />{" "}
+                    {dataCandidate.link_fb === null
+                      ? "Trang cá nhân : Không có"
+                      : dataCandidate.link_fb}
                   </p>
                 </div>
               </div>
