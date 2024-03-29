@@ -1,5 +1,6 @@
 import { Button, Modal } from "flowbite-react";
 import { useState } from "react";
+import { introCandidateService } from "../../service/candidateService/introCandidate.service";
 
 const IntroduceModal = ({
   show,
@@ -8,7 +9,15 @@ const IntroduceModal = ({
   show: boolean;
   onClose: () => void;
 }) => {
-  const [first, setfirst] = useState();
+  const [description, setDescription] = useState("");
+
+  const { handleSave } = introCandidateService();
+
+  const onClickSave = async () => {
+    await handleSave({ description });
+    setDescription("");
+    onClose();
+  };
   return (
     <Modal show={show} onClose={onClose}>
       <Modal.Header className="text-center">
@@ -17,11 +26,16 @@ const IntroduceModal = ({
       <Modal.Body>
         <div className="space-y-6">
           <label>Mô tả về bản thân các kỹ năng của mình </label>
-          <textarea className="w-full" placeholder="Hint text" />
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full"
+            placeholder="Hint text"
+          />
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onClose}>Cập Nhật</Button>
+        <Button onClick={onClickSave}>Cập Nhật</Button>
         <Button color="gray" onClick={onClose}>
           Hủy Bỏ
         </Button>
