@@ -35,6 +35,7 @@ const ProfileCV = () => {
   const dataToken: any = generateToken();
   const candidateId = (dataToken as any).id;
   const dataCandidate = candidatesDetail({ id: candidateId });
+  console.log(dataCandidate);
   const introduceCandidates = dataCandidate.introduceCandidates;
   const educationCandidates = dataCandidate.educationCandidates;
   const experienceCandidates = dataCandidate.experienceCandidates;
@@ -104,7 +105,7 @@ const ProfileCV = () => {
               onClose={() => setShowProfile(false)}
             />
             <div className="mr-5">
-              <img src={dataToken.avatar} className="w-[100px]" alt="" />
+              <img src={dataCandidate.avatar} className="w-[100px]" alt="" />
             </div>
             <div>
               <div className="px-6 py-[18px]">
