@@ -20,6 +20,9 @@ import PresonalProjectModal from "../../../../components/modal/PresonalProjectMo
 import Certificate from "../../../../components/modal/Certificate";
 import PersonalInfo from "../../../../components/modal/personalInfo";
 import Skill from "../../../../components/modal/Skill";
+import { generateToken } from "../../../../utils/generateToken.utils";
+import { candidatesDetail } from "../../../../service/candidateService/candidateDetail.service";
+import { formatDay } from "../../../../utils/convertDay";
 
 const ProfileCV = () => {
   const [showIntro, setShowIntro] = useState(false);
@@ -29,6 +32,18 @@ const ProfileCV = () => {
   const [showCertificate, setShowCertificate] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showSkill, setShowSkill] = useState(false);
+
+  const dataToken = generateToken();
+  const candidateId = (dataToken as any).id;
+  const dataCandidate = candidatesDetail({ id: candidateId });
+
+  console.log(dataCandidate);
+  const introduceCandidates = dataCandidate.introduceCandidates;
+  const educationCandidates = dataCandidate.educationCandidates;
+  const experienceCandidates = dataCandidate.experienceCandidates;
+  const skillCandidates = dataCandidate.skillCandidates;
+  const projectCandidates = dataCandidate.projectCandidates;
+  const certificateCandidates = dataCandidate.certificateCandidates;
 
   return (
     <div className="mt-5 max-w-[1320px] mx-auto">
@@ -96,23 +111,25 @@ const ProfileCV = () => {
             </div>
             <div>
               <div className="px-6 py-[18px]">
-                <p className="text-2xl font-bold">Nguyễn Minh Dương</p>
+                <p className="text-2xl font-bold">{dataCandidate.name}</p>
                 <p className="text-[#767F8C] text-sm">Full-stack Developer</p>
                 <div className="mt-4 grid gap-4 grid-cols-2 text-[#767F8C]">
                   <p className="flex items-center w-[216px]">
-                    <MdOutlineMailOutline className="mr-2" /> abc@gmail.com
+                    <MdOutlineMailOutline className="mr-2" />{" "}
+                    {dataCandidate.email}
                   </p>
                   <p className="flex items-center w-[216px]">
-                    <FaPhone className="mr-2" /> 8/3/2023
+                    <FaPhone className="mr-2" /> {dataCandidate.phone}
                   </p>
                   <p className="flex items-center w-[216px]">
-                    <FaBirthdayCake className="mr-2" /> 8/3/2023
+                    <FaBirthdayCake className="mr-2" /> {dataCandidate.dob}
                   </p>
                   <p className="flex items-center w-[216px]">
-                    <FaRegUserCircle className="mr-2" /> Giới tính
+                    <FaRegUserCircle className="mr-2" />{" "}
+                    {dataCandidate.gender !== 1 ? "Nữ" : "Nam"}
                   </p>
                   <p className="flex items-center w-[216px]">
-                    <FiMapPin className="mr-2" /> Địa chỉ hiện tại
+                    <FiMapPin className="mr-2" /> {dataCandidate.address}
                   </p>
                   <p className="flex items-center w-[216px]">
                     <TbWorld className="mr-2" /> Trang cá nhân
@@ -133,10 +150,20 @@ const ProfileCV = () => {
               show={showIntro}
               onClose={() => setShowIntro(false)}
             />
-            <p className="text-2xl font-bold mb-[22px]">Giới thiệu bản thân</p>
-            <p className="text-[#767F8C]">
-              Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
+            <p className="text-2xl font-bold mb-[22px] border-b-2 pb-3 border-gray-600">
+              Giới thiệu bản thân
             </p>
+            {introduceCandidates && introduceCandidates.length === 0 ? (
+              <p className="text-[#767F8C]">
+                Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
+              </p>
+            ) : (
+              introduceCandidates?.map((item: any, index: any) => (
+                <ul key={index} className="list-disc list-inside pl-[30px]">
+                  <li className="text-[#767F8C]">{item.description}</li>
+                </ul>
+              ))
+            )}
           </div>
           {/* education */}
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
@@ -149,10 +176,23 @@ const ProfileCV = () => {
 
             <EducationModal show={showEdu} onClose={() => setShowEdu(false)} />
 
-            <p className="text-2xl font-bold mb-[22px]">Học vấn</p>
-            <p className="text-[#767F8C]">
-              Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
+            <p className="text-2xl font-bold mb-[22px] border-b-2 pb-3 border-gray-600">
+              Học vấn
             </p>
+            {educationCandidates?.length === 0 ? (
+              <p className="text-[#767F8C]">
+                Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
+              </p>
+            ) : (
+              educationCandidates?.map((item: any, index: any) => (
+                <ul key={index} className="list-disc list-inside pl-[30px]">
+                  <li className="text-[#767F8C]">
+                    {item.name} - {item.major} - ({formatDay(item.started_at)} -{" "}
+                    {formatDay(item.end_at)}) - {item.info}
+                  </li>
+                </ul>
+              ))
+            )}
           </div>
           {/* experience */}
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
@@ -164,10 +204,24 @@ const ProfileCV = () => {
             </button>
             <ExpModal show={showExp} onClose={() => setShowExp(false)} />
 
-            <p className="text-2xl font-bold mb-[22px]">Kinh nghiệm làm việc</p>
-            <p className="text-[#767F8C]">
-              Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
+            <p className="text-2xl font-bold mb-[22px] border-b-2 pb-3 border-gray-600">
+              Kinh nghiệm làm việc
             </p>
+            {experienceCandidates?.length === 0 ? (
+              <p className="text-[#767F8C]">
+                Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
+              </p>
+            ) : (
+              experienceCandidates?.map((item: any, index: any) => (
+                <ul key={index} className="list-disc list-inside pl-[30px]">
+                  <li className="text-[#767F8C]">
+                    {item.company} - {item.position} - (
+                    {formatDay(item.started_at)} - {formatDay(item.end_at)}) -{" "}
+                    {item.info}
+                  </li>
+                </ul>
+              ))
+            )}
           </div>
           {/* skill */}
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
@@ -178,10 +232,29 @@ const ProfileCV = () => {
               <IoCreateOutline className="text-xl" />
             </button>
             <Skill show={showSkill} onClose={() => setShowSkill(false)} />
-            <p className="text-2xl font-bold mb-[22px]">Kỹ năng</p>
-            <p className="text-[#767F8C]">
-              Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
+            <p className="text-2xl font-bold mb-[22px] border-b-2 pb-3 border-gray-600">
+              Kỹ năng
             </p>
+            {skillCandidates?.length === 0 ? (
+              <p className="text-[#767F8C]">
+                Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
+              </p>
+            ) : (
+              skillCandidates?.map((item: any, index: any) => (
+                <ul key={index} className="list-disc list-inside pl-[30px]">
+                  <li className="text-[#767F8C]">
+                    {item.name} -{" "}
+                    {item.level_job_id === "1"
+                      ? "Mới bắt đầu"
+                      : item.level_job_id === "2"
+                      ? "Trung bình"
+                      : item.level_job_id === "3"
+                      ? "Thành thạo"
+                      : "Không xác định"}
+                  </li>
+                </ul>
+              ))
+            )}
           </div>
           {/* project */}
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
@@ -198,17 +271,36 @@ const ProfileCV = () => {
             <p className="text-2xl font-bold mb-[22px] border-b">
               Dự án Cá Nhân
             </p>
-            <p className="text-[#767F8C] flex justify-between">
-              <span>Hiện tại</span>
-              <span className="text-red-700 text-xl">
-                <button className="mr-5">
-                  <IoCreateOutline />
-                </button>
-                <button>
-                  <RiDeleteBin6Line />
-                </button>
-              </span>
-            </p>
+            {projectCandidates?.lenght === 0 ? (
+              <p className="text-[#767F8C] flex justify-between">
+                <span>Hiện tại</span>
+                <span className="text-red-700 text-xl">
+                  <button className="mr-5">
+                    <IoCreateOutline />
+                  </button>
+                  <button>
+                    <RiDeleteBin6Line />
+                  </button>
+                </span>
+              </p>
+            ) : (
+              projectCandidates?.map((item: any, index: number) => (
+                <p className="text-[#767F8C] flex justify-between">
+                  <span>
+                    {item.name} - {item.link}- {formatDay(item.started_at)} -{" "}
+                    {formatDay(item.end_at)} - {item.info}
+                  </span>
+                  <span className="text-red-700 text-xl">
+                    <button className="mr-5">
+                      <IoCreateOutline />
+                    </button>
+                    <button>
+                      <RiDeleteBin6Line />
+                    </button>
+                  </span>
+                </p>
+              ))
+            )}
           </div>
           {/* certificate */}
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
@@ -223,9 +315,21 @@ const ProfileCV = () => {
               onClose={() => setShowCertificate(false)}
             />
             <p className="text-2xl font-bold mb-[22px]">Chứng chỉ</p>
-            <p className="text-[#767F8C]">
-              Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
-            </p>
+            {certificateCandidates?.length === 0 ? (
+              <p className="text-[#767F8C]">
+                Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
+              </p>
+            ) : (
+              certificateCandidates?.map((item: any, index: any) => (
+                <ul key={index} className="list-disc list-inside pl-[30px]">
+                  <li className="text-[#767F8C]">
+                    {item.name} -{item.organization} -
+                    {formatDay(item.started_at)} - {formatDay(item.end_at)}-{" "}
+                    {item.info}
+                  </li>
+                </ul>
+              ))
+            )}
           </div>
         </div>
       </div>
