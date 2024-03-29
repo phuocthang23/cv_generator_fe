@@ -11,7 +11,7 @@ import Envelope from "../../../assets/Envelope.png";
 import "./index.scss";
 import { Link, useParams } from "react-router-dom";
 import BreadCrumb from "../../../components/breadCrumb/BreadCrumb";
-import { candidatesDetail } from "../../../service/candidateService/jobDetail.service";
+import { candidatesDetail } from "../../../service/candidateService/candidateDetail.service";
 const CandidateDetail = () => {
   const param = useParams();
   const dataCandidates = candidatesDetail(param);
