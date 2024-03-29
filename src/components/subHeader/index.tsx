@@ -22,7 +22,6 @@ const SubHeader = () => {
 
   const handleSignOut = () => {
     localStorage.removeItem("Auth");
-
     navigate("/auth");
   };
   return (
@@ -69,7 +68,7 @@ const SubHeader = () => {
               <Dropdown
                 label={
                   <Avatar
-                    img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                    img={token.avatar}
                     status="online"
                     rounded
                     className="mr-2 ml-[-15px]"

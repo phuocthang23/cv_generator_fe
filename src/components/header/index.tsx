@@ -1,7 +1,10 @@
 import { LuPhoneCall } from "react-icons/lu";
 import SubHeader from "../subHeader";
 import { NavLink } from "react-router-dom";
+import { generateToken } from "../../utils/generateToken.utils";
 const Header = () => {
+  const token = generateToken() as any | null;
+  console.log(token);
   return (
     <div>
       <div className=" min-w-[1440px] h-[48px]  bg-[#F1F2F4] flex justify-between items-center py-0 px-[30px]">
@@ -27,16 +30,19 @@ const Header = () => {
                 Việc làm
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/job-application"
-                className={({ isActive }) =>
-                  isActive ? "text-red-500" : "hover:text-red-500"
-                }
-              >
-                CV của bạn
-              </NavLink>
-            </li>
+            {token.role === "candidates" && (
+              <li>
+                <NavLink
+                  to="/job-application"
+                  className={({ isActive }) =>
+                    isActive ? "text-red-500" : "hover:text-red-500"
+                  }
+                >
+                  CV của bạn
+                </NavLink>
+              </li>
+            )}
+
             <li>
               <NavLink
                 to="/customer-support"

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import "./index.scss";
-import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
+import BreadCrumb from "../breadCrumb/BreadCrumb";
 const HeaderJobApplication = () => {
   const activeStyle = "text-red-700 border-b-2 border-b-red-700 py-[14px]";
   return (
