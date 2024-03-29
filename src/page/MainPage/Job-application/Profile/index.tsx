@@ -19,6 +19,7 @@ import ExpModal from "../../../../components/modal/ExpModal";
 import PresonalProjectModal from "../../../../components/modal/PresonalProjectModal";
 import Certificate from "../../../../components/modal/Certificate";
 import PersonalInfo from "../../../../components/modal/personalInfo";
+import Skill from "../../../../components/modal/Skill";
 
 const ProfileCV = () => {
   const [showIntro, setShowIntro] = useState(false);
@@ -27,6 +28,7 @@ const ProfileCV = () => {
   const [showProject, setShowProject] = useState(false);
   const [showCertificate, setShowCertificate] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [showSkill, setShowSkill] = useState(false);
 
   return (
     <div className="mt-5 max-w-[1320px] mx-auto">
@@ -77,6 +79,7 @@ const ProfileCV = () => {
           </div>
         </div>
         <div className="right-block w-[826px]">
+          {/* profile */}
           <div className=" w-full ml-[30px] py-5 bg-white border rounded-lg flex relative mb-[50px]">
             <button
               className="text-red-700 absolute top-5 right-[68px] "
@@ -118,7 +121,7 @@ const ProfileCV = () => {
               </div>
             </div>
           </div>
-
+          {/* introduce */}
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
             <button
               className="text-red-700 absolute top-5 right-[68px]"
@@ -135,7 +138,7 @@ const ProfileCV = () => {
               Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
             </p>
           </div>
-
+          {/* education */}
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
             <button
               className="text-red-700 absolute top-5 right-[68px]"
@@ -151,7 +154,7 @@ const ProfileCV = () => {
               Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
             </p>
           </div>
-
+          {/* experience */}
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
             <button
               className="text-red-700 absolute top-5 right-[68px]"
@@ -166,15 +169,21 @@ const ProfileCV = () => {
               Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
             </p>
           </div>
+          {/* skill */}
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
-            <button className="text-red-700 absolute top-5 right-[68px]">
+            <button
+              className="text-red-700 absolute top-5 right-[68px]"
+              onClick={() => setShowSkill(true)}
+            >
               <IoCreateOutline className="text-xl" />
             </button>
-            <p className="text-2xl font-bold mb-[22px]">Kinh nghiệm làm việc</p>
+            <Skill show={showSkill} onClose={() => setShowSkill(false)} />
+            <p className="text-2xl font-bold mb-[22px]">Kỹ năng</p>
             <p className="text-[#767F8C]">
               Giới thiệu điểm mạnh và số năm kinh nghiệm của bạn
             </p>
           </div>
+          {/* project */}
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
             <button
               className="text-red-700 absolute top-5 right-[68px]"
@@ -201,6 +210,7 @@ const ProfileCV = () => {
               </span>
             </p>
           </div>
+          {/* certificate */}
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
             <button
               className="text-red-700 absolute top-5 right-[68px]"
