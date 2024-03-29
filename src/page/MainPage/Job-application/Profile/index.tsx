@@ -1,6 +1,5 @@
 import { CiCirclePlus } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
-import logo from "../../../../assets/logo.png";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaBirthdayCake } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
@@ -33,11 +32,9 @@ const ProfileCV = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [showSkill, setShowSkill] = useState(false);
 
-  const dataToken = generateToken();
+  const dataToken: any = generateToken();
   const candidateId = (dataToken as any).id;
   const dataCandidate = candidatesDetail({ id: candidateId });
-
-  console.log(dataCandidate);
   const introduceCandidates = dataCandidate.introduceCandidates;
   const educationCandidates = dataCandidate.educationCandidates;
   const experienceCandidates = dataCandidate.experienceCandidates;
@@ -95,7 +92,7 @@ const ProfileCV = () => {
         </div>
         <div className="right-block w-[826px]">
           {/* profile */}
-          <div className=" w-full ml-[30px] py-5 bg-white border rounded-lg flex relative mb-[50px]">
+          <div className=" w-full ml-[30px] p-5 bg-white border rounded-lg flex relative mb-[50px]">
             <button
               className="text-red-700 absolute top-5 right-[68px] "
               onClick={() => setShowProfile(true)}
@@ -107,7 +104,7 @@ const ProfileCV = () => {
               onClose={() => setShowProfile(false)}
             />
             <div className="mr-5">
-              <img src={logo} alt="" />
+              <img src={dataToken.avatar} className="w-[100px]" alt="" />
             </div>
             <div>
               <div className="px-6 py-[18px]">
@@ -285,7 +282,7 @@ const ProfileCV = () => {
               </p>
             ) : (
               projectCandidates?.map((item: any, index: number) => (
-                <p className="text-[#767F8C] flex justify-between">
+                <p key={index} className="text-[#767F8C] flex justify-between">
                   <span>
                     {item.name} - {item.link}- {formatDay(item.started_at)} -{" "}
                     {formatDay(item.end_at)} - {item.info}

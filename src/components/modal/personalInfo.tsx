@@ -12,7 +12,7 @@ const PersonalInfo = ({
   show: boolean;
   onClose: () => void;
 }) => {
-  const dataToken = generateToken();
+  const dataToken: any = generateToken();
   const candidateId = (dataToken as any).id;
   const dataCandidate = candidatesDetail({ id: candidateId });
 
@@ -29,16 +29,16 @@ const PersonalInfo = ({
   return (
     <div>
       <Modal show={show} onClose={onClose}>
-        <p className="text-center text-2xl"> Cập nhập thông tin cá nhân </p>
+        <p className="text-center text-2xl p-4"> Cập nhập thông tin cá nhân </p>
         <Modal.Body>
           <div>
-            <img src={fpt} alt="" className="mx-auto" />
+            <img src={dataToken.avatar} alt="" className="mx-auto w-[100px]" />
             <div className="flex justify-center items-center">
               <button className="cursor-pointer px-3 py-4">
-                <FaImage /> chỉnh sửa
+                <FaImage className="mx-auto" /> chỉnh sửa
               </button>
               <button className="cursor-pointer px-3 py-4">
-                <FaRegTrashAlt /> xóa
+                <FaRegTrashAlt className="mx-auto" /> xóa
               </button>
             </div>
           </div>
