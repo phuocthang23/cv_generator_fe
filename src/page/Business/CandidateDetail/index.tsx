@@ -15,6 +15,7 @@ import { candidatesDetail } from "../../../service/candidateService/candidateDet
 const CandidateDetail = () => {
   const param = useParams();
   const dataCandidates = candidatesDetail(param);
+  console.log(dataCandidates);
   return (
     <div>
       <BreadCrumb />
