@@ -64,3 +64,17 @@ export const createIntroCandidate = async (
     throw err;
   }
 };
+
+export const deleteIntro = async (
+  id: any
+): Promise<AxiosResponse<any, any>> => {
+  try {
+    const response = await axiosInstance.delete(
+      `${API_INTRODUCE_CANDIDATE}/${id}`
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
