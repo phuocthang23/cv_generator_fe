@@ -1,13 +1,13 @@
 import { AxiosResponse } from "axios";
 import axiosInstance from "../base.api";
-import { API_EDU_CANDIDATE } from "../patchApi";
+import { API_CERTIFICATE_CANDIDATE, API_SKILL_CANDIDATE } from "../patchApi";
 
-export const createEduCandidate = async (
+export const createSkillCandidate = async (
   requestBody: any
 ): Promise<AxiosResponse<any, any>> => {
   try {
     const response = await axiosInstance.post(
-      `${API_EDU_CANDIDATE}`,
+      `${API_SKILL_CANDIDATE}`,
       requestBody
     );
     return response.data;
@@ -17,9 +17,11 @@ export const createEduCandidate = async (
   }
 };
 
-export const deleteEdu = async (id: any): Promise<AxiosResponse<any, any>> => {
+export const deleteSkill = async (
+  id: any
+): Promise<AxiosResponse<any, any>> => {
   try {
-    const response = await axiosInstance.delete(`${API_EDU_CANDIDATE}/${id}`);
+    const response = await axiosInstance.delete(`${API_SKILL_CANDIDATE}/${id}`);
     return response.data;
   } catch (err) {
     console.log(err);

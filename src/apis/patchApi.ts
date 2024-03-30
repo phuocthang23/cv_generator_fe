@@ -11,3 +11,7 @@ export const API_UPDATE_CANDIDATE = "/candidates";
 export const API_INTRODUCE_CANDIDATE = "/introduce_candidates";
 export const API_EXP_CANDIDATE = "/experience_candidates";
 export const API_EDU_CANDIDATE = "/education_candidates";
+export const API_PROJECT_CANDIDATE = "/project_candidates";
+export const API_CERTIFICATE_CANDIDATE = "/certificate_candidates";
+export const API_SKILL_CANDIDATE = "/skill_candidates";
+export const API_SKILL = "/skill";
