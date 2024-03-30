@@ -22,6 +22,7 @@ import Skill from "../../../../components/modal/Skill";
 import { generateToken } from "../../../../utils/generateToken.utils";
 import { candidatesDetail } from "../../../../service/candidateService/candidateDetail.service";
 import { formatDay } from "../../../../utils/convertDay";
+import { deleteIntroCandidateService } from "../../../../service/candidateService/introCandidate.service";
 
 const ProfileCV = () => {
   const [showIntro, setShowIntro] = useState(false);
@@ -41,6 +42,8 @@ const ProfileCV = () => {
   const skillCandidates = dataCandidate.skillCandidates;
   const projectCandidates = dataCandidate.projectCandidates;
   const certificateCandidates = dataCandidate.certificateCandidates;
+
+  const { handleDelete } = deleteIntroCandidateService();
 
   return (
     <div className="mt-5 max-w-[1320px] mx-auto">
@@ -160,7 +163,15 @@ const ProfileCV = () => {
             ) : (
               introduceCandidates?.map((item: any, index: any) => (
                 <ul key={index} className="list-disc list-inside pl-[30px]">
-                  <li className="text-[#767F8C]">{item.description}</li>
+                  <li className="text-[#767F8C]">
+                    {item.description}
+                    <button
+                      className="text-red-700 ml-4"
+                      onClick={() => handleDelete(item.id)}
+                    >
+                      <RiDeleteBin6Line />
+                    </button>
+                  </li>
                 </ul>
               ))
             )}

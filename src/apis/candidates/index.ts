@@ -1,16 +1,16 @@
-import { AxiosResponse } from "axios";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
 import axiosInstance from "../base.api";
 import {
   API_CANDIDATES,
   API_INTRODUCE_CANDIDATE,
   API_UPDATE_CANDIDATE,
 } from "../patchApi";
-import { CandidateRequest } from "./request";
 
 interface CandidateParams {
   page?: number;
   limit?: number;
 }
+
 export const getCandidatesApi = async (
   params: CandidateParams
 ): Promise<AxiosResponse<any, any>> => {
@@ -54,9 +54,23 @@ export const createIntroCandidate = async (
   requestBody: any
 ): Promise<AxiosResponse<any, any>> => {
   try {
-    const response = await axiosInstance.put(
+    const response = await axiosInstance.post(
       `${API_INTRODUCE_CANDIDATE}`,
       requestBody
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+export const deleteIntro = async (
+  id: any
+): Promise<AxiosResponse<any, any>> => {
+  try {
+    const response = await axiosInstance.delete(
+      `${API_INTRODUCE_CANDIDATE}/${id}`
     );
     return response.data;
   } catch (err) {
