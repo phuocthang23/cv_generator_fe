@@ -1,6 +1,7 @@
 import { getOneCandidateApi, updateCandidate } from "../../apis/candidates";
 import { useDispatch } from "react-redux";
 import { candidatesDetail } from "./candidateDetail.service";
+import { candidateDetailAction } from "../../store/action/candidate.action";
 
 export const updateCandidateService = () => {
   const dispatch = useDispatch();
@@ -13,10 +14,9 @@ export const updateCandidateService = () => {
 
       await updateCandidate(id, formData);
       const res: any = await getOneCandidateApi({ id });
-      dispatch(res);
+      dispatch(candidateDetailAction(res));
       candidatesDetail({ id });
     } catch (error) {
-      console.log(error);
       return;
     }
   };
