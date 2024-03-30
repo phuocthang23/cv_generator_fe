@@ -38,6 +38,7 @@ const Company = () => {
             className=" rounded-lg shadow-md border-2 company cursor-pointer"
             onClick={() => navigate(`/company/${item.id}`)}
             style={{ cursor: "pointer" }}
+            key={item.id}
           >
             <div className="flex items-center">
               <div className="bg-pink-600  mr-4">
