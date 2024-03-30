@@ -24,6 +24,7 @@ import { candidatesDetail } from "../../../../service/candidateService/candidate
 import { formatDay } from "../../../../utils/convertDay";
 import { deleteIntroCandidateService } from "../../../../service/candidateService/introCandidate.service";
 import { expCandidateService } from "../../../../service/candidateService/expCandidate.service";
+import { eduCandidateService } from "../../../../service/candidateService/eduCandidate.service";
 
 const ProfileCV = () => {
   const [showIntro, setShowIntro] = useState(false);
@@ -46,6 +47,7 @@ const ProfileCV = () => {
 
   const { handleDelete } = deleteIntroCandidateService();
   const { handleDeleteExp } = expCandidateService();
+  const { handleDeleteEdu } = eduCandidateService();
 
   return (
     <div className="mt-5 max-w-[1320px] mx-auto">
@@ -198,11 +200,20 @@ const ProfileCV = () => {
               </p>
             ) : (
               educationCandidates?.map((item: any, index: any) => (
-                <ul key={index} className="list-disc list-inside pl-[30px]">
+                <ul
+                  key={index}
+                  className="list-disc list-inside pl-[30px] flex justify-between"
+                >
                   <li className="text-[#767F8C]">
                     {item.name} - {item.major} - ({formatDay(item.started_at)} -{" "}
                     {formatDay(item.end_at)}) - {item.info}
                   </li>
+                  <button
+                    className="text-red-700"
+                    onClick={() => handleDeleteEdu(item.id)}
+                  >
+                    <RiDeleteBin6Line />
+                  </button>
                 </ul>
               ))
             )}
@@ -263,7 +274,10 @@ const ProfileCV = () => {
               </p>
             ) : (
               skillCandidates?.map((item: any, index: any) => (
-                <ul key={index} className="list-disc list-inside pl-[30px]">
+                <ul
+                  key={index}
+                  className="list-disc list-inside pl-[30px] flex justify-between"
+                >
                   <li className="text-[#767F8C]">
                     {item.name} -{" "}
                     {item.level_job_id === "1"
@@ -274,6 +288,9 @@ const ProfileCV = () => {
                       ? "Thành thạo"
                       : "Không xác định"}
                   </li>
+                  <button className="text-red-700">
+                    <RiDeleteBin6Line />
+                  </button>
                 </ul>
               ))
             )}
@@ -343,12 +360,18 @@ const ProfileCV = () => {
               </p>
             ) : (
               certificateCandidates?.map((item: any, index: any) => (
-                <ul key={index} className="list-disc list-inside pl-[30px]">
+                <ul
+                  key={index}
+                  className="list-disc list-inside pl-[30px] flex justify-between"
+                >
                   <li className="text-[#767F8C]">
                     {item.name} -{item.organization} -
                     {formatDay(item.started_at)} - {formatDay(item.end_at)}-{" "}
                     {item.info}
                   </li>
+                  <button className="text-red-700">
+                    <RiDeleteBin6Line />
+                  </button>
                 </ul>
               ))
             )}
