@@ -23,6 +23,7 @@ import { generateToken } from "../../../../utils/generateToken.utils";
 import { candidatesDetail } from "../../../../service/candidateService/candidateDetail.service";
 import { formatDay } from "../../../../utils/convertDay";
 import { deleteIntroCandidateService } from "../../../../service/candidateService/introCandidate.service";
+import { expCandidateService } from "../../../../service/candidateService/expCandidate.service";
 
 const ProfileCV = () => {
   const [showIntro, setShowIntro] = useState(false);
@@ -44,6 +45,7 @@ const ProfileCV = () => {
   const certificateCandidates = dataCandidate.certificateCandidates;
 
   const { handleDelete } = deleteIntroCandidateService();
+  const { handleDeleteExp } = expCandidateService();
 
   return (
     <div className="mt-5 max-w-[1320px] mx-auto">
@@ -224,12 +226,21 @@ const ProfileCV = () => {
               </p>
             ) : (
               experienceCandidates?.map((item: any, index: any) => (
-                <ul key={index} className="list-disc list-inside pl-[30px]">
+                <ul
+                  key={index}
+                  className="list-disc list-inside pl-[30px] flex justify-between"
+                >
                   <li className="text-[#767F8C]">
                     {item.company} - {item.position} - (
                     {formatDay(item.started_at)} - {formatDay(item.end_at)}) -{" "}
                     {item.info}
                   </li>
+                  <button
+                    className="text-red-700"
+                    onClick={() => handleDeleteExp(item.id)}
+                  >
+                    <RiDeleteBin6Line />
+                  </button>
                 </ul>
               ))
             )}
