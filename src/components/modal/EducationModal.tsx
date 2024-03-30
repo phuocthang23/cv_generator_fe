@@ -1,5 +1,6 @@
 import { Button, Modal } from "flowbite-react";
-import { useState } from "react";
+import { eduCandidateService } from "../../service/candidateService/eduCandidate.service";
+import { formatDay } from "../../utils/convertDay";
 const EducationModal = ({
   show,
   onClose,
@@ -7,8 +8,45 @@ const EducationModal = ({
   show: boolean;
   onClose: () => void;
 }) => {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const {
+    handleSave,
+    name,
+    major,
+    setName,
+    setMajor,
+    started_at,
+    end_at,
+    info,
+    setStarted_at,
+    setEnd_at,
+    setInfo,
+  } = eduCandidateService();
+
+  const onClickClose = () => {
+    setName("");
+    setMajor("");
+    setStarted_at("");
+    setEnd_at("");
+    setInfo("");
+    onClose();
+  };
+
+  const onClickSave = async () => {
+    await handleSave({
+      name,
+      major,
+      started_at: formatDay(started_at),
+      end_at: formatDay(end_at),
+      info,
+    });
+    setName("");
+    setMajor("");
+    setStarted_at("");
+    setEnd_at("");
+    setInfo("");
+    onClose();
+  };
+
   return (
     <div>
       <Modal show={show} size="3xl" onClose={onClose}>
@@ -21,6 +59,8 @@ const EducationModal = ({
               </label>
               <input
                 type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 placeholder="Trường"
               />
@@ -31,6 +71,8 @@ const EducationModal = ({
               </label>
               <input
                 type="text"
+                value={major}
+                onChange={(e) => setMajor(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 placeholder="abc"
               />
@@ -44,8 +86,8 @@ const EducationModal = ({
                   </span>
                   <input
                     type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
+                    value={started_at}
+                    onChange={(e) => setStarted_at(e.target.value)}
                     className="border-gray-300 border-hidden"
                   />
                 </div>
@@ -56,8 +98,8 @@ const EducationModal = ({
                   </span>
                   <input
                     type="date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
+                    value={end_at}
+                    onChange={(e) => setEnd_at(e.target.value)}
                     className="border-gray-300 border-hidden"
                   />
                 </div>
@@ -65,15 +107,20 @@ const EducationModal = ({
             </div>
             <div className="flex flex-col mt-5">
               <label>thông tin thêm </label>
-              <textarea cols={6} rows={8}></textarea>
+              <textarea
+                cols={6}
+                rows={8}
+                value={info}
+                onChange={(e) => setInfo(e.target.value)}
+              ></textarea>
             </div>
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={onClose} color="failure">
+          <Button onClick={onClickSave} color="failure">
             Cập Nhật
           </Button>
-          <Button color="gray" onClick={onClose}>
+          <Button color="gray" onClick={onClickClose}>
             Hủy Bỏ
           </Button>
         </Modal.Footer>

@@ -10,3 +10,4 @@ export const API_CANDIDATES = "/candidates";
 export const API_UPDATE_CANDIDATE = "/candidates";
 export const API_INTRODUCE_CANDIDATE = "/introduce_candidates";
 export const API_EXP_CANDIDATE = "/experience_candidates";
+export const API_EDU_CANDIDATE = "/education_candidates";
