@@ -25,6 +25,9 @@ import { formatDay } from "../../../../utils/convertDay";
 import { deleteIntroCandidateService } from "../../../../service/candidateService/introCandidate.service";
 import { expCandidateService } from "../../../../service/candidateService/expCandidate.service";
 import { eduCandidateService } from "../../../../service/candidateService/eduCandidate.service";
+import { projectCandidateService } from "../../../../service/candidateService/candidateProject.service";
+import { certificateCandidateService } from "../../../../service/candidateService/candidateCertificate.service";
+import { skillCandidateService } from "../../../../service/candidateService/candidateSkill.service";
 
 const ProfileCV = () => {
   const [showIntro, setShowIntro] = useState(false);
@@ -48,6 +51,9 @@ const ProfileCV = () => {
   const { handleDelete } = deleteIntroCandidateService();
   const { handleDeleteExp } = expCandidateService();
   const { handleDeleteEdu } = eduCandidateService();
+  const { handleDeleteProject } = projectCandidateService();
+  const { handleDeleteCertificate } = certificateCandidateService();
+  const { handleDeleteSkill } = skillCandidateService();
 
   return (
     <div className="mt-5 max-w-[1320px] mx-auto">
@@ -288,7 +294,10 @@ const ProfileCV = () => {
                       ? "Thành thạo"
                       : "Không xác định"}
                   </li>
-                  <button className="text-red-700">
+                  <button
+                    className="text-red-700"
+                    onClick={() => handleDeleteSkill(item.id)}
+                  >
                     <RiDeleteBin6Line />
                   </button>
                 </ul>
@@ -333,7 +342,7 @@ const ProfileCV = () => {
                     <button className="mr-5">
                       <IoCreateOutline />
                     </button>
-                    <button>
+                    <button onClick={() => handleDeleteProject(item.id)}>
                       <RiDeleteBin6Line />
                     </button>
                   </span>
@@ -369,7 +378,10 @@ const ProfileCV = () => {
                     {formatDay(item.started_at)} - {formatDay(item.end_at)}-{" "}
                     {item.info}
                   </li>
-                  <button className="text-red-700">
+                  <button
+                    className="text-red-700"
+                    onClick={() => handleDeleteCertificate(item.id)}
+                  >
                     <RiDeleteBin6Line />
                   </button>
                 </ul>

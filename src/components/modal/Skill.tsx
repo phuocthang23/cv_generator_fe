@@ -1,48 +1,57 @@
 import { Button, Modal } from "flowbite-react";
-import { useState } from "react";
-import { TiDeleteOutline } from "react-icons/ti";
+// import { TiDeleteOutline } from "react-icons/ti";
+import { skillService } from "../../service/skill/skill.service";
+import { skillCandidateService } from "../../service/candidateService/candidateSkill.service";
 
 const Skill = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
-  const [selectedOption, setSelectedOption] = useState("0");
-  const [selectedLv, setSelectedLv] = useState("0");
+  const data = skillService();
+  const { handleSave, name, level, setName, setLevel } =
+    skillCandidateService();
+
+  const onClickClose = () => {
+    setName("");
+    setLevel("");
+    onClose();
+  };
+
+  const onClickSave = async () => {
+    await handleSave({
+      name,
+      level_job_id: level,
+    });
+    setName("");
+    setLevel("");
+    onClose();
+  };
+
   return (
     <div>
       <Modal show={show} size="3xl" onClose={onClose}>
         <Modal.Header className="text-center">Kỹ năng </Modal.Header>
         <Modal.Body>
           <form className="flex justify-between  items-center">
-            <section className="min-w-64">
+            <section className="min-w-72">
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                value={selectedOption}
-                onChange={(e) => setSelectedOption(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               >
-                <option value="0" className="p-2">
-                  Nhập kỹ năng
+                <option value="" className="p-2">
+                  language
                 </option>
-                <option value="1" className="p-2">
-                  Trung bình
-                </option>
-                <option value="2" className="p-2">
-                  Trung bình kém
-                </option>
-                <option value="3" className="p-2">
-                  Khá
-                </option>
-                <option value="4" className="p-2">
-                  Tốt
-                </option>
-                <option value="5" className="p-2">
-                  Xuất sắc
-                </option>
+                {data.map((item: any) => (
+                  <option key={item.name} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
               </select>
             </section>
 
-            <section className="my-5 w-full max-w-64">
+            <section className="my-5 w-full max-w-72">
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                value={selectedLv}
-                onChange={(e) => setSelectedLv(e.target.value)}
+                value={level}
+                onChange={(e) => setLevel(e.target.value)}
               >
                 <option value="1" className="p-2">
                   Thấp
@@ -59,16 +68,16 @@ const Skill = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
               </select>
             </section>
 
-            <div className="flex justify-end">
+            {/* <div className="flex justify-end">
               <Button
                 color="white"
                 className="p-2 font-semibold text-red-500 border-red-500 border-2"
               >
                 thêm mới
               </Button>
-            </div>
+            </div> */}
           </form>
-          <div className="mt-5">
+          {/* <div className="mt-5">
             <div>
               <div>
                 <p>Thành thạo</p>
@@ -98,13 +107,13 @@ const Skill = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={onClose} color="failure">
+          <Button onClick={onClickSave} color="failure">
             Cập Nhật
           </Button>
-          <Button color="gray" onClick={onClose}>
+          <Button color="gray" onClick={onClickClose}>
             Hủy Bỏ
           </Button>
         </Modal.Footer>
