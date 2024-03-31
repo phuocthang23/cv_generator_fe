@@ -12,13 +12,13 @@ import cv from "../../../../assets/cv.png";
 
 import "./index.scss";
 import { useState } from "react";
-import IntroduceModal from "../../../../components/modal/IntroduceModal";
-import EducationModal from "../../../../components/modal/EducationModal";
-import ExpModal from "../../../../components/modal/ExpModal";
-import PresonalProjectModal from "../../../../components/modal/PresonalProjectModal";
-import Certificate from "../../../../components/modal/Certificate";
-import PersonalInfo from "../../../../components/modal/personalInfo";
-import Skill from "../../../../components/modal/Skill";
+// import IntroduceModal from "../../../../components/modal/IntroduceModal";
+// import EducationModal from "../../../../components/modal/EducationModal";
+// import ExpModal from "../../../../components/modal/ExpModal";
+// import PresonalProjectModal from "../../../../components/modal/PresonalProjectModal";
+// import Certificate from "../../../../components/modal/Certificate";
+// import PersonalInfo from "../../../../components/modal/personalInfo";
+// import Skill from "../../../../components/modal/Skill";
 import { generateToken } from "../../../../utils/generateToken.utils";
 import { candidatesDetail } from "../../../../service/candidateService/candidateDetail.service";
 import { formatDay } from "../../../../utils/convertDay";
@@ -28,6 +28,15 @@ import { eduCandidateService } from "../../../../service/candidateService/eduCan
 import { projectCandidateService } from "../../../../service/candidateService/candidateProject.service";
 import { certificateCandidateService } from "../../../../service/candidateService/candidateCertificate.service";
 import { skillCandidateService } from "../../../../service/candidateService/candidateSkill.service";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PersonalInfo from "../../../../components/modal/personalInfo";
+import IntroduceModal from "../../../../components/modal/IntroduceModal";
+import EducationModal from "../../../../components/modal/EducationModal";
+import ExpModal from "../../../../components/modal/ExpModal";
+import Skill from "../../../../components/modal/Skill";
+import PresonalProjectModal from "../../../../components/modal/PresonalProjectModal";
+import Certificate from "../../../../components/modal/Certificate";
 
 const ProfileCV = () => {
   const [showIntro, setShowIntro] = useState(false);
@@ -37,6 +46,9 @@ const ProfileCV = () => {
   const [showCertificate, setShowCertificate] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showSkill, setShowSkill] = useState(false);
+  // test
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [initialValue, setInitialValue] = useState<any>("");
 
   const dataToken: any = generateToken();
   const candidateId = (dataToken as any).id;
@@ -54,6 +66,70 @@ const ProfileCV = () => {
   const { handleDeleteProject } = projectCandidateService();
   const { handleDeleteCertificate } = certificateCandidateService();
   const { handleDeleteSkill } = skillCandidateService();
+
+  const handleIntroUpdate = (id: any, description: any) => {
+    setIsUpdate(true);
+    setInitialValue({ id, description });
+    setShowIntro(true);
+  };
+
+  const handleEduUpdate = (
+    id: any,
+    name: any,
+    major: any,
+    started_at: any,
+    end_at: any,
+    info: any
+  ) => {
+    setIsUpdate(true);
+    setInitialValue({ id, name, major, started_at, end_at, info });
+    setShowEdu(true);
+  };
+
+  const handleExpUpdate = (
+    id: any,
+    company: any,
+    position: any,
+    started_at: any,
+    end_at: any,
+    info: any
+  ) => {
+    setIsUpdate(true);
+    setInitialValue({ id, company, position, started_at, end_at, info });
+    setShowExp(true);
+  };
+
+  const handleSkillUpdate = (id: any, name: any, level_job_id: any) => {
+    setIsUpdate(true);
+    setInitialValue({ id, name, level_job_id });
+    setShowSkill(true);
+  };
+
+  const handleProjectUpdate = (
+    id: any,
+    name: any,
+    link: any,
+    started_at: any,
+    end_at: any,
+    info: any
+  ) => {
+    setIsUpdate(true);
+    setInitialValue({ id, name, link, started_at, end_at, info });
+    setShowProject(true);
+  };
+
+  const handleCertificateUpdate = (
+    id: any,
+    name: any,
+    organization: any,
+    started_at: any,
+    end_at: any,
+    info: any
+  ) => {
+    setIsUpdate(true);
+    setInitialValue({ id, name, organization, started_at, end_at, info });
+    setShowCertificate(true);
+  };
 
   return (
     <div className="mt-5 max-w-[1320px] mx-auto">
@@ -155,13 +231,17 @@ const ProfileCV = () => {
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
             <button
               className="text-red-700 absolute top-5 right-[68px]"
-              onClick={() => setShowIntro(true)}
+              onClick={() => {
+                setShowIntro(true), setIsUpdate(false);
+              }}
             >
               <CiCirclePlus className="text-xl" />
             </button>
             <IntroduceModal
               show={showIntro}
               onClose={() => setShowIntro(false)}
+              isUpdateMode={isUpdate}
+              initialValue={initialValue}
             />
             <p className="text-2xl font-bold mb-[22px] border-b-2 pb-3 border-gray-600">
               Giới thiệu bản thân
@@ -172,18 +252,29 @@ const ProfileCV = () => {
               </p>
             ) : (
               introduceCandidates?.map((item: any, index: any) => (
-                <ul key={index} className="list-disc list-inside pl-[30px]">
+                <ul
+                  key={index}
+                  className="list-disc list-inside pl-[30px] flex justify-between"
+                >
                   <li className="text-[#767F8C]">
                     {item.description}
-                    <button className="mr-5 ml-4">
-                      <IoCreateOutline />
-                    </button>
-                    <button
-                      className="text-red-700"
-                      onClick={() => handleDelete(item.id)}
-                    >
-                      <RiDeleteBin6Line />
-                    </button>
+                    {/* update button */}
+                    <div>
+                      <button
+                        className="mr-5"
+                        onClick={() =>
+                          handleIntroUpdate(item.id, item.description)
+                        }
+                      >
+                        <IoCreateOutline />
+                      </button>
+                      <button
+                        className="text-red-700"
+                        onClick={() => handleDelete(item.id)}
+                      >
+                        <RiDeleteBin6Line />
+                      </button>
+                    </div>
                   </li>
                 </ul>
               ))
@@ -193,12 +284,19 @@ const ProfileCV = () => {
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
             <button
               className="text-red-700 absolute top-5 right-[68px]"
-              onClick={() => setShowEdu(true)}
+              onClick={() => {
+                setShowEdu(true), setIsUpdate(false);
+              }}
             >
               <CiCirclePlus className="text-xl" />
             </button>
 
-            <EducationModal show={showEdu} onClose={() => setShowEdu(false)} />
+            <EducationModal
+              show={showEdu}
+              onClose={() => setShowEdu(false)}
+              isUpdateMode={isUpdate}
+              initialValue={initialValue}
+            />
 
             <p className="text-2xl font-bold mb-[22px] border-b-2 pb-3 border-gray-600">
               Học vấn
@@ -217,12 +315,30 @@ const ProfileCV = () => {
                     {item.name} - {item.major} - ({formatDay(item.started_at)} -{" "}
                     {formatDay(item.end_at)}) - {item.info}
                   </li>
-                  <button
-                    className="text-red-700"
-                    onClick={() => handleDeleteEdu(item.id)}
-                  >
-                    <RiDeleteBin6Line />
-                  </button>
+
+                  <div>
+                    <button
+                      className="mr-5"
+                      onClick={() =>
+                        handleEduUpdate(
+                          item.id,
+                          item.name,
+                          item.major,
+                          item.started_at,
+                          item.end_at,
+                          item.info
+                        )
+                      }
+                    >
+                      <IoCreateOutline />
+                    </button>
+                    <button
+                      className="text-red-700"
+                      onClick={() => handleDeleteEdu(item.id)}
+                    >
+                      <RiDeleteBin6Line />
+                    </button>
+                  </div>
                 </ul>
               ))
             )}
@@ -231,11 +347,18 @@ const ProfileCV = () => {
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
             <button
               className="text-red-700 absolute top-5 right-[68px]"
-              onClick={() => setShowExp(true)}
+              onClick={() => {
+                setShowExp(true), setIsUpdate(false);
+              }}
             >
               <CiCirclePlus className="text-xl" />
             </button>
-            <ExpModal show={showExp} onClose={() => setShowExp(false)} />
+            <ExpModal
+              show={showExp}
+              onClose={() => setShowExp(false)}
+              isUpdateMode={isUpdate}
+              initialValue={initialValue}
+            />
 
             <p className="text-2xl font-bold mb-[22px] border-b-2 pb-3 border-gray-600">
               Kinh nghiệm làm việc
@@ -255,12 +378,29 @@ const ProfileCV = () => {
                     {formatDay(item.started_at)} - {formatDay(item.end_at)}) -{" "}
                     {item.info}
                   </li>
-                  <button
-                    className="text-red-700"
-                    onClick={() => handleDeleteExp(item.id)}
-                  >
-                    <RiDeleteBin6Line />
-                  </button>
+                  <div>
+                    <button
+                      className="mr-5"
+                      onClick={() =>
+                        handleExpUpdate(
+                          item.id,
+                          item.company,
+                          item.position,
+                          item.started_at,
+                          item.end_at,
+                          item.info
+                        )
+                      }
+                    >
+                      <IoCreateOutline />
+                    </button>
+                    <button
+                      className="text-red-700"
+                      onClick={() => handleDeleteExp(item.id)}
+                    >
+                      <RiDeleteBin6Line />
+                    </button>
+                  </div>
                 </ul>
               ))
             )}
@@ -269,11 +409,18 @@ const ProfileCV = () => {
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
             <button
               className="text-red-700 absolute top-5 right-[68px]"
-              onClick={() => setShowSkill(true)}
+              onClick={() => {
+                setShowSkill(true), setIsUpdate(false);
+              }}
             >
               <IoCreateOutline className="text-xl" />
             </button>
-            <Skill show={showSkill} onClose={() => setShowSkill(false)} />
+            <Skill
+              show={showSkill}
+              onClose={() => setShowSkill(false)}
+              isUpdateMode={isUpdate}
+              initialValue={initialValue}
+            />
             <p className="text-2xl font-bold mb-[22px] border-b-2 pb-3 border-gray-600">
               Kỹ năng
             </p>
@@ -297,12 +444,22 @@ const ProfileCV = () => {
                       ? "Thành thạo"
                       : "Không xác định"}
                   </li>
-                  <button
-                    className="text-red-700"
-                    onClick={() => handleDeleteSkill(item.id)}
-                  >
-                    <RiDeleteBin6Line />
-                  </button>
+                  <div>
+                    <button
+                      className="mr-5"
+                      onClick={() =>
+                        handleSkillUpdate(item.id, item.name, item.level_job_id)
+                      }
+                    >
+                      <IoCreateOutline />
+                    </button>
+                    <button
+                      className="text-red-700"
+                      onClick={() => handleDeleteSkill(item.id)}
+                    >
+                      <RiDeleteBin6Line />
+                    </button>
+                  </div>
                 </ul>
               ))
             )}
@@ -311,13 +468,17 @@ const ProfileCV = () => {
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
             <button
               className="text-red-700 absolute top-5 right-[68px]"
-              onClick={() => setShowProject(true)}
+              onClick={() => {
+                setShowProject(true), setIsUpdate(false);
+              }}
             >
               <CiCirclePlus className="text-xl" />
             </button>
             <PresonalProjectModal
               show={showProject}
               onClose={() => setShowProject(false)}
+              isUpdateMode={isUpdate}
+              initialValue={initialValue}
             />
             <p className="text-2xl font-bold mb-[22px] border-b">
               Dự án Cá Nhân
@@ -342,7 +503,19 @@ const ProfileCV = () => {
                     {formatDay(item.end_at)} - {item.info}
                   </span>
                   <span className="text-red-700 text-xl">
-                    <button className="mr-5">
+                    <button
+                      className="mr-5"
+                      onClick={() =>
+                        handleProjectUpdate(
+                          item.id,
+                          item.name,
+                          item.link,
+                          item.started_at,
+                          item.end_at,
+                          item.info
+                        )
+                      }
+                    >
                       <IoCreateOutline />
                     </button>
                     <button onClick={() => handleDeleteProject(item.id)}>
@@ -357,13 +530,17 @@ const ProfileCV = () => {
           <div className=" w-full ml-[30px] py-5 px-[30px] mb-[50px] bg-white border rounded-lg relative">
             <button
               className="text-red-700 absolute top-5 right-[68px]"
-              onClick={() => setShowCertificate(true)}
+              onClick={() => {
+                setShowCertificate(true), setIsUpdate(false);
+              }}
             >
               <CiCirclePlus className="text-xl" />
             </button>
             <Certificate
               show={showCertificate}
               onClose={() => setShowCertificate(false)}
+              isUpdateMode={isUpdate}
+              initialValue={initialValue}
             />
             <p className="text-2xl font-bold mb-[22px]">Chứng chỉ</p>
             {certificateCandidates?.length === 0 ? (
@@ -381,18 +558,36 @@ const ProfileCV = () => {
                     {formatDay(item.started_at)} - {formatDay(item.end_at)}-{" "}
                     {item.info}
                   </li>
-                  <button
-                    className="text-red-700"
-                    onClick={() => handleDeleteCertificate(item.id)}
-                  >
-                    <RiDeleteBin6Line />
-                  </button>
+                  <div>
+                    <button
+                      className="mr-5"
+                      onClick={() =>
+                        handleCertificateUpdate(
+                          item.id,
+                          item.name,
+                          item.organization,
+                          item.started_at,
+                          item.end_at,
+                          item.info
+                        )
+                      }
+                    >
+                      <IoCreateOutline />
+                    </button>
+                    <button
+                      className="text-red-700"
+                      onClick={() => handleDeleteCertificate(item.id)}
+                    >
+                      <RiDeleteBin6Line />
+                    </button>
+                  </div>
                 </ul>
               ))
             )}
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

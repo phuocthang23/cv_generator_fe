@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import axiosInstance from "../base.api";
 import {
   API_CANDIDATES,
@@ -51,6 +51,7 @@ export const updateCandidate = async (
     );
     return response.data;
   } catch (err) {
+    console.log(err);
     throw err;
   }
 };
@@ -63,8 +64,11 @@ export const createIntroCandidate = async (
       `${API_INTRODUCE_CANDIDATE}`,
       requestBody
     );
-    return response.data;
+    return response;
   } catch (err) {
+    if (axios.isAxiosError(err) && err.response) {
+      return err.response;
+    }
     console.log(err);
     throw err;
   }
@@ -79,6 +83,25 @@ export const deleteIntro = async (
     );
     return response.data;
   } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+export const updateIntroCandidate = async (
+  id: any,
+  requestBody: any
+): Promise<AxiosResponse<any, any>> => {
+  try {
+    const response = await axiosInstance.put(
+      `${API_INTRODUCE_CANDIDATE}/${id}`,
+      requestBody
+    );
+    return response;
+  } catch (err) {
+    if (axios.isAxiosError(err) && err.response) {
+      return err.response;
+    }
     console.log(err);
     throw err;
   }

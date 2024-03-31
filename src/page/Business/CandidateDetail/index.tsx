@@ -15,7 +15,6 @@ import { candidatesDetail } from "../../../service/candidateService/candidateDet
 const CandidateDetail = () => {
   const param = useParams();
   const dataCandidates = candidatesDetail(param);
-  console.log(dataCandidates);
   return (
     <div>
       <BreadCrumb />
@@ -84,7 +83,7 @@ const CandidateDetail = () => {
               </ul>
             </div>
           </div>
-          <div className="right-ctn w-[536px] h-[160px]  ml-6">
+          <div className="right-ctn w-[536px]   ml-6">
             <div className=" flex pt-[9px] py-8 pl-[25px] border border-collapse ml-6 rounded-lg">
               <div>
                 <div className="flex items-center gap-2">

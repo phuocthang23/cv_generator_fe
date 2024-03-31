@@ -6,7 +6,9 @@ import { useState } from "react";
 import {
   createCertificateCandidate,
   deleteCertificate,
+  updateCertificateCandidate,
 } from "../../apis/candidates/certificate";
+import { toast } from "react-toastify";
 
 export const certificateCandidateService = () => {
   const [name, setName] = useState("");
@@ -22,9 +24,21 @@ export const certificateCandidateService = () => {
 
   const handleSave = async (body: any) => {
     try {
-      await createCertificateCandidate(body);
+      const response = await createCertificateCandidate(body);
       const res: any = await getOneCandidateApi({ id });
       dispatch(candidateDetailAction(res));
+      return response;
+    } catch (error) {
+      return;
+    }
+  };
+
+  const handleUpdate = async (idbutton: any, body: any) => {
+    try {
+      const response = await updateCertificateCandidate(idbutton, body);
+      const res: any = await getOneCandidateApi({ id });
+      dispatch(candidateDetailAction(res));
+      return response;
     } catch (error) {
       return;
     }
@@ -33,6 +47,7 @@ export const certificateCandidateService = () => {
   const handleDeleteCertificate = async (idDelete: any) => {
     try {
       await deleteCertificate(idDelete);
+      toast.success("đã xóa bỏ phần giáo dục");
       const res: any = await getOneCandidateApi({ id });
       dispatch(candidateDetailAction(res));
     } catch (error) {
@@ -53,5 +68,6 @@ export const certificateCandidateService = () => {
     setEnd_at,
     setInfo,
     handleDeleteCertificate,
+    handleUpdate,
   };
 };

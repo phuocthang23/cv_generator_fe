@@ -7,10 +7,11 @@ export const updateCandidateService = () => {
   const dispatch = useDispatch();
   const handleSave = async (id: any, body: any) => {
     try {
-      await updateCandidate(id, body);
+      const response = await updateCandidate(id, body);
       const res: any = await getOneCandidateApi({ id });
       dispatch(candidateDetailAction(res));
       candidatesDetail({ id });
+      return response;
     } catch (error) {
       return;
     }

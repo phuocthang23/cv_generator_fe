@@ -1,14 +1,21 @@
 import { Button, Modal } from "flowbite-react";
 import { expCandidateService } from "../../service/candidateService/expCandidate.service";
 import { formatDay } from "./../../utils/convertDay";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
+interface IntroduceModalProps {
+  show: boolean;
+  onClose: () => void;
+  isUpdateMode: boolean;
+  initialValue: any;
+}
 const ExpModal = ({
   show,
   onClose,
-}: {
-  show: boolean;
-  onClose: () => void;
-}) => {
+  isUpdateMode,
+  initialValue,
+}: IntroduceModalProps) => {
   const {
     handleSave,
     company,
@@ -21,37 +28,78 @@ const ExpModal = ({
     setStarted_at,
     setEnd_at,
     setInfo,
+    handleUpdate,
   } = expCandidateService();
 
+  useEffect(() => {
+    setCompany(isUpdateMode ? initialValue.company : "");
+    setPosition(isUpdateMode ? initialValue.position : "");
+    setStarted_at(isUpdateMode ? initialValue.started_at : "");
+    setEnd_at(isUpdateMode ? initialValue.end_at : "");
+    setInfo(isUpdateMode ? initialValue.info : "");
+  }, [show]);
+
   const onClickSave = async () => {
-    await handleSave({
-      company,
-      position,
-      started_at: formatDay(started_at),
-      end_at: formatDay(end_at),
-      info,
-    });
-    setPosition("");
-    setCompany("");
-    setStarted_at("");
-    setEnd_at("");
-    setInfo("");
-    onClose();
+    if (isUpdateMode) {
+      const res = await handleUpdate(initialValue.id, {
+        company,
+        position,
+        started_at,
+        end_at,
+        info,
+      });
+      if (res?.status === 200) {
+        toast.success("Đã cập nhật");
+      } else {
+        toast.error("Đã xảy ra lỗi không cập nhật  được");
+      }
+      onClose();
+    } else {
+      const res = await handleSave({
+        company,
+        position,
+        started_at: formatDay(started_at),
+        end_at: formatDay(end_at),
+        info,
+      });
+      if (res?.status === 201) {
+        toast.success("Tạo thành công");
+        setPosition("");
+        setCompany("");
+        setStarted_at("");
+        setEnd_at("");
+        setInfo("");
+        onClose();
+      } else if (res?.status === 400) {
+        toast.warning("vui lòng điền đầy đủ thông tin");
+      } else {
+        toast.error("Đã xảy ra lỗi ko tạo được");
+      }
+    }
   };
 
   const onClickClose = () => {
-    setPosition("");
-    setCompany("");
-    setStarted_at("");
-    setEnd_at("");
-    setInfo("");
-    onClose();
+    if (isUpdateMode) {
+      setCompany(initialValue.company);
+      setPosition(initialValue.position);
+      setStarted_at(initialValue.started_at);
+      setEnd_at(initialValue.end_at);
+      setInfo(initialValue.info);
+      onClose();
+    } else {
+      setPosition("");
+      setCompany("");
+      setStarted_at("");
+      setEnd_at("");
+      setInfo("");
+      onClose();
+    }
   };
 
   return (
     <div>
       <Modal show={show} size="3xl" onClose={onClose}>
-        <Modal.Header className="text-center">Học vấn </Modal.Header>
+        <Modal.Header className="text-center">Kinh nghiệm </Modal.Header>
         <Modal.Body>
           <form>
             <div>
@@ -119,7 +167,7 @@ const ExpModal = ({
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={onClickSave} color="failure">
-            Cập Nhật
+            {isUpdateMode ? "Cập nhật" : "Tạo"}
           </Button>
           <Button color="gray" onClick={onClickClose}>
             Hủy Bỏ

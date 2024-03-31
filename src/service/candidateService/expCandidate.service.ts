@@ -1,9 +1,14 @@
 import { useDispatch } from "react-redux";
 import { generateToken } from "../../utils/generateToken.utils";
 import { getOneCandidateApi } from "../../apis/candidates";
-import { createExpCandidate, deleteExp } from "../../apis/candidates/exp";
+import {
+  createExpCandidate,
+  deleteExp,
+  updateExpCandidate,
+} from "../../apis/candidates/exp";
 import { candidateDetailAction } from "../../store/action/candidate.action";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export const expCandidateService = () => {
   const [position, setPosition] = useState("");
@@ -19,9 +24,21 @@ export const expCandidateService = () => {
 
   const handleSave = async (body: any) => {
     try {
-      await createExpCandidate(body);
+      const response = await createExpCandidate(body);
       const res: any = await getOneCandidateApi({ id });
       dispatch(candidateDetailAction(res));
+      return response;
+    } catch (error) {
+      return;
+    }
+  };
+
+  const handleUpdate = async (idbutton: any, body: any) => {
+    try {
+      const response = await updateExpCandidate(idbutton, body);
+      const res: any = await getOneCandidateApi({ id });
+      dispatch(candidateDetailAction(res));
+      return response;
     } catch (error) {
       return;
     }
@@ -30,6 +47,7 @@ export const expCandidateService = () => {
   const handleDeleteExp = async (idDelete: any) => {
     try {
       await deleteExp(idDelete);
+      toast.success("đã xóa bỏ phần giờ dữ liệu");
       const res: any = await getOneCandidateApi({ id });
       dispatch(candidateDetailAction(res));
     } catch (error) {
@@ -50,5 +68,6 @@ export const expCandidateService = () => {
     setEnd_at,
     setInfo,
     handleDeleteExp,
+    handleUpdate,
   };
 };

@@ -3,7 +3,12 @@ import { generateToken } from "../../utils/generateToken.utils";
 import { getOneCandidateApi } from "../../apis/candidates";
 import { candidateDetailAction } from "../../store/action/candidate.action";
 import { useState } from "react";
-import { createEduCandidate, deleteEdu } from "../../apis/candidates/edu";
+import {
+  createEduCandidate,
+  deleteEdu,
+  updateEduCandidate,
+} from "../../apis/candidates/edu";
+import { toast } from "react-toastify";
 
 export const eduCandidateService = () => {
   const [name, setName] = useState("");
@@ -19,9 +24,21 @@ export const eduCandidateService = () => {
 
   const handleSave = async (body: any) => {
     try {
-      await createEduCandidate(body);
+      const response = await createEduCandidate(body);
       const res: any = await getOneCandidateApi({ id });
       dispatch(candidateDetailAction(res));
+      return response;
+    } catch (error) {
+      return;
+    }
+  };
+
+  const handleUpdate = async (idbutton: any, body: any) => {
+    try {
+      const response = await updateEduCandidate(idbutton, body);
+      const res: any = await getOneCandidateApi({ id });
+      dispatch(candidateDetailAction(res));
+      return response;
     } catch (error) {
       return;
     }
@@ -30,6 +47,7 @@ export const eduCandidateService = () => {
   const handleDeleteEdu = async (idDelete: any) => {
     try {
       await deleteEdu(idDelete);
+      toast.success("đã xóa bỏ phần giáo dục");
       const res: any = await getOneCandidateApi({ id });
       dispatch(candidateDetailAction(res));
     } catch (error) {
@@ -50,5 +68,6 @@ export const eduCandidateService = () => {
     setEnd_at,
     setInfo,
     handleDeleteEdu,
+    handleUpdate,
   };
 };
