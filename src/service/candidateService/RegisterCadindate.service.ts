@@ -21,7 +21,7 @@ export const registerCandidateService = () => {
   } = useAuthLogic(true);
 
   const [messageError, setMessageError] = useState("");
-  const [phone, setPhone] = useState(0);
+  const [phone, setPhone] = useState<any>();
   const [address, setAddress] = useState("");
   const [gender, setGender] = useState<any>(0);
   const [dateTime, setDateTime] = useState("");
@@ -44,7 +44,8 @@ export const registerCandidateService = () => {
       confirmPassword === "" ||
       userName === "" ||
       phone === 0 ||
-      address === ""
+      address === "" ||
+      dateTime === ""
     ) {
       setMessageError("điền đầy đủ các thông tin không được trống");
     }
@@ -62,6 +63,11 @@ export const registerCandidateService = () => {
     } catch (error) {
       setEmailError("Email đã được tồn tại");
     }
+  };
+
+  const handlePhoneChange = (e: any) => {
+    const value = e.target.value.replace(/\D/g, "");
+    setPhone(value);
   };
 
   return {
@@ -88,5 +94,6 @@ export const registerCandidateService = () => {
     setAddress,
     setGender,
     setDateTime,
+    handlePhoneChange,
   };
 };

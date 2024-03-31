@@ -175,8 +175,11 @@ const ProfileCV = () => {
                 <ul key={index} className="list-disc list-inside pl-[30px]">
                   <li className="text-[#767F8C]">
                     {item.description}
+                    <button className="mr-5 ml-4">
+                      <IoCreateOutline />
+                    </button>
                     <button
-                      className="text-red-700 ml-4"
+                      className="text-red-700"
                       onClick={() => handleDelete(item.id)}
                     >
                       <RiDeleteBin6Line />

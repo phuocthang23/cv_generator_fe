@@ -28,6 +28,7 @@ const RegisterCandidate = () => {
     setPhone,
     setAddress,
     setDateTime,
+    handlePhoneChange,
   } = registerCandidateService();
 
   return (
@@ -195,7 +196,7 @@ const RegisterCandidate = () => {
                 type="tel"
                 placeholder="090 123 4567"
                 value={phone}
-                onChange={(e) => setPhone(parseInt(e.target.value))}
+                onChange={handlePhoneChange}
                 className={`h-16 rounded-[5px] border ${
                   passwordError && password !== ""
                     ? "border-red-500"

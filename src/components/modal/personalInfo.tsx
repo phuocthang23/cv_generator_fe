@@ -85,7 +85,7 @@ const PersonalInfo = ({
                 type="file"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   if (event.target.files && event.target.files.length > 0) {
-                    setAvatar(event.target.files[0]); // Lấy file đầu tiên từ danh sách các file được chọn
+                    setAvatar(event.target.files[0]);
                   }
                 }}
                 className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
