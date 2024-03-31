@@ -12,12 +12,17 @@ import EmployersLogo from "../../../assets/Employers Logo.png";
 import BookmarkSimple from "../../../assets/BookmarkSimple (1).png";
 import vetor2 from "../../../assets/Vector2.png";
 import "./index.scss";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { FiFilter, FiMapPin, FiSearch, FiSettings } from "react-icons/fi";
 import { ImTarget } from "react-icons/im";
 import { IoOptionsOutline } from "react-icons/io5";
 import BreadCrumb from "../../../components/breadCrumb/BreadCrumb";
+import { companyDetail } from "../../../service/companyService/company.service";
 const BusinessInformationUser = () => {
+  const params = useParams();
+  const navigate = useNavigate();
+  const { dataJob, relatedJobs } = companyDetail(params.id);
+
   return (
     <div>
       <BreadCrumb />
@@ -25,9 +30,13 @@ const BusinessInformationUser = () => {
       <div className="main max-w-[1320px] mx-auto font-inter">
         <div className=" heading mx-auto mt-[35.5px] flex justify-between">
           <div className="flex items-center">
-            <img className="w-[96px] mr-6" src={logo} alt="" />
+            <img
+              className="w-[96px] h-[96px] mr-6"
+              src={dataJob?.logo === undefined ? logo : dataJob?.logo}
+              alt=""
+            />
             <div className="heading ">
-              <p className="text-2xl font-medium ">FPT Software</p>
+              <p className="text-2xl font-medium ">{dataJob?.name}</p>
               <p className="text-[18px] mt-3 ml-3">
                 <span className="mx-2 text-white itag">Outsource</span>{" "}
                 <span className="featured text-[#0A65CC]">Featured</span>
@@ -39,7 +48,9 @@ const BusinessInformationUser = () => {
                   target="_blank"
                   className=" text-lg font-normal ml-6"
                 >
-                  https://fptsoftware.com/
+                  {dataJob?.website === ""
+                    ? "https://fptsoftware.com/"
+                    : dataJob?.website}
                 </NavLink>
               </p>
             </div>
@@ -59,10 +70,7 @@ const BusinessInformationUser = () => {
               <b>Mô tả về công ty</b>
             </p>
             <p className="mt-4 text-base">
-              <span className="block mb-4">
-                Velstar is a Shopify Plus agency, and we partner with brands to
-                help them grow, we also do the same with our people!
-              </span>
+              <span className="block mb-4">{dataJob.description}</span>
               <span className="block mb-4">
                 Here at Velstar, we don't just make websites, we create
                 exceptional digital experiences that consumers love. Our team of
@@ -386,122 +394,37 @@ const BusinessInformationUser = () => {
       </div>
       <div className="border-t-2 mt-14 mb-52 border">
         <div className="border-collapse main max-w-[1320px] mx-auto pt-[100px]">
-          <p className="font-bold text-[40px] mb-[50px]">Ứng viên nổi bật</p>
+          <p className="font-bold text-[40px] mb-[50px]">Công việc nổi bật</p>
           <div className="grid gap-x-8 gap-y-4 grid-cols-3">
-            <div className="border border-collapse rounded p-6">
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <p className="mx-3 w-full">
-                  <span className="text-lg">Dribbble</span>{" "}
-                  <span className="featured text-red-700 mb-1">Featured</span>
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </p>
-              </p>
-              <button className="bg-[#E7F0FA] text-[#0A65CC] font-bold py-2 px-4 rounded w-full mt-5">
-                Open Position (3)
-              </button>
-            </div>
-            <div className="border border-collapse rounded p-6">
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <p className="mx-3 w-full">
-                  <span className="text-lg">Dribbble</span>{" "}
-                  <span className="featured text-red-700 mb-1">Featured</span>
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </p>
-              </p>
-              <button className="bg-[#E7F0FA] text-[#0A65CC] font-bold py-2 px-4 rounded w-full mt-5">
-                Open Position (3)
-              </button>
-            </div>
-            <div className="border border-collapse rounded p-6">
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <p className="mx-3 w-full">
-                  <span className="text-lg">Dribbble</span>{" "}
-                  <span className="featured text-red-700 mb-1">Featured</span>
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </p>
-              </p>
-              <button className="bg-[#E7F0FA] text-[#0A65CC] font-bold py-2 px-4 rounded w-full mt-5">
-                Open Position (3)
-              </button>
-            </div>
-            <div className="border border-collapse rounded p-6">
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <p className="mx-3 w-full">
-                  <span className="text-lg">Dribbble</span>{" "}
-                  <span className="featured text-red-700 mb-1">Featured</span>
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </p>
-              </p>
-              <button className="bg-[#E7F0FA] text-[#0A65CC] font-bold py-2 px-4 rounded w-full mt-5">
-                Open Position (3)
-              </button>
-            </div>
-            <div className="border border-collapse rounded p-6">
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <p className="mx-3 w-full">
-                  <span className="text-lg">Dribbble</span>{" "}
-                  <span className="featured text-red-700 mb-1">Featured</span>
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </p>
-              </p>
-              <button className="bg-[#E7F0FA] text-[#0A65CC] font-bold py-2 px-4 rounded w-full mt-5">
-                Open Position (3)
-              </button>
-            </div>
-            <div className="border border-collapse rounded p-6">
-              <p className="mt-5 flex flex-row">
-                <span className=" basis-1/6">
-                  <img src={EmployersLogo} />
-                </span>
-                <p className="mx-3 w-full">
-                  <span className="text-lg">Dribbble</span>{" "}
-                  <span className="featured text-red-700 mb-1">Featured</span>
-                  <span className="flex">
-                    {" "}
-                    <img className="h-[18px]" src={MapPin} />
-                    Dhaka, Bangladesh
-                  </span>
-                </p>
-              </p>
-              <button className="bg-[#E7F0FA] text-[#0A65CC] font-bold py-2 px-4 rounded w-full mt-5">
-                Open Position (3)
-              </button>
-            </div>
+            {relatedJobs.map((job: any) => {
+              return (
+                <div
+                  key={job.id}
+                  className="border border-collapse rounded p-6"
+                  onClick={() => navigate(`/job/${job.id}`)}
+                >
+                  <p className="mt-5 flex flex-row">
+                    <span className=" basis-1/6">
+                      <img src={EmployersLogo} />
+                    </span>
+                    <p className="mx-3 w-full">
+                      <span className="text-lg">{job.name}</span>{" "}
+                      <span className="featured text-red-700 mb-1">
+                        Featured
+                      </span>
+                      <span className="flex">
+                        {" "}
+                        <img className="h-[18px]" src={MapPin} />
+                        Dhaka, Bangladesh
+                      </span>
+                    </p>
+                  </p>
+                  <button className="bg-[#E7F0FA] text-[#0A65CC] font-bold py-2 px-4 rounded w-full mt-5">
+                    Open Position ({job?.jobs.length})
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

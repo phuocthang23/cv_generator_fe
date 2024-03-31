@@ -1,8 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { companyAction } from "../../store/action/company.action";
+import {
+  companyAction,
+  companyDetailAction,
+} from "../../store/action/company.action";
 import { useEffect } from "react";
 import { AppState } from "../../store";
-import { getCompanyApi } from "../../apis/company";
+import {
+  getAllCompanyApi,
+  getCompanyApi,
+  getOneCompanyApi,
+} from "../../apis/company";
 
 export const companyService = ({ page, limit }: any) => {
   const dispatch = useDispatch();
@@ -23,4 +30,37 @@ export const companyService = ({ page, limit }: any) => {
   }, [page]);
 
   return data;
+};
+
+export const companyDetail = (id: any) => {
+  const dispatch = useDispatch();
+  const dataJob = useSelector(
+    (state: AppState) => (state.companyReducer as any).companyDetail
+  );
+
+  const relatedJobs = useSelector(
+    (state: AppState) => (state.companyReducer as any).listCompany
+  );
+
+  const page = 1;
+  const limit = 6;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res: any = await getOneCompanyApi(id);
+        dispatch(companyDetailAction(res));
+
+        const relatedCompanyData: any = await getCompanyApi({ page, limit });
+        const filteredRelatedJobs = relatedCompanyData.data;
+        dispatch(companyAction(filteredRelatedJobs));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { dataJob, relatedJobs };
 };

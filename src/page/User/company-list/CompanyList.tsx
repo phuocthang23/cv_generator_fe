@@ -6,9 +6,11 @@ import Filter from "../../../components/filter/Filter";
 import { useState } from "react";
 import { companyService } from "../../../service/companyService/company.service";
 import PaginationComponent from "../../../components/pagination/PaginationComponent";
+import { useNavigate } from "react-router-dom";
 const CompanyList = () => {
   const [page, setPage] = useState(1);
   const limit = 12;
+  const navigate = useNavigate();
 
   const { data, total } = companyService({ page, limit });
   return (
@@ -21,6 +23,8 @@ const CompanyList = () => {
             <div
               className=" rounded-lg shadow-md border-2 company "
               key={item.id}
+              onClick={() => navigate(`/company/${item.id}`)}
+              style={{ cursor: "pointer" }}
             >
               <div className="flex items-center">
                 <div className="bg-pink-600  mr-4">

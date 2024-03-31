@@ -42,10 +42,7 @@ const RouterIndex = () => {
           <Route path="/job-application" element={<JobApplicationLayout />}>
             <Route index element={<ProfileCV />} />
           </Route>
-          <Route
-            path="/business-information-user"
-            element={<BusinessInformationUser />}
-          />
+          <Route path="/company/:id" element={<BusinessInformationUser />} />
           <Route path="/job" element={<Job />} />
           <Route path="/list-company" element={<CompanyList />} />
         </Route>
@@ -53,12 +50,11 @@ const RouterIndex = () => {
         {/* adminpage */}
         <Route path="/admin" element={<Admin />}></Route>
         {/* businesspage */}
-       
+
         <Route path="/business" element={<CandidateLayout />}>
           <Route index element={<CandidateList />} />
           <Route path=":id" element={<CandidateDetail />} />
         </Route>
-     
       </Routes>
     </div>
   );
