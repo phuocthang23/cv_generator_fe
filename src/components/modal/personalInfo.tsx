@@ -17,14 +17,13 @@ const PersonalInfo = ({
   const dataToken: any = generateToken();
   const candidateId = (dataToken as any).id;
   const dataCandidate: any = candidatesDetail({ id: candidateId });
-
   const [name, setName] = useState(dataCandidate?.name);
   const [email, setEmail] = useState(dataCandidate?.email);
   const [phone, setPhone] = useState(dataCandidate?.phone);
   const [dob, setDob] = useState(dataCandidate?.dob);
   const [gender, setGender] = useState(dataCandidate?.gender);
   const [address, setAddress] = useState(dataCandidate?.address);
-  const [avatar, setAvatar] = useState<File | null>(null);
+  const [avatar, setAvatar] = useState<any>(null);
   const [link_fb, setLink_fb] = useState(dataCandidate?.link_fb);
 
   useEffect(() => {
@@ -63,14 +62,10 @@ const PersonalInfo = ({
     onClose();
   };
 
-  const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      setAvatar(event.target.files[0]);
-    }
-  };
-
   const handleClickSave = async () => {
-    await handleSave(candidateId, body);
+    const formData = new FormData();
+    for (let i of Object.entries(body)) formData.append(i[0], i[1]);
+    await handleSave(candidateId, formData);
     onClose();
   };
 
@@ -80,11 +75,19 @@ const PersonalInfo = ({
         <p className="text-center text-2xl p-4"> Cập nhập thông tin cá nhân </p>
         <Modal.Body>
           <div>
-            <img src={dataToken.avatar} alt="" className="mx-auto w-[100px]" />
+            <img
+              src={dataCandidate?.avatar}
+              alt=""
+              className="mx-auto w-[100px]"
+            />
             <div className="flex justify-center items-center">
               <input
                 type="file"
-                onChange={handleAvatarChange}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  if (event.target.files && event.target.files.length > 0) {
+                    setAvatar(event.target.files[0]); // Lấy file đầu tiên từ danh sách các file được chọn
+                  }
+                }}
                 className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
               />
               <button className="cursor-pointer px-3 py-4">

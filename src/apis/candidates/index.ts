@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import axiosInstance from "../base.api";
 import {
   API_CANDIDATES,
@@ -39,13 +39,18 @@ export const updateCandidate = async (
   requestBody: any
 ): Promise<AxiosResponse<any, any>> => {
   try {
+    console.log(requestBody);
     const response = await axiosInstance.put(
       `${API_UPDATE_CANDIDATE}/${id}`,
-      requestBody
+      requestBody,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
     return response.data;
   } catch (err) {
-    console.log(err);
     throw err;
   }
 };

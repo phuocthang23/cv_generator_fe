@@ -20,7 +20,7 @@ export const skillService = () => {
       }
     };
     fetchData();
-  }, [data]);
+  }, []);
 
   return data;
 };
