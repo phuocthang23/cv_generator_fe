@@ -6,7 +6,9 @@ import { useState } from "react";
 import {
   createProjectCandidate,
   deleteProject,
+  updateProjectCandidate,
 } from "../../apis/candidates/project";
+import { toast } from "react-toastify";
 
 export const projectCandidateService = () => {
   const [name, setName] = useState("");
@@ -22,9 +24,21 @@ export const projectCandidateService = () => {
 
   const handleSave = async (body: any) => {
     try {
-      await createProjectCandidate(body);
+      const response = await createProjectCandidate(body);
       const res: any = await getOneCandidateApi({ id });
       dispatch(candidateDetailAction(res));
+      return response;
+    } catch (error) {
+      return;
+    }
+  };
+
+  const handleUpdate = async (idbutton: any, body: any) => {
+    try {
+      const response = await updateProjectCandidate(idbutton, body);
+      const res: any = await getOneCandidateApi({ id });
+      dispatch(candidateDetailAction(res));
+      return response;
     } catch (error) {
       return;
     }
@@ -33,6 +47,7 @@ export const projectCandidateService = () => {
   const handleDeleteProject = async (idDelete: any) => {
     try {
       await deleteProject(idDelete);
+      toast.success("đã xóa bỏ phần giáo dục");
       const res: any = await getOneCandidateApi({ id });
       dispatch(candidateDetailAction(res));
     } catch (error) {
@@ -53,5 +68,6 @@ export const projectCandidateService = () => {
     setEnd_at,
     setInfo,
     handleDeleteProject,
+    handleUpdate,
   };
 };

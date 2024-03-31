@@ -1,11 +1,10 @@
-import { Button, Modal } from "flowbite-react";
+import { Button, Modal, Spinner } from "flowbite-react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { generateToken } from "../../utils/generateToken.utils";
 import { candidatesDetail } from "../../service/candidateService/candidateDetail.service";
 import { updateCandidateService } from "../../service/candidateService/updateCandidate.service";
 import { formatDay } from "../../utils/convertDay";
-
 const PersonalInfo = ({
   show,
   onClose,
@@ -25,6 +24,8 @@ const PersonalInfo = ({
   const [address, setAddress] = useState(dataCandidate?.address);
   const [avatar, setAvatar] = useState<any>(null);
   const [link_fb, setLink_fb] = useState(dataCandidate?.link_fb);
+
+  const [status, setStats] = useState(false);
 
   useEffect(() => {
     setName(dataCandidate?.name);
@@ -63,10 +64,18 @@ const PersonalInfo = ({
   };
 
   const handleClickSave = async () => {
-    const formData = new FormData();
-    for (let i of Object.entries(body)) formData.append(i[0], i[1]);
-    await handleSave(candidateId, formData);
-    onClose();
+    setStats(true);
+    try {
+      const formData = new FormData();
+      for (let i of Object.entries(body)) formData.append(i[0], i[1]);
+      const response = await handleSave(candidateId, formData);
+      console.log(response);
+      onClose();
+    } catch (error) {
+      return;
+    } finally {
+      setStats(false);
+    }
   };
 
   return (
@@ -75,6 +84,7 @@ const PersonalInfo = ({
         <p className="text-center text-2xl p-4"> Cập nhập thông tin cá nhân </p>
         <Modal.Body>
           <div>
+            {status && <Spinner aria-label="Default status example" />}
             <img
               src={dataCandidate?.avatar}
               alt=""

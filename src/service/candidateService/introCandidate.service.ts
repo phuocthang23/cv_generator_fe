@@ -3,9 +3,11 @@ import {
   createIntroCandidate,
   deleteIntro,
   getOneCandidateApi,
+  updateIntroCandidate,
 } from "../../apis/candidates";
 import { generateToken } from "../../utils/generateToken.utils";
 import { candidateDetailAction } from "../../store/action/candidate.action";
+import { toast } from "react-toastify";
 
 export const introCandidateService = () => {
   const dispatch = useDispatch();
@@ -15,15 +17,27 @@ export const introCandidateService = () => {
 
   const handleSave = async (body: any) => {
     try {
-      await createIntroCandidate(body);
+      const response = await createIntroCandidate(body);
       const res: any = await getOneCandidateApi({ id });
       dispatch(candidateDetailAction(res));
+      return response;
     } catch (error) {
       return;
     }
   };
 
-  return { handleSave };
+  const handleUpdate = async (idbutton: any, body: any) => {
+    try {
+      const response = await updateIntroCandidate(idbutton, body);
+      const res: any = await getOneCandidateApi({ id });
+      dispatch(candidateDetailAction(res));
+      return response;
+    } catch (error) {
+      return;
+    }
+  };
+
+  return { handleSave, handleUpdate };
 };
 
 export const deleteIntroCandidateService = () => {
@@ -33,8 +47,10 @@ export const deleteIntroCandidateService = () => {
   const handleDelete = async (idDelete: any) => {
     try {
       await deleteIntro(idDelete);
+      toast.success("đã loại bỏ phần giới thiệu bản thân");
       const res: any = await getOneCandidateApi({ id });
       dispatch(candidateDetailAction(res));
+      return;
     } catch (error) {
       return;
     }

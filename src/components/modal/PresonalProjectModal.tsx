@@ -1,14 +1,21 @@
 import { Button, Modal } from "flowbite-react";
 import { projectCandidateService } from "../../service/candidateService/candidateProject.service";
 import { formatDay } from "../../utils/convertDay";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
+interface IntroduceModalProps {
+  show: boolean;
+  onClose: () => void;
+  isUpdateMode: boolean;
+  initialValue: any;
+}
 const PresonalProjectModal = ({
   show,
   onClose,
-}: {
-  show: boolean;
-  onClose: () => void;
-}) => {
+  isUpdateMode,
+  initialValue,
+}: IntroduceModalProps) => {
   const {
     handleSave,
     name,
@@ -21,31 +28,63 @@ const PresonalProjectModal = ({
     setStarted_at,
     setEnd_at,
     setInfo,
+    handleUpdate,
   } = projectCandidateService();
 
+  useEffect(() => {
+    setName(isUpdateMode ? initialValue.name : "");
+    setLink(isUpdateMode ? initialValue.link : "");
+    setStarted_at(isUpdateMode ? initialValue.started_at : "");
+    setEnd_at(isUpdateMode ? initialValue.end_at : "");
+    setInfo(isUpdateMode ? initialValue.info : "");
+  }, [show]);
+
   const onClickClose = () => {
-    setName("");
-    setLink("");
-    setStarted_at("");
-    setEnd_at("");
-    setInfo("");
+    setName(isUpdateMode ? initialValue.name : "");
+    setLink(isUpdateMode ? initialValue.link : "");
+    setStarted_at(isUpdateMode ? initialValue.started_at : "");
+    setEnd_at(isUpdateMode ? initialValue.end_at : "");
+    setInfo(isUpdateMode ? initialValue.info : "");
     onClose();
   };
 
   const onClickSave = async () => {
-    await handleSave({
-      name,
-      link,
-      started_at: formatDay(started_at),
-      end_at: formatDay(end_at),
-      info,
-    });
-    setName("");
-    setLink("");
-    setStarted_at("");
-    setEnd_at("");
-    setInfo("");
-    onClose();
+    if (isUpdateMode) {
+      const res = await handleUpdate(initialValue.id, {
+        name,
+        link,
+        started_at,
+        end_at,
+        info,
+      });
+      if (res?.status === 200) {
+        toast.success("Đã cập nhật");
+      } else {
+        toast.error("Đã xảy ra lỗi không cập nhật  được");
+      }
+      onClose();
+    } else {
+      const res = await handleSave({
+        name,
+        link,
+        started_at: formatDay(started_at),
+        end_at: formatDay(started_at),
+        info,
+      });
+      if (res?.status === 201) {
+        toast.success("Tạo thành công");
+        setName("");
+        setLink("");
+        setStarted_at("");
+        setEnd_at("");
+        setInfo("");
+        onClose();
+      } else if (res?.status === 400) {
+        toast.warning("vui lòng điền đầy đủ thông tin");
+      } else {
+        toast.error("Đã xảy ra lỗi ko tạo được");
+      }
+    }
   };
 
   return (

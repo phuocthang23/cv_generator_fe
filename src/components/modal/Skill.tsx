@@ -1,27 +1,65 @@
 import { Button, Modal } from "flowbite-react";
-// import { TiDeleteOutline } from "react-icons/ti";
 import { skillService } from "../../service/skill/skill.service";
 import { skillCandidateService } from "../../service/candidateService/candidateSkill.service";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
-const Skill = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
+interface IntroduceModalProps {
+  show: boolean;
+  onClose: () => void;
+  isUpdateMode: boolean;
+  initialValue: any;
+}
+
+const Skill = ({
+  show,
+  onClose,
+  isUpdateMode,
+  initialValue,
+}: IntroduceModalProps) => {
   const data = skillService();
-  const { handleSave, name, level, setName, setLevel } =
+  const { handleSave, name, level, setName, setLevel, handleUpdate } =
     skillCandidateService();
 
+  useEffect(() => {
+    setName(isUpdateMode ? initialValue.name : "");
+    setLevel(isUpdateMode ? initialValue.level_job_id : "");
+  }, [show]);
+
   const onClickClose = () => {
-    setName("");
-    setLevel("");
+    setName(isUpdateMode ? initialValue.name : "");
+    setLevel(isUpdateMode ? initialValue.level_job_id : "");
     onClose();
   };
 
   const onClickSave = async () => {
-    await handleSave({
-      name,
-      level_job_id: level,
-    });
-    setName("");
-    setLevel("");
-    onClose();
+    if (isUpdateMode) {
+      const res = await handleUpdate(initialValue.id, {
+        name,
+        level_job_id: level,
+      });
+      if (res?.status === 200) {
+        toast.success("Đã cập nhật");
+      } else {
+        toast.error("Đã xảy ra lỗi không cập nhật  được");
+      }
+      onClose();
+    } else {
+      const res = await handleSave({
+        name,
+        level_job_id: level,
+      });
+      if (res?.status === 201) {
+        toast.success("Tạo thành công");
+        setName("");
+        setLevel("");
+        onClose();
+      } else if (res?.status === 400) {
+        toast.warning("vui lòng điền đầy đủ thông tin");
+      } else {
+        toast.error("Đã xảy ra lỗi ko tạo được");
+      }
+    }
   };
 
   return (
@@ -53,8 +91,8 @@ const Skill = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
                 value={level}
                 onChange={(e) => setLevel(e.target.value)}
               >
-                <option value="1" className="p-2">
-                  Thấp
+                <option value="" className="p-2">
+                  lựa chọn level
                 </option>
                 <option value="1" className="p-2">
                   Thấp
@@ -111,7 +149,7 @@ const Skill = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={onClickSave} color="failure">
-            Cập Nhật
+            {isUpdateMode ? "Cập nhật" : "Tạo"}
           </Button>
           <Button color="gray" onClick={onClickClose}>
             Hủy Bỏ

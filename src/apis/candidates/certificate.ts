@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import axiosInstance from "../base.api";
 import { API_CERTIFICATE_CANDIDATE } from "../patchApi";
 
@@ -10,8 +10,30 @@ export const createCertificateCandidate = async (
       `${API_CERTIFICATE_CANDIDATE}`,
       requestBody
     );
-    return response.data;
+    return response;
   } catch (err) {
+    if (axios.isAxiosError(err) && err.response) {
+      return err.response;
+    }
+    console.log(err);
+    throw err;
+  }
+};
+
+export const updateCertificateCandidate = async (
+  id: any,
+  requestBody: any
+): Promise<AxiosResponse<any, any>> => {
+  try {
+    const response = await axiosInstance.put(
+      `${API_CERTIFICATE_CANDIDATE}/${id}`,
+      requestBody
+    );
+    return response;
+  } catch (err) {
+    if (axios.isAxiosError(err) && err.response) {
+      return err.response;
+    }
     console.log(err);
     throw err;
   }

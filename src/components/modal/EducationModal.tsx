@@ -1,13 +1,20 @@
 import { Button, Modal } from "flowbite-react";
 import { eduCandidateService } from "../../service/candidateService/eduCandidate.service";
 import { formatDay } from "../../utils/convertDay";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+interface IntroduceModalProps {
+  show: boolean;
+  onClose: () => void;
+  isUpdateMode: boolean;
+  initialValue: any;
+}
 const EducationModal = ({
   show,
   onClose,
-}: {
-  show: boolean;
-  onClose: () => void;
-}) => {
+  isUpdateMode,
+  initialValue,
+}: IntroduceModalProps) => {
   const {
     handleSave,
     name,
@@ -20,31 +27,72 @@ const EducationModal = ({
     setStarted_at,
     setEnd_at,
     setInfo,
+    handleUpdate,
   } = eduCandidateService();
 
+  useEffect(() => {
+    setName(isUpdateMode ? initialValue.name : "");
+    setMajor(isUpdateMode ? initialValue.major : "");
+    setStarted_at(isUpdateMode ? initialValue.started_at : "");
+    setEnd_at(isUpdateMode ? initialValue.end_at : "");
+    setInfo(isUpdateMode ? initialValue.info : "");
+  }, [show]);
+
   const onClickClose = () => {
-    setName("");
-    setMajor("");
-    setStarted_at("");
-    setEnd_at("");
-    setInfo("");
-    onClose();
+    if (isUpdateMode) {
+      setName(initialValue.name);
+      setMajor(initialValue.major);
+      setStarted_at(initialValue.started_at);
+      setEnd_at(initialValue.end_at);
+      setInfo(initialValue.info);
+      onClose();
+    } else {
+      setName("");
+      setMajor("");
+      setStarted_at("");
+      setEnd_at("");
+      setInfo("");
+      onClose();
+    }
   };
 
   const onClickSave = async () => {
-    await handleSave({
-      name,
-      major,
-      started_at: formatDay(started_at),
-      end_at: formatDay(end_at),
-      info,
-    });
-    setName("");
-    setMajor("");
-    setStarted_at("");
-    setEnd_at("");
-    setInfo("");
-    onClose();
+    if (isUpdateMode) {
+      const res = await handleUpdate(initialValue.id, {
+        name,
+        major,
+        started_at,
+        end_at,
+        info,
+      });
+      if (res?.status === 200) {
+        toast.success("Đã cập nhật");
+      } else {
+        toast.error("Đã xảy ra lỗi không cập nhật  được");
+      }
+      onClose();
+    } else {
+      const res = await handleSave({
+        name,
+        major,
+        started_at: formatDay(started_at),
+        end_at: formatDay(end_at),
+        info,
+      });
+      if (res?.status === 201) {
+        toast.success("Tạo thành công");
+        setName("");
+        setMajor("");
+        setStarted_at("");
+        setEnd_at("");
+        setInfo("");
+        onClose();
+      } else if (res?.status === 400) {
+        toast.warning("vui lòng điền đầy đủ thông tin");
+      } else {
+        toast.error("Đã xảy ra lỗi ko tạo được");
+      }
+    }
   };
 
   return (
@@ -118,7 +166,7 @@ const EducationModal = ({
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={onClickSave} color="failure">
-            Cập Nhật
+            {isUpdateMode ? "Cập nhật" : "Tạo"}
           </Button>
           <Button color="gray" onClick={onClickClose}>
             Hủy Bỏ
