@@ -21,7 +21,7 @@ export const registerService = () => {
 
   const [messageError, setMessageError] = useState("");
 
-  const roleId = 3;
+  const roleId = 1;
   const navigate = useNavigate();
 
   const handleSubmit = async (e: any) => {
