@@ -2,9 +2,12 @@ import { CiLocationOn, CiSearch } from "react-icons/ci";
 import { ImTarget } from "react-icons/im";
 import { IoIosOptions } from "react-icons/io";
 import { searchJobs } from "../../service/jobService/jobSearch.service";
+import { generateToken } from "../../utils/generateToken.utils";
 
 const Filter = () => {
-  const { handleSearch, searchTerm, setSearchTerm } = searchJobs();
+  const { handleSearch, searchTerm, setSearchTerm, handleSearchCandidate } =
+    searchJobs();
+  const dataToken: any = generateToken();
 
   return (
     <div className="mx-auto px-[60px] font-inter w-[1440px] mt-5">
@@ -20,7 +23,7 @@ const Filter = () => {
           <CiSearch className="text-main-0 absolute left-3 top-1/2 transform -translate-y-1/2" />
         </div>
 
-        <div className=" w-[2px] bg-[#E4E5E8] mx-3"></div>
+        <div className=" w-[2px] bg-[#E4E5E8] mx-2"></div>
         <div className="relative">
           <input
             type="text"
@@ -41,9 +44,13 @@ const Filter = () => {
           </div>
           <button
             className="px-6 bg-main-0 text-white whitespace-nowrap"
-            onClick={() => handleSearch(searchTerm)}
+            onClick={
+              dataToken?.role === "company"
+                ? () => handleSearchCandidate(searchTerm)
+                : () => handleSearch(searchTerm)
+            }
           >
-            Find Job
+            {dataToken?.role === "company" ? "Find Candidate" : "Find Job"}
           </button>
         </div>
       </div>

@@ -15,7 +15,6 @@ const CandidateList = () => {
   const navigate = useNavigate();
 
   const { data, total } = getCandidate({ page, limit });
-  console.log(data);
   return (
     <div>
       <BreadCrumb />
@@ -36,7 +35,7 @@ const CandidateList = () => {
                         item?.avatar === undefined ? basketball : item?.avatar
                       }
                       alt=""
-                      className="w-10 h-10"
+                      className="w-12 h-12"
                     />
                   </div>
                   <div>
@@ -63,17 +62,21 @@ const CandidateList = () => {
                     <p className="text-sm text-[#767F8C] inline-block font-normal">
                       Technical in use:
                     </p>
-                    {item.skillCandidates &&
-                      item.skillCandidates.map((item: any, index: number) => {
-                        return (
-                          <span
-                            key={index}
-                            className="text-sm text-[#0BA02C] bg-[#E7F6EA] font-semibold  px-3 py-[5px] rounded"
-                          >
-                            {item.name}
-                          </span>
-                        );
-                      })}
+                    {item.skillCandidates && (
+                      <div>
+                        {item.skillCandidates
+                          .slice(0, 2)
+                          .map((skill: any, index: number) => (
+                            <span
+                              key={index}
+                              className="text-sm text-[#0BA02C] bg-[#E7F6EA] font-semibold px-3 py-[5px] mr-2 rounded"
+                            >
+                              {skill.name}
+                            </span>
+                          ))}
+                        {item.skillCandidates.length > 2 && <span>...</span>}
+                      </div>
+                    )}
                   </div>
                   <div className="flex gap-2 mb-3 items-center">
                     <p className="text-sm text-[#767F8C] inline-block font-normal">

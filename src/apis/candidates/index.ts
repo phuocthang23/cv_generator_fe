@@ -9,6 +9,7 @@ import {
 interface CandidateParams {
   page?: number;
   limit?: number;
+  title?: string;
 }
 
 export const getCandidatesApi = async (
