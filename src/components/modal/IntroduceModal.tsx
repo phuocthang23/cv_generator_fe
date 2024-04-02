@@ -59,12 +59,12 @@ const IntroduceModal = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className="w-full"
-              placeholder="Hint text"
+              placeholder="Tip: Tóm tắt kinh nghiệm chuyên môn"
             />
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={onClickSave}>
+          <Button color="failure" onClick={onClickSave}>
             {isUpdateMode ? "Cập nhật" : "Tạo"}
           </Button>
           <Button color="gray" onClick={onClose}>

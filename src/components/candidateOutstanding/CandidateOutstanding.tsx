@@ -41,7 +41,7 @@ const CandidateOutstanding = () => {
               <div className="flex items-center">
                 <div className="bg-[#EDEFF5]  mr-4">
                   <img
-                    src={item.avatar === undefined ? basketball : item.avatar}
+                    src={item?.avatar === undefined ? basketball : item?.avatar}
                     alt=""
                     className="w-14 h-14"
                   />

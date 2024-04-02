@@ -5,6 +5,7 @@ import { API_JOB } from "../patchApi";
 interface JobParams {
   page?: number;
   limit?: number;
+  title?: string;
 }
 export const getJobApi = async (
   params: JobParams

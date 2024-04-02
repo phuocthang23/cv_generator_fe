@@ -12,13 +12,6 @@ import cv from "../../../../assets/cv.png";
 
 import "./index.scss";
 import { useState } from "react";
-// import IntroduceModal from "../../../../components/modal/IntroduceModal";
-// import EducationModal from "../../../../components/modal/EducationModal";
-// import ExpModal from "../../../../components/modal/ExpModal";
-// import PresonalProjectModal from "../../../../components/modal/PresonalProjectModal";
-// import Certificate from "../../../../components/modal/Certificate";
-// import PersonalInfo from "../../../../components/modal/personalInfo";
-// import Skill from "../../../../components/modal/Skill";
 import { generateToken } from "../../../../utils/generateToken.utils";
 import { candidatesDetail } from "../../../../service/candidateService/candidateDetail.service";
 import { formatDay } from "../../../../utils/convertDay";
@@ -256,26 +249,23 @@ const ProfileCV = () => {
                   key={index}
                   className="list-disc list-inside pl-[30px] flex justify-between"
                 >
-                  <li className="text-[#767F8C]">
-                    {item.description}
-                    {/* update button */}
-                    <div>
-                      <button
-                        className="mr-5"
-                        onClick={() =>
-                          handleIntroUpdate(item.id, item.description)
-                        }
-                      >
-                        <IoCreateOutline />
-                      </button>
-                      <button
-                        className="text-red-700"
-                        onClick={() => handleDelete(item.id)}
-                      >
-                        <RiDeleteBin6Line />
-                      </button>
-                    </div>
-                  </li>
+                  <li className="text-[#767F8C]">{item.description}</li>
+                  <div>
+                    <button
+                      className="mr-5"
+                      onClick={() =>
+                        handleIntroUpdate(item.id, item.description)
+                      }
+                    >
+                      <IoCreateOutline />
+                    </button>
+                    <button
+                      className="text-red-700"
+                      onClick={() => handleDelete(item.id)}
+                    >
+                      <RiDeleteBin6Line />
+                    </button>
+                  </div>
                 </ul>
               ))
             )}
@@ -307,14 +297,24 @@ const ProfileCV = () => {
               </p>
             ) : (
               educationCandidates?.map((item: any, index: any) => (
-                <ul
+                <div
                   key={index}
-                  className="list-disc list-inside pl-[30px] flex justify-between"
+                  className=" pl-[20px] flex justify-between items-center "
                 >
-                  <li className="text-[#767F8C]">
-                    {item.name} - {item.major} - ({formatDay(item.started_at)} -{" "}
-                    {formatDay(item.end_at)}) - {item.info}
-                  </li>
+                  <div
+                    className={`text-[#767F8C]  border-blue-gray-800 py-2 w-[80%] break-words ${
+                      index === educationCandidates.length - 1
+                        ? "last:border-none"
+                        : "border-b-2"
+                    }`}
+                  >
+                    <p className="text-black font-bold font-inter text-xl ">
+                      {item.name}
+                    </p>{" "}
+                    <p>{item.major}</p>
+                    {formatDay(item.started_at)} - {formatDay(item.end_at)}
+                    <p className="  text-wrap">{item.info}</p>
+                  </div>
 
                   <div>
                     <button
@@ -339,7 +339,7 @@ const ProfileCV = () => {
                       <RiDeleteBin6Line />
                     </button>
                   </div>
-                </ul>
+                </div>
               ))
             )}
           </div>
@@ -369,15 +369,20 @@ const ProfileCV = () => {
               </p>
             ) : (
               experienceCandidates?.map((item: any, index: any) => (
-                <ul
-                  key={index}
-                  className="list-disc list-inside pl-[30px] flex justify-between"
-                >
-                  <li className="text-[#767F8C]">
-                    {item.company} - {item.position} - (
-                    {formatDay(item.started_at)} - {formatDay(item.end_at)}) -{" "}
-                    {item.info}
-                  </li>
+                <div key={index} className=" pl-[20px] flex justify-between">
+                  <div
+                    className={`text-[#767F8C]  border-blue-gray-800 py-2 w-[80%] break-words ${
+                      index === experienceCandidates.length - 1
+                        ? "last:border-none"
+                        : "border-b-2"
+                    }`}
+                  >
+                    <p className="text-black font-bold font-inter text-xl ">
+                      {item.position}
+                    </p>{" "}
+                    {item.company} - ({formatDay(item.started_at)} -{" "}
+                    {formatDay(item.end_at)})<p>{item.info}</p>
+                  </div>
                   <div>
                     <button
                       className="mr-5"
@@ -401,7 +406,7 @@ const ProfileCV = () => {
                       <RiDeleteBin6Line />
                     </button>
                   </div>
-                </ul>
+                </div>
               ))
             )}
           </div>
@@ -497,11 +502,25 @@ const ProfileCV = () => {
               </p>
             ) : (
               projectCandidates?.map((item: any, index: number) => (
-                <p key={index} className="text-[#767F8C] flex justify-between">
-                  <span>
-                    {item.name} - {item.link}- {formatDay(item.started_at)} -{" "}
-                    {formatDay(item.end_at)} - {item.info}
-                  </span>
+                <div
+                  key={index}
+                  className="text-[#767F8C] flex justify-between"
+                >
+                  <div
+                    className={`text-[#767F8C]  border-blue-gray-800 py-2 w-[80%] break-words ${
+                      index === experienceCandidates.length - 1
+                        ? "last:border-none"
+                        : "border-b-2"
+                    }`}
+                  >
+                    <div className="text-black font-bold font-inter text-lg">
+                      {item.name} - ({formatDay(item.started_at)} -{" "}
+                      {formatDay(item.end_at)})
+                    </div>
+                    <div>thông tin :{item.info}</div>
+                    <div>Link: {item.link}</div>
+                  </div>
+
                   <span className="text-red-700 text-xl">
                     <button
                       className="mr-5"
@@ -522,7 +541,7 @@ const ProfileCV = () => {
                       <RiDeleteBin6Line />
                     </button>
                   </span>
-                </p>
+                </div>
               ))
             )}
           </div>
@@ -549,15 +568,20 @@ const ProfileCV = () => {
               </p>
             ) : (
               certificateCandidates?.map((item: any, index: any) => (
-                <ul
-                  key={index}
-                  className="list-disc list-inside pl-[30px] flex justify-between"
-                >
-                  <li className="text-[#767F8C]">
-                    {item.name} -{item.organization} -
+                <div key={index} className=" pl-[20px] flex justify-between">
+                  <div
+                    className={`text-[#767F8C]  border-blue-gray-800 py-2 w-[80%] break-words ${
+                      index === experienceCandidates.length - 1
+                        ? "last:border-none"
+                        : "border-b-2"
+                    }`}
+                  >
+                    <div className="text-black font-bold font-inter text-lg">
+                      {item.name} -{item.organization}
+                    </div>
                     {formatDay(item.started_at)} - {formatDay(item.end_at)}-{" "}
-                    {item.info}
-                  </li>
+                    <div>{item.info}</div>
+                  </div>
                   <div>
                     <button
                       className="mr-5"
@@ -581,7 +605,7 @@ const ProfileCV = () => {
                       <RiDeleteBin6Line />
                     </button>
                   </div>
-                </ul>
+                </div>
               ))
             )}
           </div>

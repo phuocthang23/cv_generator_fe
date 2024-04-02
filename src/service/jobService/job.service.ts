@@ -12,13 +12,13 @@ export const getJob = (data: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res: any = await getJobApi(data);
+        const res: any = await getJobApi({ ...data });
         dispatch(jobAction(res));
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, [data.page, data.title]);
+  }, [data.page]);
   return dataJob;
 };

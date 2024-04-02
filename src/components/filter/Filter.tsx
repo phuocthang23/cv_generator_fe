@@ -1,23 +1,20 @@
 import { CiLocationOn, CiSearch } from "react-icons/ci";
 import { ImTarget } from "react-icons/im";
 import { IoIosOptions } from "react-icons/io";
-import { getJob } from "../../service/jobService/job.service";
-import { useState } from "react";
+import { searchJobs } from "../../service/jobService/jobSearch.service";
 
 const Filter = () => {
-  const [textSearch, setTextSearch] = useState("");
-
-  getJob({ title: textSearch });
+  const { handleSearch, searchTerm, setSearchTerm } = searchJobs();
 
   return (
-    <div className="mx-auto px-[60px] font-inter w-[1440px] font-inter mt-5">
+    <div className="mx-auto px-[60px] font-inter w-[1440px] mt-5">
       <div className=" border border-[#E4E5E8] border-2 rounded-lg flex justify-evenly min-h-[72px] px-3">
         <div className="relative">
           <input
             type="text"
-            value={textSearch}
-            onChange={(e) => setTextSearch(e.target.value)}
-            className="min-w-[576px] my-3 pl-10"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="min-w-[576px] my-3 pl-10 border-none focus:ring-0 focus:border-none"
             placeholder="Search by: Job tittle, Position, Keyword..."
           />
           <CiSearch className="text-main-0 absolute left-3 top-1/2 transform -translate-y-1/2" />
@@ -27,7 +24,9 @@ const Filter = () => {
         <div className="relative">
           <input
             type="text"
-            className="min-w-[424px] my-3 pl-10"
+            // value={searchTerm}
+            // onChange={(e) => setSearchTerm(e.target.value)}
+            className="min-w-[424px] my-3 pl-10 border-none focus:ring-0 focus:border-none"
             placeholder="Search by: Job tittle, Position, Keyword..."
           />
           <CiLocationOn className="text-main-0 absolute left-3 top-1/2 transform -translate-y-1/2" />
@@ -42,7 +41,7 @@ const Filter = () => {
           </div>
           <button
             className="px-6 bg-main-0 text-white whitespace-nowrap"
-            // onClick={handleSearch}
+            onClick={() => handleSearch(searchTerm)}
           >
             Find Job
           </button>

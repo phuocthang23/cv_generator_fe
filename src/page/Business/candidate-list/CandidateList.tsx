@@ -15,6 +15,7 @@ const CandidateList = () => {
   const navigate = useNavigate();
 
   const { data, total } = getCandidate({ page, limit });
+  console.log(data);
   return (
     <div>
       <BreadCrumb />
@@ -31,9 +32,11 @@ const CandidateList = () => {
                 <div className="flex items-center">
                   <div className="bg-[#EDEFF5]  mr-4">
                     <img
-                      src={item.logo === undefined ? basketball : item.logo}
+                      src={
+                        item?.avatar === undefined ? basketball : item?.avatar
+                      }
                       alt=""
-                      className="w-14 h-14"
+                      className="w-10 h-10"
                     />
                   </div>
                   <div>
