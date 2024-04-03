@@ -3,6 +3,7 @@ import Investment from "../../../assets/Investment data-rafiki 1.png";
 import { resetPassword } from "../../../service/auth/ResetPassword.service";
 import { Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
+import { Link } from "react-router-dom";
 const ForgetPassword = () => {
   const { email, setEmail, handleSubmit, emailError, message } =
     resetPassword();
@@ -57,12 +58,11 @@ const ForgetPassword = () => {
               Đặt lại mật khẩu
             </button>
 
-            <button
-              type="submit"
-              className="bg-main-0 w-full mt-[37px] py-[13px] font-cabin font-medium text-white text-center text-base rounded-[5px]"
-            >
-              Đăng nhập
-            </button>
+            <Link to="/auth">
+              <p className="text-base font-cabin text-main-0 font-medium mt-6 cursor-pointer hover:text-[#0A033C]">
+                ◀ Quay lại đăng nhập
+              </p>
+            </Link>
           </form>
         </div>
         {/* 2 */}
