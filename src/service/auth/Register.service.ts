@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthLogic } from "../../utils/authLogic";
 import { RegisterApi } from "../../apis/auth/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export const registerService = () => {
   const {
@@ -19,36 +20,50 @@ export const registerService = () => {
 
   const [messageError, setMessageError] = useState("");
   const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
   const [description, setDescription] = useState("");
   const [size, setSize] = useState("");
+  const [sizeError, setSizeError] = useState("");
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-
-    if (
-      email === "" ||
-      password === "" ||
-      confirmPassword === "" ||
-      name === "" ||
-      description === "" ||
-      size === ""
-    ) {
-      setMessageError("điền đầy đủ các thông tin không được trống");
+  useEffect(() => {
+    const sizeNumber = Number(size);
+    if (name.length < 3) {
+      setNameError("Tên phải có nhất 3 ký tự");
+    } else {
+      setNameError("");
     }
 
+    if (isNaN(sizeNumber)) {
+      setSizeError("quy mô cty phải là một số");
+    } else {
+      setSizeError("");
+    }
+  }, [name, size]);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
     try {
-      await RegisterApi({
+      const res: any = await RegisterApi({
         email,
         password,
         name,
         description,
         size,
       });
-      navigate("/auth");
-    } catch (error) {
-      setEmailError("Email đã được tồn tại");
+      if (res?.success === true) {
+        toast.success("Bạn đăng thành công !", {
+          autoClose: 2000,
+          onClose: () => navigate("/auth"),
+        });
+      }
+    } catch (error: any) {
+      if (error?.response?.status === 409) {
+        setEmailError("Tên email đã được sử dụng");
+        return;
+      }
+      setMessageError("lỗi không tạo được account");
     }
   };
 
@@ -71,5 +86,7 @@ export const registerService = () => {
     setDescription,
     size,
     setSize,
+    nameError,
+    sizeError,
   };
 };

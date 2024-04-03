@@ -4,6 +4,8 @@ import Logo from "../../assets/logo-rikkei2 2.png";
 import { registerService } from "../../service/auth/Register.service";
 import { Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -25,6 +27,8 @@ const Register = () => {
     passwordError,
     confirmPasswordError,
     messageError,
+    nameError,
+    sizeError,
     handleSubmit,
   } = registerService();
 
@@ -48,13 +52,17 @@ const Register = () => {
                 type="text"
                 placeholder="abcd"
                 value={name}
+                required
                 onChange={(e) => setName(e.target.value)}
                 className={`h-16 rounded-[5px] border ${
-                  emailError && email !== ""
+                  nameError && name !== ""
                     ? "border-red-500"
                     : "border-[#DEDDE4]"
                 }`}
               />
+              {nameError && name !== "" && (
+                <p className="text-red-500">{nameError}</p>
+              )}
             </div>
             <div id="size" className="flex flex-col mt-4">
               <label htmlFor="" className="mb-2 mx-4">
@@ -65,12 +73,16 @@ const Register = () => {
                 placeholder="abcd"
                 value={size}
                 onChange={(e) => setSize(e.target.value)}
+                required
                 className={`h-16 rounded-[5px] border ${
-                  emailError && email !== ""
+                  sizeError && size !== ""
                     ? "border-red-500"
                     : "border-[#DEDDE4]"
                 }`}
               />
+              {sizeError && size !== "" && (
+                <p className="text-red-500">{sizeError}</p>
+              )}
             </div>
             <div id="email" className="flex flex-col mt-4">
               <label htmlFor="" className="mb-2 mx-4">
@@ -80,6 +92,7 @@ const Register = () => {
                 type="email"
                 placeholder="abc@gmail.com"
                 value={email}
+                required
                 onChange={(e) => setEmail(e.target.value)}
                 className={`h-16 rounded-[5px] border ${
                   emailError && email !== ""
@@ -99,6 +112,7 @@ const Register = () => {
                 type="text"
                 placeholder="abcd"
                 value={description}
+                required
                 onChange={(e) => setDescription(e.target.value)}
                 className={`h-16 rounded-[5px] border ${
                   emailError && email !== ""
@@ -115,6 +129,7 @@ const Register = () => {
                 type="password"
                 placeholder="********"
                 value={password}
+                required
                 onChange={(e) => setPassword(e.target.value)}
                 className={`h-16 rounded-[5px] border ${
                   passwordError && password !== ""
@@ -133,6 +148,7 @@ const Register = () => {
               <input
                 type="password"
                 placeholder="********"
+                required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className={`h-16 rounded-[5px] border ${
@@ -181,6 +197,7 @@ const Register = () => {
           <img src={Investment} alt="" />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthLogic } from "../../utils/authLogic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RegisterCandidateApi } from "../../apis/auth/auth";
 import { formatDay } from "../../utils/convertDay";
 
@@ -25,6 +25,7 @@ export const registerCandidateService = () => {
   const [address, setAddress] = useState("");
   const [gender, setGender] = useState<any>(0);
   const [dateTime, setDateTime] = useState("");
+  const [nameErr, setNameErr] = useState("");
 
   const handleChange = (event: any) => {
     setGender(event.target.value);
@@ -34,6 +35,14 @@ export const registerCandidateService = () => {
 
   const dob = formatDay(dateTime);
   const name = userName;
+
+  useEffect(() => {
+    if (userName.length < 3 || userName.length > 50) {
+      setNameErr("Tên đăng nhập phải có 3 đúng 50 ký tự");
+    } else {
+      setNameErr("");
+    }
+  }, [userName]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -60,8 +69,12 @@ export const registerCandidateService = () => {
         dob,
       });
       navigate("/auth/login-candidate");
-    } catch (error) {
-      setEmailError("Email đã được tồn tại");
+    } catch (error: any) {
+      if (error?.response?.status === 409) {
+        setEmailError("Tên email đã được sử dụng");
+        return;
+      }
+      setMessageError("lỗi không tạo được account");
     }
   };
 
@@ -94,6 +107,7 @@ export const registerCandidateService = () => {
     setAddress,
     setGender,
     setDateTime,
+    nameErr,
     handlePhoneChange,
   };
 };

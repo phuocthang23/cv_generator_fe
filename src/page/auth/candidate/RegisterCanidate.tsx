@@ -24,6 +24,7 @@ const RegisterCandidate = () => {
     address,
     gender,
     dateTime,
+    nameErr,
     handleChange,
     setPhone,
     setAddress,
@@ -51,13 +52,17 @@ const RegisterCandidate = () => {
                 type="text"
                 placeholder="abcd"
                 value={userName}
+                required
                 onChange={(e) => setUserName(e.target.value)}
                 className={`h-16 rounded-[5px] border ${
-                  emailError && email !== ""
+                  nameErr && userName !== ""
                     ? "border-red-500"
                     : "border-[#DEDDE4]"
                 }`}
               />
+              {nameErr && userName !== "" && (
+                <p className="text-red-500">{nameErr}</p>
+              )}
             </div>
             <div id="email" className="flex flex-col mt-9">
               <label htmlFor="" className="mb-4">
@@ -67,6 +72,7 @@ const RegisterCandidate = () => {
                 type="email"
                 placeholder="abc@gmail.com"
                 value={email}
+                required
                 onChange={(e) => setEmail(e.target.value)}
                 className={`h-16 rounded-[5px] border ${
                   emailError && email !== ""
@@ -86,6 +92,7 @@ const RegisterCandidate = () => {
                 type="password"
                 placeholder="********"
                 value={password}
+                required
                 onChange={(e) => setPassword(e.target.value)}
                 className={`h-16 rounded-[5px] border ${
                   passwordError && password !== ""
@@ -105,6 +112,7 @@ const RegisterCandidate = () => {
                 type="password"
                 placeholder="********"
                 value={confirmPassword}
+                required
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className={`h-16 rounded-[5px] border ${
                   confirmPasswordError && confirmPassword !== ""
@@ -161,6 +169,7 @@ const RegisterCandidate = () => {
               <input
                 type="date"
                 value={dateTime}
+                required
                 onChange={(e) => setDateTime(e.target.value)}
                 className={`h-16 rounded-[5px] border ${
                   emailError && email !== ""
@@ -177,12 +186,9 @@ const RegisterCandidate = () => {
                 type="text"
                 placeholder=""
                 value={address}
+                required
                 onChange={(e) => setAddress(e.target.value)}
-                className={`h-16 rounded-[5px] border ${
-                  emailError && email !== ""
-                    ? "border-red-500"
-                    : "border-[#DEDDE4]"
-                }`}
+                className={`h-16 rounded-[5px] border border-[#DEDDE4]`}
               />
               {/* {emailError && email !== "" && (
                 <p className="text-red-500">{emailError}</p>
@@ -196,12 +202,9 @@ const RegisterCandidate = () => {
                 type="tel"
                 placeholder="090 123 4567"
                 value={phone}
+                required
                 onChange={handlePhoneChange}
-                className={`h-16 rounded-[5px] border ${
-                  passwordError && password !== ""
-                    ? "border-red-500"
-                    : "border-[#DEDDE4]"
-                } px-4`}
+                className={`h-16 rounded-[5px] border border-[#DEDDE4] `}
               />
               {/* {passwordError && password !== "" && (
                 <p className="text-red-500">{passwordError}</p>
