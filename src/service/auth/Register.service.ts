@@ -13,15 +13,15 @@ export const registerService = () => {
     setPassword,
     emailError,
     setEmailError,
-    userName,
-    setUserName,
     passwordError,
     confirmPasswordError,
   } = useAuthLogic(true);
 
   const [messageError, setMessageError] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [size, setSize] = useState("");
 
-  const roleId = 1;
   const navigate = useNavigate();
 
   const handleSubmit = async (e: any) => {
@@ -31,16 +31,20 @@ export const registerService = () => {
       email === "" ||
       password === "" ||
       confirmPassword === "" ||
-      userName === ""
+      name === "" ||
+      description === "" ||
+      size === ""
     ) {
       setMessageError("điền đầy đủ các thông tin không được trống");
     }
+
     try {
       await RegisterApi({
         email,
         password,
-        roleId,
-        userName,
+        name,
+        description,
+        size,
       });
       navigate("/auth");
     } catch (error) {
@@ -57,11 +61,15 @@ export const registerService = () => {
     setPassword,
     emailError,
     setEmailError,
-    userName,
-    setUserName,
     passwordError,
     confirmPasswordError,
     messageError,
     handleSubmit,
+    name,
+    setName,
+    description,
+    setDescription,
+    size,
+    setSize,
   };
 };

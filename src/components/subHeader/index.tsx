@@ -61,7 +61,7 @@ const SubHeader = () => {
         <div className=" grid grid-cols-3 gap-3 items-center min-h-[48px]">
           {hasToken ? (
             <>
-              <div className="text-[#BC2228] text-[25px] ml-[-10px]">
+              <div className="text-[#BC2228] text-[25px] mx-auto px-0">
                 <IoMdNotifications />
               </div>
 
@@ -71,7 +71,7 @@ const SubHeader = () => {
                     img={token.avatar}
                     status="online"
                     rounded
-                    className="mr-2 ml-[-15px]"
+                    className=" mx-auto px-0"
                   />
                 }
                 arrowIcon={false}
@@ -87,8 +87,8 @@ const SubHeader = () => {
                 </Dropdown.Item>
               </Dropdown>
 
-              <p className="">
-                {token?.role === "candidates" ? token?.name : token?.userName}
+              <p className="px-0">
+                {token?.role === "candidates" ? token?.name : token?.name}
               </p>
             </>
           ) : (

@@ -4,10 +4,11 @@ export interface LoginRequest {
 }
 
 export interface RegisterRequest {
-  userName: string;
+  name: string;
   email: string;
   password: string;
-  roleId: number;
+  description: string;
+  size: string;
 }
 
 export interface RegisterCandidateRequest {

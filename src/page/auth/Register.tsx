@@ -16,8 +16,12 @@ const Register = () => {
     setConfirmPassword,
     setPassword,
     emailError,
-    userName,
-    setUserName,
+    name,
+    setName,
+    description,
+    setDescription,
+    size,
+    setSize,
     passwordError,
     confirmPasswordError,
     messageError,
@@ -37,14 +41,14 @@ const Register = () => {
           </p>
           <form onSubmit={handleSubmit} className="mt-[50px]">
             <div id="name" className="flex flex-col">
-              <label htmlFor="" className="mb-4">
-                Họ tên
+              <label htmlFor="" className="mb-2 mx-4">
+                Tên công ty
               </label>
               <input
                 type="text"
                 placeholder="abcd"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className={`h-16 rounded-[5px] border ${
                   emailError && email !== ""
                     ? "border-red-500"
@@ -52,8 +56,24 @@ const Register = () => {
                 }`}
               />
             </div>
-            <div id="email" className="flex flex-col mt-9">
-              <label htmlFor="" className="mb-4">
+            <div id="size" className="flex flex-col mt-4">
+              <label htmlFor="" className="mb-2 mx-4">
+                Quy mô nhân sự
+              </label>
+              <input
+                type="text"
+                placeholder="abcd"
+                value={size}
+                onChange={(e) => setSize(e.target.value)}
+                className={`h-16 rounded-[5px] border ${
+                  emailError && email !== ""
+                    ? "border-red-500"
+                    : "border-[#DEDDE4]"
+                }`}
+              />
+            </div>
+            <div id="email" className="flex flex-col mt-4">
+              <label htmlFor="" className="mb-2 mx-4">
                 Email
               </label>
               <input
@@ -71,8 +91,24 @@ const Register = () => {
                 <p className="text-red-500">{emailError}</p>
               )}
             </div>
-            <div id="password" className="flex flex-col mt-9">
-              <label htmlFor="" className="mb-4">
+            <div id="description" className="flex flex-col mt-4">
+              <label htmlFor="" className="mb-2 mx-4">
+                Mô tả công ty
+              </label>
+              <input
+                type="text"
+                placeholder="abcd"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className={`h-16 rounded-[5px] border ${
+                  emailError && email !== ""
+                    ? "border-red-500"
+                    : "border-[#DEDDE4]"
+                }`}
+              />
+            </div>
+            <div id="password" className="flex flex-col mt-4">
+              <label htmlFor="" className="mb-2 mx-4">
                 Password
               </label>
               <input
@@ -90,8 +126,8 @@ const Register = () => {
                 <p className="text-red-500">{passwordError}</p>
               )}
             </div>
-            <div id="repassword" className="flex flex-col mt-9">
-              <label htmlFor="" className="mb-4">
+            <div id="repassword" className="flex flex-col mt-4">
+              <label htmlFor="" className="mb-2 mx-4">
                 Confirm password
               </label>
               <input
