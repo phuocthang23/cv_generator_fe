@@ -1,10 +1,11 @@
-import { Button, Modal, Spinner } from "flowbite-react";
+import { Button, Modal } from "flowbite-react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { generateToken } from "../../utils/generateToken.utils";
 import { candidatesDetail } from "../../service/candidateService/candidateDetail.service";
 import { updateCandidateService } from "../../service/candidateService/updateCandidate.service";
 import { formatDay } from "../../utils/convertDay";
+import Loading from "../loading";
 const PersonalInfo = ({
   show,
   onClose,
@@ -82,9 +83,9 @@ const PersonalInfo = ({
     <div>
       <Modal show={show} onClose={handleClose}>
         <p className="text-center text-2xl p-4"> Cập nhập thông tin cá nhân </p>
+        {status && <Loading />}
         <Modal.Body>
           <div>
-            {status && <Spinner aria-label="Default status example" />}
             <img
               src={dataCandidate?.avatar}
               alt=""
