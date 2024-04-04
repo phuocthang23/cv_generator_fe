@@ -12,16 +12,22 @@ import "./index.scss";
 import { Link, useParams } from "react-router-dom";
 import BreadCrumb from "../../../components/breadCrumb/BreadCrumb";
 import { candidatesDetail } from "../../../service/candidateService/candidateDetail.service";
+import { formatDay } from "./../../../utils/convertDay";
 const CandidateDetail = () => {
   const param = useParams();
   const dataCandidates = candidatesDetail(param);
+  console.log(dataCandidates.certificateCandidates);
   return (
     <div>
       <BreadCrumb />
       <div className="main max-w-[1320px] mx-auto ">
         <div className=" heading mx-auto mt-[35.5px] flex justify-between">
           <div className="flex items-center">
-            <img className="w-[96px] mr-6" src={logo} alt="" />
+            <img
+              className="w-[96px] mr-6"
+              src={dataCandidates.avatar ? dataCandidates.avatar : logo}
+              alt=""
+            />
             <div className="heading ">
               <p className="text-2xl">{dataCandidates.name}</p>
               {dataCandidates &&
@@ -55,21 +61,151 @@ const CandidateDetail = () => {
             <p className="text-it-black text-lg text-black ">
               <b>Mô tả bản thân</b>
             </p>
-            {dataCandidates?.introduceCandidates?.map(
-              (item: any, index: number) => {
-                return <span key={index}>{item.description}</span>;
-              }
+            {dataCandidates?.introduceCandidates && (
+              <ul className="ml-6">
+                {dataCandidates?.introduceCandidates?.map(
+                  (item: any, index: number) => {
+                    return <li key={index}>{item.description}</li>;
+                  }
+                )}
+              </ul>
             )}
             <div className="requirements">
-              <b className=" block text-black mt-4">Kinh nghiệm làm việc</b>
+              <b className=" block text-black mt-4 text-lg">Học vấn</b>
               <ul className="ml-6">
-                {dataCandidates?.experienceCandidates?.map(
+                {dataCandidates?.educationCandidates?.map(
                   (item: any, index: number) => {
-                    return <li key={index}>{item.position}</li>;
+                    return (
+                      <li key={index}>
+                        <div className="break-words w-[90%]">
+                          <div>
+                            <b className="text-black font-bold font-inter">
+                              Trường:
+                            </b>{" "}
+                            {item.name}
+                          </div>
+                          <div>
+                            ({formatDay(item.started_at)} -{" "}
+                            {formatDay(item.end_at)})
+                          </div>
+                          <div className=" font-inter ">
+                            <b className="text-black">Bằng cấp:</b> {item.major}
+                          </div>
+                          <div>{item.info}</div>
+                        </div>
+                      </li>
+                    );
                   }
                 )}
               </ul>
             </div>
+
+            <div className="requirements">
+              <b className=" block text-black mt-4 text-lg">
+                Kinh nghiệm làm việc
+              </b>
+              <ul className="ml-6">
+                {dataCandidates?.experienceCandidates?.map(
+                  (item: any, index: number) => {
+                    return (
+                      <li key={index}>
+                        <div className="break-words w-[90%]  font-inter ">
+                          <div className="text-black font-bold">
+                            <b>Công ty:</b> {item.company}
+                          </div>
+                          <div>
+                            ({formatDay(item.started_at)} -{" "}
+                            {formatDay(item.end_at)})
+                          </div>
+                          <div>
+                            <b className="text-black underline underline-offset-2">
+                              Vị trí:{" "}
+                            </b>{" "}
+                            {item.position}
+                          </div>
+                          <div>
+                            <b className="underline underline-offset-2">
+                              Mô tả:
+                            </b>
+                            <br />
+                            {item.info}
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  }
+                )}
+              </ul>
+            </div>
+
+            <div className="requirements">
+              <b className=" block text-black mt-4 text-lg">Dự án cá nhân</b>
+              <ul className="ml-6">
+                {dataCandidates?.projectCandidates?.map(
+                  (item: any, index: number) => {
+                    return (
+                      <li key={index}>
+                        <div className="break-words w-[90%]  font-inter ">
+                          <div className="text-black font-bold">
+                            <b>Dự án:</b> {item.name}
+                          </div>
+                          <div>
+                            ({formatDay(item.started_at)} -{" "}
+                            {formatDay(item.end_at)})
+                          </div>
+
+                          <div>
+                            <b className="underline underline-offset-2">
+                              Mô tả:
+                            </b>
+                            <br />
+                            {item.info}
+                          </div>
+                          <div>
+                            <b className="text-black underline underline-offset-2">
+                              Link:{" "}
+                            </b>{" "}
+                            {item.link}
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  }
+                )}
+              </ul>
+            </div>
+
+            <div className="requirements">
+              <b className=" block text-black mt-4 text-lg">Chứng chỉ</b>
+              <ul className="ml-6">
+                {dataCandidates?.certificateCandidates?.map(
+                  (item: any, index: number) => {
+                    return (
+                      <li key={index}>
+                        <div className="break-words w-[90%]  font-inter ">
+                          <div className="text-black font-bold">
+                            {item.name} - {item.organization}
+                          </div>
+                          <div>
+                            ({formatDay(item.started_at)} -{" "}
+                            {formatDay(item.end_at)})
+                          </div>
+
+                          <div>
+                            <b className="underline underline-offset-2">
+                              Mô tả:
+                            </b>
+                            <br />
+                            {item.info}
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  }
+                )}
+              </ul>
+            </div>
+
             <div className="desirable">
               <b className=" block text-black mt-4">Định hướng phát triển</b>
               <ul className="ml-6">
