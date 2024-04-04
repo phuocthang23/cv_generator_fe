@@ -26,6 +26,7 @@ export const registerCandidateService = () => {
   const [gender, setGender] = useState<any>(0);
   const [dateTime, setDateTime] = useState("");
   const [nameErr, setNameErr] = useState("");
+  const [phoneErr, setPhoneErr] = useState("");
 
   const handleChange = (event: any) => {
     setGender(event.target.value);
@@ -36,13 +37,23 @@ export const registerCandidateService = () => {
   const dob = formatDay(dateTime);
   const name = userName;
 
+  const handlePhoneChange = (e: any) => {
+    const value = e.target.value.replace(/\D/g, "");
+    if (value.length > 10) {
+      setPhoneErr("Số điện thoại phải có 10 ký tự");
+    } else {
+      setPhoneErr("");
+    }
+    setPhone(value);
+  };
+
   useEffect(() => {
     if (userName.length < 3 || userName.length > 50) {
       setNameErr("Tên đăng nhập phải có 3 đúng 50 ký tự");
     } else {
       setNameErr("");
     }
-  }, [userName]);
+  }, [userName, phone]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -78,11 +89,6 @@ export const registerCandidateService = () => {
     }
   };
 
-  const handlePhoneChange = (e: any) => {
-    const value = e.target.value.replace(/\D/g, "");
-    setPhone(value);
-  };
-
   return {
     email,
     setEmail,
@@ -108,6 +114,7 @@ export const registerCandidateService = () => {
     setGender,
     setDateTime,
     nameErr,
+    phoneErr,
     handlePhoneChange,
   };
 };
