@@ -3,6 +3,7 @@ import { HiInformationCircle } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../../assets/logo-rikkei2 2.png";
 import { registerCandidateService } from "../../../service/candidateService/RegisterCadindate.service";
+import "./index.scss";
 const RegisterCandidate = () => {
   const navigate = useNavigate();
 
@@ -222,11 +223,11 @@ const RegisterCandidate = () => {
             </button>
           </div>
 
-          <div className="text-center mt-[20px] font-cabin">
-            <p className="text-sm  font-medium mt-5">
+          <div className="changeRouter">
+            <p>
               bạn đã có tài khoản?{" "}
               <span
-                className="text-main-0 hover:text-red-500 cursor-pointer"
+                className="text-main-0 hover:text-red-500"
                 onClick={() => navigate("/auth/login-candidate")}
               >
                 Đăng nhập tài khoản ứng viên
@@ -234,12 +235,12 @@ const RegisterCandidate = () => {
             </p>
           </div>
 
-          <div className="text-center mt-[20px]">
-            <p className="text-sm font-cabin font-medium mt-5">
+          <div className="changeRouter">
+            <p>
               bạn đã có tài khoản?{" "}
               <span
-                className="text-main-0 hover:text-red-500 cursor-pointer"
-                onClick={() => navigate("/auth")}
+                className="text-main-0 hover:text-red-500"
+                onClick={() => navigate("/auth/login-company")}
               >
                 Đăng nhập tài khoản doanh nghiệp
               </span>

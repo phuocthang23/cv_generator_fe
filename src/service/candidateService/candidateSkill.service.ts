@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { generateToken } from "../../utils/generateToken.utils";
 import { candidateDetailAction } from "../../store/action/candidate.action";
 import { useState } from "react";
@@ -9,6 +9,8 @@ import {
 } from "../../apis/candidates/skill";
 import { getOneCandidateApi } from "../../apis/candidates";
 import { toast } from "react-toastify";
+import { skillADDAction } from "../../store/action/skill.actiocn";
+import { AppState } from "../../store";
 
 export const skillCandidateService = () => {
   const [name, setName] = useState("");
@@ -16,8 +18,28 @@ export const skillCandidateService = () => {
 
   const dispatch = useDispatch();
 
+  const dataSkill = useSelector(
+    (state: AppState) => (state.skillReducer as any).listSkill
+  );
+
   const dataToken: any = generateToken();
   const id = (dataToken as any).id;
+
+  const handleRemove = async (id: any) => {
+    try {
+      dispatch(candidateDetailAction(id));
+    } catch (error) {
+      return;
+    }
+  };
+
+  const handleAddSkill = async (body: any) => {
+    try {
+      dispatch(skillADDAction(body));
+    } catch (error) {
+      return;
+    }
+  };
 
   const handleSave = async (body: any) => {
     try {
@@ -60,5 +82,8 @@ export const skillCandidateService = () => {
     setLevel,
     handleDeleteSkill,
     handleUpdate,
+    handleAddSkill,
+    dataSkill,
+    handleRemove,
   };
 };

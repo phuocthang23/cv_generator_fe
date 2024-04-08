@@ -1,0 +1,17 @@
+.badge {
+  margin-top: 1.25rem;
+    span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+  div {
+    display: flex;
+    align-items: center;
+    span {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+}

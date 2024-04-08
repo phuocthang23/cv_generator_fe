@@ -13,11 +13,11 @@ const SubHeader = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate("/auth");
+    navigate("/auth/login-candidate");
   };
 
   const handleRegister = () => {
-    navigate("/auth/register");
+    navigate("/auth/register-candidate");
   };
 
   const handleSignOut = () => {
@@ -105,7 +105,10 @@ const SubHeader = () => {
               >
                 Đăng ký
               </button>
-              <button className="rounded-[3px] bg-white border-[1px] border-[#BC2228] px-6 py-3 text-[#BC2228] whitespace-nowrap">
+              <button
+                onClick={() => navigate("/auth/register-company")}
+                className="rounded-[3px] bg-white border-[1px] border-[#BC2228] px-6 py-3 text-[#BC2228] whitespace-nowrap"
+              >
                 Đăng tuyển
               </button>
             </>

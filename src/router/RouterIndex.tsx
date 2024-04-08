@@ -25,9 +25,9 @@ const RouterIndex = () => {
     <div>
       <Routes>
         <Route path="/auth" element={<Auth />}>
-          <Route index element={<Login />} />
+          <Route path="login-company" element={<Login />} />
           <Route path="login-candidate" element={<LoginCandidate />} />
-          <Route path="register" element={<Register />} />
+          <Route path="register-company" element={<Register />} />
           <Route path="register-candidate" element={<RegisterCandidate />} />
           <Route path="check-email" element={<ForgetPassword />} />
           <Route path="reset-password/:id" element={<ComfirmPassword />} />
