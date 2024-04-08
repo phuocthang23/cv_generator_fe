@@ -26,6 +26,7 @@ const Skill = ({
     handleSave,
     name,
     level,
+    error,
     setName,
     setLevel,
     handleUpdate,
@@ -87,6 +88,7 @@ const Skill = ({
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 value={name}
+                required
                 onChange={(e) => setName(e.target.value)}
               >
                 <option value="" className="p-2">
@@ -98,15 +100,21 @@ const Skill = ({
                   </option>
                 ))}
               </select>
+              {error && name === "" && (
+                <p className="text-red-500 mt-2">{error}</p>
+              )}
             </section>
 
             <section className="my-5 w-full max-w-72">
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 value={level}
+                required
                 onChange={(e) => setLevel(e.target.value)}
               >
-                <option className="p-2">lựa chọn level</option>
+                <option value="" className="p-2">
+                  lựa chọn level
+                </option>
                 <option value="1" className="p-2">
                   Thấp
                 </option>
@@ -117,6 +125,9 @@ const Skill = ({
                   Cao
                 </option>
               </select>
+              {error && level === "" && (
+                <p className="text-red-500 mt-2">{error}</p>
+              )}
             </section>
 
             <Button

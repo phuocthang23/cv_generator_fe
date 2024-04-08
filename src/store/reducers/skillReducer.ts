@@ -39,7 +39,7 @@ const skillReducer: any = createReducer(
           );
           return {
             ...state,
-            listSkill: [...state.listSkill, updatedDataSkill],
+            listSkill: updatedDataSkill,
           };
         }
       )

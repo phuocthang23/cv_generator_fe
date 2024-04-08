@@ -9,12 +9,17 @@ import {
 } from "../../apis/candidates/skill";
 import { getOneCandidateApi } from "../../apis/candidates";
 import { toast } from "react-toastify";
-import { skillADDAction } from "../../store/action/skill.actiocn";
+import {
+  skillADDAction,
+  skillRemoveAction,
+} from "../../store/action/skill.actiocn";
 import { AppState } from "../../store";
+import { Error_Language, Error_Level } from "../../common/errorMessage/index";
 
 export const skillCandidateService = () => {
   const [name, setName] = useState("");
   const [level, setLevel] = useState("1");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
 
@@ -27,17 +32,21 @@ export const skillCandidateService = () => {
 
   const handleRemove = async (id: any) => {
     try {
-      dispatch(candidateDetailAction(id));
+      dispatch(skillRemoveAction(id));
     } catch (error) {
       return;
     }
   };
 
   const handleAddSkill = async (body: any) => {
-    try {
-      dispatch(skillADDAction(body));
-    } catch (error) {
+    if (name === "") {
+      setError(Error_Language);
       return;
+    } else if (level === "") {
+      setError(Error_Level);
+    } else {
+      setError("");
+      dispatch(skillADDAction(body));
     }
   };
 
@@ -85,5 +94,6 @@ export const skillCandidateService = () => {
     handleAddSkill,
     dataSkill,
     handleRemove,
+    error,
   };
 };
