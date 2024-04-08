@@ -222,14 +222,26 @@ const RegisterCandidate = () => {
             </button>
           </div>
 
-          <div className="text-center mt-[20px]">
-            <p className="text-sm font-cabin font-medium mt-5">
+          <div className="text-center mt-[20px] font-cabin">
+            <p className="text-sm  font-medium mt-5">
               bạn đã có tài khoản?{" "}
               <span
                 className="text-main-0 hover:text-red-500 cursor-pointer"
                 onClick={() => navigate("/auth/login-candidate")}
               >
-                Đăng nhập tài khoản
+                Đăng nhập tài khoản ứng viên
+              </span>
+            </p>
+          </div>
+
+          <div className="text-center mt-[20px]">
+            <p className="text-sm font-cabin font-medium mt-5">
+              bạn đã có tài khoản?{" "}
+              <span
+                className="text-main-0 hover:text-red-500 cursor-pointer"
+                onClick={() => navigate("/auth")}
+              >
+                Đăng nhập tài khoản doanh nghiệp
               </span>
             </p>
           </div>
